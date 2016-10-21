@@ -1,0 +1,43 @@
+﻿body {
+	color: black;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1, pre {
+	font-family: Consolas, "Courier New", Courier, monospace;
+	font-weight: normal;
+}
+
+body, p, h2, table {
+	font-family: Calibri, Tahoma, sans-serif;
+}
+
+h2, h3 {
+	font-family: Cambria, "Times New Roman", Times, serif;
+}
+
+span.b {
+	color: #008;
+}
+
+span.g {
+	color: #065;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+th, td {
+	text-align: center;
+	padding: 0 7px;
+}
+
+ul {
+	list-style-type: none;
+}

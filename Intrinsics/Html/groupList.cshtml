@@ -1,0 +1,19 @@
+﻿@model IntrinsicsDocs.GroupList
+@using IntrinsicsDocs
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>@Model.title</title>
+	<link rel="stylesheet" type="text/css" href="intrinsics.css">
+</head>
+<body>
+	<h2>@Model.title</h2>
+	@foreach( var g in Model.groups )
+	{
+		<ul>
+			<li><a href="@g.htmlFile()">@g.title</a></li>
+		</ul>
+	}
+</body>
+</html>

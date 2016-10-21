@@ -1,0 +1,27 @@
+﻿@model IntrinsicsDocs.Group
+@using IntrinsicsDocs
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>@Model.title</title>
+	<link rel="stylesheet" type="text/css" href="intrinsics.css">
+</head>
+<body>
+	<h2>@Model.title</h2>
+	<h3>
+@foreach( var i in Model.sectionNames ) { <a href="#@i">@i</a> }
+	</h3>
+
+	@for( int i=0; i<Model.sectionNames.Count; i++ )
+	{
+		<h3><a name="@Model.sectionNames[ i ]" />@Model.sectionNames[ i ]</h3>
+		<ul>
+			@foreach( var intr in Model.sections[ i ] )
+			{
+				<li><a href="@intr.htmlFile()">@intr.id</a> @intr.shortDescription()</li>
+			}
+		</ul>
+	}
+</body>
+</html>
