@@ -1,0 +1,1 @@
+# Intel IntrinsicsThis project builds a C# command-line app that parses Intel’s documentation into the developer-friendly CHM format.The code quality is mediocre, because I don’t care: I only need the output.
