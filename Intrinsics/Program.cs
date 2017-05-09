@@ -6,8 +6,8 @@ namespace IntrinsicsDocs
 {
 	static class Program
 	{
-		const string localName = "IntelIntrinsics-3.3.15.xml";
-		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.3.15.xml";
+		const string localName = "IntelIntrinsics-3.3.16.xml";
+		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.3.16.xml";
 
 		static void mainImpl()
 		{
