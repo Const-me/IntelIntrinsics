@@ -5,6 +5,7 @@ using System.Text;
 
 namespace IntrinsicsDocs
 {
+	/// <summary>Extension methods for <see cref="Intrinsic"> that are called by the view engine.</summary>
 	public static class Html
 	{
 		static void span( this StringBuilder sb, string c, string content )

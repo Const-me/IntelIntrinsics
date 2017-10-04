@@ -1,13 +1,20 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
 using System.Xml.Serialization;
 
 namespace IntrinsicsDocs
 {
 	static class Program
 	{
-		const string localName = "IntelIntrinsics-3.3.16.xml";
-		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.3.16.xml";
+		/// <summary>Data file with the documentation, @ intel.com</summary>
+		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.4.xml";
+
+		static string localName { get { return "IntelIntrinsics-" + remoteUri.Split( '-' ).Last(); } }
 
 		static void mainImpl()
 		{
@@ -28,6 +35,25 @@ namespace IntrinsicsDocs
 
 		static void Main( string[] args )
 		{
+			// https://github.com/Antaris/RazorEngine/issues/244#issuecomment-85507351
+			if( AppDomain.CurrentDomain.IsDefaultAppDomain() )
+			{
+				// RazorEngine cannot clean up from the default appdomain...
+				Console.WriteLine( "Switching to second AppDomain, for RazorEngine" );
+				AppDomainSetup adSetup = new AppDomainSetup();
+				adSetup.ApplicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+				var current = AppDomain.CurrentDomain;
+				// You only need to add strongnames when your appdomain is not a full trust environment.
+				var strongNames = new StrongName[0];
+
+				var domain = AppDomain.CreateDomain(
+					"MyMainDomain", null,
+					current.SetupInformation, new PermissionSet(PermissionState.Unrestricted),
+					strongNames);
+				domain.ExecuteAssembly( Assembly.GetExecutingAssembly().Location );
+				return;
+			}
+
 			try
 			{
 				mainImpl();

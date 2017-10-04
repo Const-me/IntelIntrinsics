@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace IntrinsicsDocs
 {
+	/// <summary>A model class for a single intrinsic. XmlSerializer reads them from the XML data, RazorEngine writes them into HTML articles.</summary>
 	public class Intrinsic
 	{
 		[XmlAttribute]
