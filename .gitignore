@@ -2,3 +2,6 @@
 Intrinsics/bin/
 Intrinsics/obj/
 packages/
+ParseTables/bin/
+ParseTables/obj/
+PerformanceData/
