@@ -51,9 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ParseTables\InstructionsData.cs">
+      <Link>Performance\InstructionsData.cs</Link>
+    </Compile>
     <Compile Include="DataSource.cs" />
     <Compile Include="Parse\DataSet.cs" />
     <Compile Include="Parse\Intrinsic.cs" />
+    <Compile Include="Performance\ArgTypes.cs" />
+    <Compile Include="Performance\PerfData.cs" />
+    <Compile Include="Performance\RegSizes.cs" />
+    <Compile Include="Performance\TableBuilder.cs" />
+    <Compile Include="Performance\Unpack.cs" />
+    <Compile Include="Performance\UnpackUtils.cs" />
     <Compile Include="Process\GroupList.cs" />
     <Compile Include="Process\UniqueID.cs" />
     <Compile Include="Program.cs" />

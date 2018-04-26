@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntrinsicsDocs.Performance;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,7 +71,7 @@ namespace IntrinsicsDocs
 			return sb.ToString();
 		}
 
-		public static string rawPerformance( this Intrinsic i )
+		static string rawPerformanceIntel( this Intrinsic i )
 		{
 			StringBuilder sb = new StringBuilder( 256 );
 			bool hasThroughput = i.perfdata.Any( p => p.tpt.notEmpty() );
@@ -88,8 +89,43 @@ namespace IntrinsicsDocs
 				sb.AppendLine( "</tr>" );
 			}
 			sb.AppendLine( "		</table>" );
-
 			return sb.ToString();
+		}
+
+		internal static PerfData perfData;
+
+		public static bool hasPerformanceData( this Intrinsic i )
+		{
+			// return i.perfdata.notEmpty();
+			return perfData.hasPerformanceData( i );
+		}
+
+		static string rawPerformanceThirdParty( this Intrinsic i )
+		{
+			var data = perfData.table( i );
+			StringBuilder sb = new StringBuilder( 256 );
+			// bool hasThroughput = i.perfdata.Any( p => p.tpt.notEmpty() );
+			sb.AppendLine( "		<table>" );
+			sb.Append( "			<tr><th>Architecture</th><th>Latency</th>" );
+			sb.Append( "<th>Throughput</th>" );
+			sb.Append( "<th>μops</th>" );
+			sb.AppendLine( "</tr>" );
+
+			foreach( var p in data )
+			{
+				sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.cpu, p.latency );
+				sb.AppendFormat( "<td>{0}</td>", p.throughput );
+				sb.AppendFormat( "<td>{0}</td>", p.uops );
+				sb.AppendLine( "</tr>" );
+			}
+			sb.AppendLine( "		</table>" );
+			return sb.ToString();
+		}
+
+		public static string rawPerformance( this Intrinsic i )
+		{
+			// return i.rawPerformanceIntel();
+			return i.rawPerformanceThirdParty();
 		}
 
 		static readonly string[] stopMarkers = new string[]

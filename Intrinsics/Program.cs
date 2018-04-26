@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntrinsicsDocs.Performance;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,8 +17,12 @@ namespace IntrinsicsDocs
 
 		static string localName { get { return "IntelIntrinsics-" + remoteUri.Split( '-' ).Last(); } }
 
+		const string pathPerf = @"C:\Z\Fun\IntelIntrinsics\PerformanceData\performance.xml";
+
 		static void mainImpl()
 		{
+			Html.perfData = new PerfData( pathPerf );
+
 			string xml = DataSource.getXml( localName, remoteUri );
 			XmlSerializer ser = new XmlSerializer(typeof(DataSet));
 			DataSet data;
@@ -33,8 +38,17 @@ namespace IntrinsicsDocs
 			HelpBuilder.produce( tempFolder, data );
 		}
 
+		static void perfTest()
+		{
+			var perf = new PerfData( pathPerf, @"C:\Z\Fun\IntelIntrinsics\PerformanceData\dump.txt" );
+			foreach( var p in Unpack.errors() )
+				Console.WriteLine( p );
+		}
+
 		static void Main( string[] args )
 		{
+			// perfTest(); return;
+
 			// https://github.com/Antaris/RazorEngine/issues/244#issuecomment-85507351
 			if( AppDomain.CurrentDomain.IsDefaultAppDomain() )
 			{

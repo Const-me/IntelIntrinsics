@@ -16,7 +16,7 @@
 	{
 		<h2>Operation</h2>
 		<pre>@Model.operation</pre>
-	} @if( Model.perfdata.notEmpty() )
+	} @if( Model.hasPerformanceData() )
 	{
 		<h2>Performance</h2>
 		@Raw( @Model.rawPerformance() )
