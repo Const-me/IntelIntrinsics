@@ -107,7 +107,7 @@ namespace IntrinsicsDocs
 			// bool hasThroughput = i.perfdata.Any( p => p.tpt.notEmpty() );
 			sb.AppendLine( "		<table>" );
 			sb.Append( "			<tr><th>Architecture</th><th>Latency</th>" );
-			sb.Append( "<th>Throughput</th>" );
+			sb.Append( @"<th title=""Reciprocal of the throughputs, i.e. average number of clock cycles"">Throughput</th>" );
 			sb.Append( "<th>μops</th>" );
 			sb.AppendLine( "</tr>" );
 

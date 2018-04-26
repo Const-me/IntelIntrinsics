@@ -50,7 +50,8 @@ namespace IntrinsicsDocs.Performance
 			{ "m", eArgumentsMask.memory },
 			{ "y", eArgumentsMask.ymm },
 			{ "z", eArgumentsMask.zmm },
-			{ "v", eArgumentsMask.mmx_xmm_ymm_zmm },
+			{ "y/z", eArgumentsMask.ymm_zmm },
+			{ "v", eArgumentsMask.mmx_xmm_ymm_zmm }, // any vector register
 		};
 
 		static IEnumerable<eArgumentsMask> parseImpl( string raw )
