@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace IntrinsicsDocs.Performance
@@ -30,6 +31,8 @@ namespace IntrinsicsDocs.Performance
 
 		public static List<PerfData.Instruction> table( this PerfData pd, Intrinsic intr )
 		{
+			// if( intr.name == "_mm256_sad_epu8" && Debugger.IsAttached ) Debugger.Break();	// Break on building the perf.table for "_mm256_sad_epu8" intrinsic
+
 			if( null == intr.instruction )
 				return null;
 			IEnumerable<PerfData.Instruction> data = pd.lookup( intr.instruction.name );

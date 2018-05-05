@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using ParseTables;
 using System.Xml.Serialization;
+using System.Diagnostics;
+using System.Linq;
 
 namespace IntrinsicsDocs.Performance
 {
@@ -72,13 +74,35 @@ namespace IntrinsicsDocs.Performance
 
 		TextWriter debugWriter=null;
 
+		static IEnumerable<string> unpackInstructionsAddVPrefix( string instructionsCoded, bool appendVPrefix )
+		{
+			foreach( string i in instructionsCoded.unpackInstructions() )
+			{
+				if( i == "etc." )
+					continue;
+				yield return i;
+				if( !appendVPrefix )
+					continue;
+				if( String.IsNullOrEmpty( i ) )
+					continue;
+				if( i[ 0 ] == 'v' || i[ 0 ] == 'V' )
+					continue;
+				yield return "V" + i;
+			}
+		}
+
 		void addInstruction( string cpu, InstructionsData.Instruction data )
 		{
+			// if( data.i == "vpsadbw" && Debugger.IsAttached ) Debugger.Break();	// Break on loading perf.data of a "vpsadbw" instruction for some architecture
+
 			Instruction r = new Instruction( cpu, data );
 
 			debugWriter?.Write( "{0} / {1}: ", cpu, data.i );
 
-			foreach( string i in data.i.unpackInstructions() )
+			eArgumentsMask[] args = ArgTypes.parse( data.op );  // This is not a waste of CPU time because ArgTypes.parse() uses a local cache
+			bool appendVPrefix  = args.Any( am => 0 != ( am & ( ArgTypes.avxBits | ArgTypes.avx512Bits ) ) );
+
+			foreach( string i in unpackInstructionsAddVPrefix( data.i, appendVPrefix ) )
 			{
 				debugWriter?.Write( "{0} ", i );
 				List<Instruction> list;
