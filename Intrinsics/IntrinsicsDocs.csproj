@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
@@ -56,6 +60,7 @@
     </Compile>
     <Compile Include="DataSource.cs" />
     <Compile Include="Parse\DataSet.cs" />
+    <Compile Include="Parse\IntelPerfData.cs" />
     <Compile Include="Parse\Intrinsic.cs" />
     <Compile Include="Performance\ArgTypes.cs" />
     <Compile Include="Performance\PerfData.cs" />

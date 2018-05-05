@@ -39,19 +39,6 @@ namespace IntrinsicsDocs
 		[XmlElement]
 		public Instr instruction;
 
-		public class Perf
-		{
-			[XmlAttribute]
-			public string arch;
-			[XmlAttribute]
-			public string lat;
-			[XmlAttribute]
-			public string tpt;  // Sometimes empty
-		}
-
-		[XmlElement]
-		public Perf[] perfdata;
-
 		[XmlElement]
 		public string header;
 

@@ -29,7 +29,34 @@ namespace IntrinsicsDocs.Performance
 			return data.Any( ii => ii.match( regSize ) );
 		}
 
-		public static List<PerfData.Instruction> table( this PerfData pd, Intrinsic intr )
+		static IEnumerable<PerfData.Instruction> pickBestPerArch( IEnumerable<PerfData.Instruction> data, eRegSize regSize )
+		{
+			foreach( var g in data.GroupBy( i => i.cpu ) )
+			{
+				if( 1 == g.Count() )
+				{
+					// This CPU only has a single version of that instruction
+					yield return g.First();
+					continue;
+				}
+
+				var matched = g.FirstOrDefault( ii => ii.match( regSize ) );
+				if( null != matched )
+				{
+					yield return matched;
+					continue;
+				}
+				matched = g.FirstOrDefault( ii => ii.regsOnly() );
+				if( null != matched )
+				{
+					yield return matched;
+					continue;
+				}
+				// throw new NotSupportedException();
+			}
+		}
+
+		public static IEnumerable<PerfData.Instruction> table( this PerfData pd, Intrinsic intr )
 		{
 			// if( intr.name == "_mm256_sad_epu8" && Debugger.IsAttached ) Debugger.Break();	// Break on building the perf.table for "_mm256_sad_epu8" intrinsic
 
@@ -38,35 +65,8 @@ namespace IntrinsicsDocs.Performance
 			IEnumerable<PerfData.Instruction> data = pd.lookup( intr.instruction.name );
 			if( null == data )
 				return null;
-
 			eRegSize regSize = intr.regSize();
-			var grouped = data.GroupBy( i => i.cpu );
-			List<PerfData.Instruction> res = new List<PerfData.Instruction>( grouped.Count() );
-
-			foreach( var g in grouped )
-			{
-				if( 1 == g.Count() )
-				{
-					// This CPU only has a single version of that instruction
-					res.Add( g.First() );
-					continue;
-				}
-
-				var matched = g.FirstOrDefault( ii => ii.match( regSize ) );
-				if( null != matched )
-				{
-					res.Add( matched );
-					continue;
-				}
-				matched = g.FirstOrDefault( ii => ii.regsOnly() );
-				if( null != matched )
-				{
-					res.Add( matched );
-					continue;
-				}
-				// throw new NotSupportedException();
-			}
-			return res;
+			return pickBestPerArch( data, regSize );
 		}
 	}
 }

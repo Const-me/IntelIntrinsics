@@ -15,7 +15,11 @@ namespace IntrinsicsDocs
 		/// <summary>Data file with the documentation, @ intel.com</summary>
 		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.4.1.xml";
 
+		/// <summary>Starting from version 3.4.1, Intel decided to split the data into 2 pieces, one XML another one JSON. Obviously, in now in 2018 the XML no longer works, and user just love waiting for seconds for client-side JS rendering to complete. The more web requests, the better.</summary>
+		const string perfUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/perf.json";
+
 		static string localName { get { return "IntelIntrinsics-" + remoteUri.Split( '-' ).Last(); } }
+		static string localNamePerf { get { return Path.ChangeExtension( localName, ".json" ); } }
 
 		const string pathPerf = @"C:\Z\Fun\IntelIntrinsics\PerformanceData\performance.xml";
 
@@ -23,11 +27,14 @@ namespace IntrinsicsDocs
 		{
 			Html.perfData = new PerfData( pathPerf );
 
-			string xml = DataSource.getXml( localName, remoteUri );
+			string xml = DataSource.download( localName, remoteUri, "XML" );
 			XmlSerializer ser = new XmlSerializer(typeof(DataSet));
 			DataSet data;
 			using( StreamReader sr = new StreamReader( xml ) )
 				data = (DataSet)ser.Deserialize( sr );
+
+			string json = DataSource.download( localNamePerf, perfUri, "perf.json" );
+			Html.intelPerf = IntelPerfData.load( json );
 
 			data.fixAfterLoading();
 			data.intrinsic = UniqueID.make( data.intrinsic );

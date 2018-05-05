@@ -6,16 +6,16 @@ namespace IntrinsicsDocs
 {
 	static class DataSource
 	{
-		public static string getXml( string localName, string remoteUri )
+		public static string download( string localName, string remoteUri, string what )
 		{
 			string local = Utils.inTemp( localName );
 			if( File.Exists( local ) )
 			{
-				Console.WriteLine( "Found XML in the local cache" );
+				Console.WriteLine( $"Found {what} in the local cache" );
 				return local;
 			}
 
-			Console.WriteLine( "The XML not found in the local cache, downloading.." );
+			Console.WriteLine( $"The {what} not found in the local cache, downloading.." );
 
 			WebClient wc = new WebClient();
 			string tmp = local + ".tmp";
@@ -23,7 +23,7 @@ namespace IntrinsicsDocs
 			wc.DownloadFile( intelDataFile, tmp );
 			File.Move( tmp, local );
 
-			Console.WriteLine( "Downloaded the XML from intel.com" );
+			Console.WriteLine( $"Downloaded the {what} from intel.com" );
 			return local;
 		}
 	}

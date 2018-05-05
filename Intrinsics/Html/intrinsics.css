@@ -32,6 +32,9 @@ table {
 table, th, td {
 	border: 1px solid black;
 }
+tr.i {
+	color: #008;
+}
 
 th, td {
 	text-align: center;

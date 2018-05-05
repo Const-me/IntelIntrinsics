@@ -71,52 +71,43 @@ namespace IntrinsicsDocs
 			return sb.ToString();
 		}
 
-		static string rawPerformanceIntel( this Intrinsic i )
-		{
-			StringBuilder sb = new StringBuilder( 256 );
-			bool hasThroughput = i.perfdata.Any( p => p.tpt.notEmpty() );
-			sb.AppendLine( "		<table>" );
-			sb.Append( "			<tr><th>Architecture</th><th>Latency</th>" );
-			if( hasThroughput )
-				sb.Append( "<th>Throughput</th>" );
-			sb.AppendLine( "</tr>" );
-
-			foreach( var p in i.perfdata )
-			{
-				sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.arch, p.lat );
-				if( hasThroughput )
-					sb.AppendFormat( "<td>{0}</td>", p.tpt.isEmpty() ? "-" : p.tpt );
-				sb.AppendLine( "</tr>" );
-			}
-			sb.AppendLine( "		</table>" );
-			return sb.ToString();
-		}
-
 		internal static PerfData perfData;
+		internal static IntelPerfData.DataSet intelPerf;
 
 		public static bool hasPerformanceData( this Intrinsic i )
 		{
-			// return i.perfdata.notEmpty();
-			return perfData.hasPerformanceData( i );
+			return intelPerf.hasPerformanceData( i ) || perfData.hasPerformanceData( i );
 		}
 
 		static string rawPerformanceThirdParty( this Intrinsic i )
 		{
-			var data = perfData.table( i );
+
 			StringBuilder sb = new StringBuilder( 256 );
-			// bool hasThroughput = i.perfdata.Any( p => p.tpt.notEmpty() );
 			sb.AppendLine( "		<table>" );
 			sb.Append( "			<tr><th>Architecture</th><th>Latency</th>" );
 			sb.Append( @"<th title=""Reciprocal of the throughputs, i.e. average number of clock cycles"">Throughput</th>" );
 			sb.Append( "<th>μops</th>" );
 			sb.AppendLine( "</tr>" );
 
-			foreach( var p in data )
+			if( perfData.hasPerformanceData( i ) )
 			{
-				sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.cpu, p.latency );
-				sb.AppendFormat( "<td>{0}</td>", p.throughput );
-				sb.AppendFormat( "<td>{0}</td>", p.uops );
-				sb.AppendLine( "</tr>" );
+				var data = perfData.table( i );
+				foreach( var p in data )
+				{
+					sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.cpu, p.latency );
+					sb.AppendFormat( "<td>{0}</td>", p.throughput );
+					sb.AppendFormat( "<td>{0}</td>", p.uops );
+					sb.AppendLine( "</tr>" );
+				}
+			}
+			if( intelPerf.hasPerformanceData( i ) )
+			{
+				foreach( var p in intelPerf.lookup( i ).entries() )
+				{
+					sb.AppendFormat( @"			<tr class=""i"" title=""as reported by Intel""><td>{0}</td><td>{1}</td>", p.Key, p.Value.lat );
+					sb.AppendFormat( "<td>{0}</td>", p.Value.tpt ?? String.Empty );
+					sb.AppendLine( "<td></td></tr>" );  // no uops
+				}
 			}
 			sb.AppendLine( "		</table>" );
 			return sb.ToString();
@@ -151,7 +142,7 @@ namespace IntrinsicsDocs
 			{  "double-precision (64-bit)", "double-precision" },
 		};
 
-		const int minLength = 64;	// Don't truncate shorter then this count of characters
+		const int minLength = 64;   // Don't truncate shorter then this count of characters
 
 		public static string shortDescription( this Intrinsic i )
 		{
