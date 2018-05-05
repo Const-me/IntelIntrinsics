@@ -13,7 +13,7 @@ namespace IntrinsicsDocs
 	static class Program
 	{
 		/// <summary>Data file with the documentation, @ intel.com</summary>
-		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.4.xml";
+		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.4.1.xml";
 
 		static string localName { get { return "IntelIntrinsics-" + remoteUri.Split( '-' ).Last(); } }
 
