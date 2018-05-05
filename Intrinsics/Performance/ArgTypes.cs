@@ -74,6 +74,7 @@ namespace IntrinsicsDocs.Performance
 		static readonly Dictionary<string, eArgumentsMask[]> s_cache = new Dictionary<string, eArgumentsMask[]>( StringComparer.OrdinalIgnoreCase );
 		static readonly eArgumentsMask[] s_empty = new eArgumentsMask[ 0 ];
 
+		/// <summary>Parse operands string into a set of flags.</summary>
 		public static eArgumentsMask[] parse( string raw )
 		{
 			if( String.IsNullOrWhiteSpace( raw ) )

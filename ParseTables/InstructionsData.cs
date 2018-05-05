@@ -31,8 +31,12 @@ namespace ParseTables
 			[XmlAttribute]
 			public int cat;
 
+			/// <summary>Encoded instruction string, e.g. "PADD/SUB(S,US) B/W/D/Q"</summary>
 			[XmlAttribute]
-			public string i, op;
+			public string i;
+			/// <summary>Encoded operands string, e.g. "v,v / v,v,v"</summary>
+			[XmlAttribute]
+			public string op;
 
 			[XmlAttribute( "uo" )]
 			public string uops;
