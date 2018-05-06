@@ -151,14 +151,27 @@ namespace IntrinsicsDocs
 		/// <summary>Key = instruction name, e.g. "VMASKMOVPD"</summary>
 		class Tech : Dict<Instruction> { }
 
-		/// <summary>Key = tech, e.g. "FMA"</summary>
+		/// <summary>Key = CPUID, e.g. "FMA"</summary>
 		class DataSet : Dict<Tech>, iDataSet
 		{
+			Instruction lookup( Intrinsic intr )
+			{
+				if( null == intr.CPUID )
+					return null;
+				foreach( string cpu in intr.CPUID )
+				{
+					var res = lookup( cpu )?.lookup( intr.instruction.name );
+					if( null != res )
+						return res;
+				}
+				return null;
+			}
+
 			iTable iDataSet.lookup( Intrinsic intr )
 			{
 				if( null == intr.instruction )
 					return null;
-				Instruction instr = lookup( intr.tech )?.lookup( intr.instruction.name );
+				Instruction instr = lookup( intr );
 				if( null == instr )
 					return null;
 				foreach( var kvp in instr )
