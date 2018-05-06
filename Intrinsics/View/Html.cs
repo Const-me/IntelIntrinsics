@@ -72,7 +72,7 @@ namespace IntrinsicsDocs
 		}
 
 		internal static PerfData perfData;
-		internal static IntelPerfData.DataSet intelPerf;
+		internal static IntelPerfData.iDataSet intelPerf;
 
 		public static bool hasPerformanceData( this Intrinsic i )
 		{

@@ -8,13 +8,11 @@ using System.Text;
 
 namespace IntrinsicsDocs
 {
+	// Intel has designed their performance JSON data format in a way that's hard to map automatically with JSON serializer attributes. It's doable but would require custom converters, i.e. too much code to write.
+	// Instead, this static class parses the complete document into JObject, then builds strongly-typed dataset from that. The JSON is merely 88kb, so performance is still good but the code is simpler.
 	public static class IntelPerfData
 	{
-		public interface iJsonLoad
-		{
-			void load( JToken token );
-		}
-
+		// ==== Public interface ====
 		public class Perf : iJsonLoad
 		{
 			public readonly string lat, tpt;
@@ -27,13 +25,51 @@ namespace IntrinsicsDocs
 			public void load( JToken token ) { throw new NotSupportedException(); }
 		}
 
-		public abstract class Dict<T> : Dictionary<string, T>, iJsonLoad
+		public interface iTable
+		{
+			IEnumerable<KeyValuePair<string, Perf>> entries();
+		}
+
+		public interface iDataSet
+		{
+			iTable lookup( Intrinsic intr );
+		}
+
+		public static iDataSet load( string jsonFile )
+		{
+			// Read into string
+			string content;
+			using( var reader = new StreamReader( jsonFile, Encoding.UTF8 ) )
+				content = reader.ReadToEnd();
+			// The JSON starts with "perf_js = {", need to get rid of "perf_js = " part
+			content = content.Substring( content.IndexOf( '{' ) );
+			// Parse the JSON
+			JObject json = JObject.Parse( content );
+			// Build the dataset
+			DataSet res = new DataSet();
+			res.load( json );
+			return res;
+		}
+
+		public static bool hasPerformanceData( this iDataSet dataSet, Intrinsic intr )
+		{
+			return null != dataSet.lookup( intr );
+		}
+
+		// ==== Implementation details ====
+		interface iJsonLoad
+		{
+			void load( JToken token );
+		}
+
+		abstract class Dict<T> : Dictionary<string, T>, iJsonLoad
 			where T : iJsonLoad, new()
 		{
 			public Dict() : base( StringComparer.OrdinalIgnoreCase )
 			{ }
 
-			public void load( JToken token )
+			/// <summary>Load JSON node into this</summary>
+			public void load( JToken token )    // iJsonLoad method
 			{
 				var obj = token as JObject;
 				if( null != obj )
@@ -47,7 +83,7 @@ namespace IntrinsicsDocs
 				{
 					foreach( var c in arr )
 					{
-						obj = c as JObject;
+						obj = (JObject)c;
 						Debug.Assert( obj.Count == 1 );
 						var prop = obj.First as JProperty;
 						this[ prop.Name ] = loadValue( prop.Value );
@@ -57,14 +93,16 @@ namespace IntrinsicsDocs
 				throw new ArgumentException();
 			}
 
+			/// <summary>Load JSON node into a newly constructed value</summary>
 			protected virtual T loadValue( JToken token )
 			{
 				T res = new T();
 				iJsonLoad jl = res;
-				jl.load( token );
+				jl.load( token );   // C# doesn't support generic argument constraints like "new(JToken)", that's why iJsonLoad interface.
 				return res;
 			}
 
+			/// <summary>Lookup by key, returns null if not found.</summary>
 			public T lookup( string k )
 			{
 				T res;
@@ -74,7 +112,8 @@ namespace IntrinsicsDocs
 			}
 		}
 
-		static readonly Dictionary<string, int> s_generations = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+		// Sort table entries by CPU generation
+		static readonly Dictionary<string, int> s_generations = new Dictionary<string, int>( StringComparer.OrdinalIgnoreCase )
 		{
 			{ "Sandy Bridge", 2 },
 			{ "Ivy Bridge", 3 },
@@ -83,7 +122,6 @@ namespace IntrinsicsDocs
 			{ "Skylake", 6 },
 			{ "Knights Landing", 7 },
 		};
-
 		static int generation( this string arch )
 		{
 			int res;
@@ -93,58 +131,43 @@ namespace IntrinsicsDocs
 		}
 
 		/// <summary>Key = architecture, value = performance</summary>
-		public class Table : Dict<Perf>
+		class Table : Dict<Perf>, iTable
 		{
 			protected override Perf loadValue( JToken token )
 			{
-				var pd = token as JObject;
+				// Perf is readonly class, accepts constructor arguments but doesn't actually support iJsonLoad interface. That's why overriding this method.
+				var pd = (JObject)token;
 				return new Perf( pd[ "l" ], pd[ "t" ] );
 			}
-			public IEnumerable<KeyValuePair<string, Perf>> entries()
+			IEnumerable<KeyValuePair<string, Perf>> iTable.entries()
 			{
 				return this.OrderBy( kvp => kvp.Key.generation() );
 			}
 		}
 
-		/// <summary>Key = arguments e.g. "m256, ymm, ymm". Usually empty.</summary>
-		public class Instruction : Dict<Table> { }
+		/// <summary>Key = arguments e.g. "m256, ymm, ymm". Usually contains the only key, empty string.</summary>
+		class Instruction : Dict<Table> { }
 
 		/// <summary>Key = instruction name, e.g. "VMASKMOVPD"</summary>
-		public class Tech : Dict<Instruction> { }
+		class Tech : Dict<Instruction> { }
 
 		/// <summary>Key = tech, e.g. "FMA"</summary>
-		public class DataSet : Dict<Tech> { }
-
-		public static DataSet load( string jsonFile )
+		class DataSet : Dict<Tech>, iDataSet
 		{
-			string content;
-			using( var reader = new StreamReader( jsonFile, Encoding.UTF8 ) )
-				content = reader.ReadToEnd();
-			content = content.Substring( content.IndexOf( '{' ) );
-			JObject json = JObject.Parse( content );
-
-			DataSet res = new DataSet();
-			res.load( json );
-			return res;
-		}
-
-		public static bool hasPerformanceData( this DataSet dataSet, Intrinsic intr )
-		{
-			return null != dataSet.lookup( intr );
-		}
-		public static Table lookup( this DataSet dataSet, Intrinsic intr )
-		{
-			if( null == intr.instruction )
-				return null;
-			Instruction instr = dataSet.lookup( intr.tech )?.lookup( intr.instruction.name );
-			if( null == instr )
-				return null;
-			foreach( var kvp in instr )
+			iTable iDataSet.lookup( Intrinsic intr )
 			{
-				if( String.Equals( kvp.Key, intr.instruction.form, StringComparison.OrdinalIgnoreCase ) )
-					return kvp.Value;
+				if( null == intr.instruction )
+					return null;
+				Instruction instr = lookup( intr.tech )?.lookup( intr.instruction.name );
+				if( null == instr )
+					return null;
+				foreach( var kvp in instr )
+				{
+					if( String.Equals( kvp.Key, intr.instruction.form, StringComparison.OrdinalIgnoreCase ) )
+						return kvp.Value;
+				}
+				return instr.lookup( string.Empty );
 			}
-			return instr.lookup( string.Empty );
 		}
 	}
 }

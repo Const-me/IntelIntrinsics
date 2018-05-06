@@ -1,8 +1,1 @@
-# Intel Intrinsics
-This project builds a C# command-line app that parses Intel’s documentation into the developer-friendly CHM format.
-
-The code quality is mediocre, because I don’t care: I only need the output.
-
-You’ll find the compiled CHM file [on “Releases” page](https://github.com/Const-me/IntelIntrinsics/releases).
-
-If the fonts are too small for you, [here’s a fix](https://superuser.com/a/204783/31483).
+# Intel IntrinsicsThis project builds a C# command-line app that parses Intel’s documentation into the developer-friendly CHM format.The code quality is mediocre, because I don’t care: I only need the output.You’ll find the compiled CHM file [on “Releases” page](https://github.com/Const-me/IntelIntrinsics/releases).If the fonts are too small for you, [here’s a fix](https://superuser.com/a/204783/31483).If you aren’t using Windows and don’t have HTML help viewer application, rename the .chm to .zip, unpack the content from “html” subfolder, and open “misc\_All.html”, “misc\_Categories.html” or “misc\_Technologies.html” page in a web browser.You won’t have index nor search, but it’s still usable this way.
