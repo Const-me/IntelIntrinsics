@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace IntrinsicsDocs.Performance
 {
-
 	class PerfData
 	{
 		public class Instruction
@@ -32,6 +31,20 @@ namespace IntrinsicsDocs.Performance
 		}
 
 		readonly Dictionary<string, List<Instruction>> m_data = new Dictionary<string, List<Instruction>>( StringComparer.OrdinalIgnoreCase );
+
+		static readonly HashSet<string> s_hsExtraInstructions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+		{
+			"crc32", "popcnt", "rdrand", "rdseed", "rdrand rdseed",
+		};
+
+		static bool shouldAddInstruction( HashSet<int> hsCats, InstructionsData.Instruction instr )
+		{
+			if( hsCats.Contains( instr.cat ) )
+				return true;
+			if( s_hsExtraInstructions.Contains( instr.i ) )
+				return true;
+			return false;
+		}
 
 		public PerfData( string path, string debugOutput = null )
 		{
@@ -60,7 +73,7 @@ namespace IntrinsicsDocs.Performance
 				{
 					foreach( var i in s.data )
 					{
-						if( !hsCats.Contains( i.cat ) )
+						if( !shouldAddInstruction( hsCats, i ) )
 							continue;
 						addInstruction( s.name, i );
 					}

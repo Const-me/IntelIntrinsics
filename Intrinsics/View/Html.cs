@@ -94,9 +94,9 @@ namespace IntrinsicsDocs
 				var data = perfData.table( i );
 				foreach( var p in data )
 				{
-					sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.cpu, p.latency );
-					sb.AppendFormat( "<td>{0}</td>", p.throughput );
-					sb.AppendFormat( "<td>{0}</td>", p.uops );
+					sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.cpu, p.latency ?? string.Empty );
+					sb.AppendFormat( "<td>{0}</td>", p.throughput ?? string.Empty );
+					sb.AppendFormat( "<td>{0}</td>", p.uops ?? string.Empty );
 					sb.AppendLine( "</tr>" );
 				}
 			}
@@ -104,8 +104,8 @@ namespace IntrinsicsDocs
 			{
 				foreach( var p in intelPerf.lookup( i ).entries() )
 				{
-					sb.AppendFormat( @"			<tr class=""i"" title=""as reported by Intel""><td>{0}</td><td>{1}</td>", p.Key, p.Value.lat );
-					sb.AppendFormat( "<td>{0}</td>", p.Value.tpt ?? String.Empty );
+					sb.AppendFormat( @"			<tr class=""i"" title=""as reported by Intel""><td>{0}</td><td>{1}</td>", p.Key, p.Value.lat ?? string.Empty );
+					sb.AppendFormat( "<td>{0}</td>", p.Value.tpt ?? string.Empty );
 					sb.AppendLine( "<td></td></tr>" );  // no uops
 				}
 			}

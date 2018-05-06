@@ -6,56 +6,7 @@ namespace IntrinsicsDocs.Performance
 {
 	static class Unpack
 	{
-		enum eSpecialChar : byte
-		{
-			Comma = 0,
-			Space = 1,
-			Newline = 2,
-			BracketOpen = 3,
-			BracketClose = 4,
-			Slash = 5,
-		}
-
-		static readonly Dictionary<char, eSpecialChar> dictSpecial = new Dictionary<char, eSpecialChar>()
-		{
-			{ ',', eSpecialChar.Comma },
-			{ ' ', eSpecialChar.Space },
-			{ '\r', eSpecialChar.Newline },
-			{ '\n', eSpecialChar.Newline },
-			{ '(', eSpecialChar.BracketOpen },
-			{ ')', eSpecialChar.BracketClose },
-			{ '/', eSpecialChar.Slash },
-		};
-
-		static bool onlySlashes( this int[] specialCount )
-		{
-			for( int i = 0; i < specialCount.Length; i++ )
-			{
-				eSpecialChar sc = (eSpecialChar)i;
-				if( sc != eSpecialChar.Slash && 0 != specialCount[ i ] )
-					return false;
-			}
-			return true;
-		}
-
-		// static readonly char[] separators = new char[] { ',', ' ', '\r', '\n' };
 		static readonly char[] allSpecial = new char[ 7 ] { ',', ' ', '\r', '\n', '(', ')', '/' };
-
-		/* static IEnumerable<string> unpackSlashes( string op )
-		{
-			string[] arr = op.Split( '/' );
-			string first = arr[ 0 ];
-			yield return first;
-			for( int i = 1; i < arr.Length; i++ )
-			{
-				string suffix = arr[ i ];
-				string next = first.Substring( 0, first.Length - suffix.Length ) + suffix;
-				yield return next;
-			}
-		} */
-
-
-
 
 		static readonly string[] arrPrefixes = new string[] { "AND/ANDN/OR/XOR", "PMIN/PMAX" };
 		static IEnumerable<string> tryUnpackPrefix( this string op )
@@ -173,6 +124,13 @@ namespace IntrinsicsDocs.Performance
 						yield return c;
 		}
 
+		static string finalFix( string s )
+		{
+			if( s.StartsWith( "CMPcc", StringComparison.OrdinalIgnoreCase ) )
+				return s.Substring( 0, 3 ) + s.Substring( 5 );
+			return s;
+		}
+
 		public static IEnumerable<string> unpackInstructions( this string op )
 		{
 			// Initial fixes
@@ -200,7 +158,7 @@ namespace IntrinsicsDocs.Performance
 			foreach( string s in op.split() )
 			{
 				foreach( var r in s.unpackImpl() )
-					yield return r;
+					yield return finalFix( r );
 			}
 		}
 
