@@ -76,5 +76,8 @@ namespace IntrinsicsDocs
 
 		[XmlIgnore]
 		public bool is64bitOnly = false;
+
+		[XmlIgnore]
+		public bool fixedSetOrder = false;
 	}
 }

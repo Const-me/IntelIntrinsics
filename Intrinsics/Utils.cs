@@ -121,6 +121,13 @@ namespace IntrinsicsDocs
 			return s;
 		}
 
+		public static string stripSuffix( this string s, string sfOld )
+		{
+			if( !s.EndsWith( sfOld ) )
+				return s;
+			return s.Substring( 0, s.Length - sfOld.Length );
+		}
+
 		public static string replaceSuffix( this string s, string sfOld, string sfNew )
 		{
 			if( !s.EndsWith( sfOld ) )

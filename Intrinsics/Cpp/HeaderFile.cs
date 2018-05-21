@@ -35,6 +35,9 @@ namespace IntrinsicsDocs.Cpp
 
 			string n = i.name;
 
+			if( n.Contains( "_set_" ) )
+				return false;	// Skip _set_, only include _setr_
+
 			switch( n )
 			{
 				case "_mm_load_pd1":
@@ -67,18 +70,15 @@ namespace IntrinsicsDocs.Cpp
 			intrinsics.Add( i );
 		}
 
-		void write( IEnumerable<Intrinsic> ii )
-		{
-		}
-
 		public void write( string destPath )
 		{
 			using( var fs = File.CreateText( destPath ) )
 			{
 				fs.WriteLine( "// This file is generated automatically by a tool, please don't edit" );
 				fs.WriteLine();
-				fs.WriteLine( "namespace Intrinsics {{ namespace {0}", ns );
-				fs.WriteLine( "{" );
+				fs.WriteLine( @"namespace Intrinsics {{
+	namespace {0}", ns );
+				fs.WriteLine( "	{" );
 
 				var all = intrinsics.Where( i => !i.is64bitOnly ).OrderBy( i => i.sortKey ).ToArray();
 				fs.write( all, callConv );
@@ -86,12 +86,14 @@ namespace IntrinsicsDocs.Cpp
 				var a64 = intrinsics.Where( i => i.is64bitOnly ).OrderBy( i => i.sortKey ).ToArray();
 				if( a64.Length > 0 )
 				{
+					fs.WriteLine();
 					fs.WriteLine( "#if _M_X64" );
 					fs.write( a64, callConv );
 					fs.WriteLine( "#endif // _M_X64" );
 				}
 
-				fs.WriteLine( "}} }}	// namespace Intrinsics::{0}", ns );
+				fs.Write( @"	}}	// namespace Intrinsics::{0}
+}}	// namespace Intrinsics", ns );
 			}
 		}
 	}

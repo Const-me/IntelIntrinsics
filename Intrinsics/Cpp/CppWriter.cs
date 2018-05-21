@@ -56,44 +56,55 @@ namespace IntrinsicsDocs.Cpp
 
 		static string cppName( this Intrinsic i )
 		{
-			if( i.name.StartsWith( "_mm_" ) )
-				return i.name.stripPrefix( "_mm_" ).replaceSuffix( "_si128", completeSuffix );
+			string n = i.name;
+			if( n.StartsWith( "_mm_" ) )
+				n = n.stripPrefix( "_mm_" ).replaceSuffix( "_si128", completeSuffix );
+			else if( n.StartsWith( "_mm256_" ) )
+				return n.stripPrefix( "_mm256_" ).replaceSuffix( "_si256", completeSuffix );
+			else if( n.StartsWith( "_mm512_" ) )
+				return n.stripPrefix( "_mm512_" ).replaceSuffix( "_si512", completeSuffix );
 
-			if( i.name.StartsWith( "_mm256_" ) )
-				return i.name.stripPrefix( "_mm256_" ).replaceSuffix( "_si256", completeSuffix );
+			if( n.StartsWith( "setr_" ) )
+			{
+				// Intel messed up in the headers, what they call "reverse order" is normal order i.e. increasing RAM addresses.
+				// They probably meant "reverse order" compared to the native stack but that's meaningless for C++ developers, people expect left to right order to be normal.
+				n = n.Replace( "setr_", "set_" );
+				i.fixedSetOrder = true;
+			}
 
-			if( i.name.StartsWith( "_mm512_" ) )
-				return i.name.stripPrefix( "_mm512_" ).replaceSuffix( "_si512", completeSuffix );
-
-			return i.name;
+			return n;
 		}
 
 		static string singleLineDescription( this Intrinsic i )
 		{
-			return i.shortDescription().Replace( "\n", "" ).Replace( "\r", "" ).Replace( " \t", " " );
+			string res = i.shortDescription().Replace( "\n", "" ).Replace( "\r", "" ).Replace( " \t", " " );
+			if( i.fixedSetOrder )
+				res = res.stripSuffix( " in reverse order" );
+			return res;
 		}
 
 		static void write( this StreamWriter sw, Intrinsic i, string callConv )
 		{
-			sw.WriteLine( "	// " + i.singleLineDescription() );
+			string name = i.cppName();
+			sw.WriteLine( "		// " + i.singleLineDescription() );
 
 			if( !String.IsNullOrWhiteSpace( callConv ) )
 				callConv = " " + callConv;
 
 			if( i.isEmptyParams() || !i.parameter.Any( isImm ) )
 			{
-				sw.WriteLine( $"	inline { i.rettype }{ callConv } { i.cppName() }({ i.argPrototype() })" );
-				sw.WriteLine( "	{" );
-				sw.WriteLine( $"		return { i.name }({ i.argCall() });" );
-				sw.WriteLine( "	}" );
+				sw.WriteLine( $"		inline { i.rettype }{ callConv } { name }({ i.argPrototype() })" );
+				sw.WriteLine( "		{" );
+				sw.WriteLine( $"			return { i.name }({ i.argCall() });" );
+				sw.WriteLine( "		}" );
 			}
 			else
 			{
-				sw.WriteLine( $"	template<{i.templatePrototype()}>" );
-				sw.WriteLine( $"	inline { i.rettype }{ callConv } { i.cppName() }({ i.argPrototype( true ) })" );
-				sw.WriteLine( "	{" );
-				sw.WriteLine( $"		return { i.name }({ i.argCall() });" );
-				sw.WriteLine( "	}" );
+				sw.WriteLine( $"		template<{i.templatePrototype()}>" );
+				sw.WriteLine( $"		inline { i.rettype }{ callConv } { name }({ i.argPrototype( true ) })" );
+				sw.WriteLine( "		{" );
+				sw.WriteLine( $"			return { i.name }({ i.argCall() });" );
+				sw.WriteLine( "		}" );
 			}
 		}
 
