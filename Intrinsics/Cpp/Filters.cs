@@ -55,6 +55,8 @@ namespace IntrinsicsDocs.Cpp
 
 			"_mm_tzcnt_32",
 			"_mm_tzcnt_64",
+
+			"_mm_broadcastsi128_si256",
 		};
 
 		static readonly HashSet<string> _64BitIntrinsics = new HashSet<string>

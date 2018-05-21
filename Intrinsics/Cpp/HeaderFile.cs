@@ -20,7 +20,7 @@ namespace IntrinsicsDocs.Cpp
 		{
 			cpuid = cpuid.ToLowerInvariant();
 			this.cpuid = cpuid;
-			if( cpuid.Contains( "avx" ) )
+			if( cpuid.Contains( "avx" ) || cpuid.Contains( "fma" ) )
 			{
 				ns = "Avx";
 				fnSmaller = Filters.isSmallerFunc( 256 );

@@ -88,7 +88,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <EmbeddedResource Include="Cpp\avx2.extra.hpp" />
-    <EmbeddedResource Include="Cpp\fp16c.extra.hpp" />
     <EmbeddedResource Include="Cpp\operators_float.inl" />
     <EmbeddedResource Include="Cpp\sse_operators.hpp" />
     <Content Include="Cpp\avx_operators.hpp" />
@@ -98,6 +97,7 @@
     <EmbeddedResource Include="Cpp\sse2_operators.hpp" />
     <EmbeddedResource Include="Cpp\avx2_operators.hpp" />
     <EmbeddedResource Include="Cpp\sse2.extra.hpp" />
+    <EmbeddedResource Include="Cpp\fp16c.hpp" />
     <Content Include="Html\group.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -24,7 +24,7 @@ namespace IntrinsicsDocs.Cpp
 			{
 				case "aes":
 				case "fma":
-				case "fp16c":
+				// case "fp16c":
 				// case "kncni":
 				case "pclmulqdq":
 				case "sha":
@@ -81,7 +81,10 @@ namespace IntrinsicsDocs.Cpp
 #include <emmintrin.h>
 #include <immintrin.h>
 " );
-				foreach( string fn in dict.Keys.OrderBy( k => k ) )
+				List<string> keys = dict.Keys.ToList();
+				keys.Add( "fp16c" );
+				keys.Sort();
+				foreach( string fn in keys )
 				{
 					fs.WriteLine( @"#include ""{0}.hpp""", fn );
 				}
