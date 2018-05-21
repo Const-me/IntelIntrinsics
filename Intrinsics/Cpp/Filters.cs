@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IntrinsicsDocs.Cpp
@@ -33,8 +34,8 @@ namespace IntrinsicsDocs.Cpp
 			"_mm256_pow",
 			"_mm256_svml",
 			"_mm256_trunc",
-			"_mm_broadcast",
-			"_mm256_broadcast",
+			// "_mm_broadcast",
+			// "_mm256_broadcast",
 		};
 
 		static readonly HashSet<string> skipIntrinsics = new HashSet<string>
@@ -47,9 +48,6 @@ namespace IntrinsicsDocs.Cpp
 			"_mm_free",
 			"_mm_clflush",
 			"_mm_prefetch",
-			// Extra AVX code
-			"_mm_broadcast_ss",
-			"_mm256_broadcast_ss",
 
 			// Extra fp16c code
 			"_mm_cvtph_ps",
@@ -115,6 +113,38 @@ namespace IntrinsicsDocs.Cpp
 				i.is64bitOnly = true;
 
 			return true;
+		}
+
+		static IEnumerable<string> api( this Intrinsic i )
+		{
+			yield return i.rettype;
+			if( null == i.parameter )
+				yield break;
+			foreach( var p in i.parameter )
+				yield return p.type;
+		}
+
+		public static Func<IEnumerable<string>, bool> isSmallerFunc( int iThisBits )
+		{
+			string strThisBits = iThisBits.ToString();
+			string strSmallerBits = ( iThisBits / 2 ).ToString();
+			return ( IEnumerable<string> types ) =>
+			{
+				bool anySmaller = false;
+				foreach( string s in types )
+				{
+					if( s.Contains( strThisBits ) )
+						return false;
+					else if( s.Contains( strSmallerBits ) )
+						anySmaller = true;
+				}
+				return anySmaller;
+			};
+		}
+
+		public static bool isSmall( this Intrinsic i, Func<IEnumerable<string>, bool> fn )
+		{
+			return fn( i.api() );
 		}
 	}
 }
