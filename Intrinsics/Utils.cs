@@ -121,6 +121,14 @@ namespace IntrinsicsDocs
 			return s;
 		}
 
+		public static bool startsWith( this string s, params string[] pfix )
+		{
+			foreach( string p in pfix )
+				if( s.StartsWith( p ) )
+					return true;
+			return false;
+		}
+
 		public static string stripSuffix( this string s, string sfOld )
 		{
 			if( !s.EndsWith( sfOld ) )

@@ -49,7 +49,11 @@ namespace IntrinsicsDocs.Cpp
 
 		static bool isImm( Intrinsic.Param p )
 		{
-			return p.type.EndsWith( "int" ) && p.varname.StartsWith( "imm" );
+			if( p.type.EndsWith( "int" ) && p.varname.StartsWith( "imm" ) )
+				return true;
+			if( ( p.type == "int" || p.type == "const int" ) && ( p.varname == "rounding" || p.varname == "count" || p.varname == "index" ) )
+				return true;
+			return false;
 		}
 
 		const string completeSuffix = "_all";
@@ -95,7 +99,12 @@ namespace IntrinsicsDocs.Cpp
 			{
 				sw.WriteLine( $"		inline { i.rettype }{ callConv } { name }({ i.argPrototype() })" );
 				sw.WriteLine( "		{" );
-				sw.WriteLine( $"			return { i.name }({ i.argCall() });" );
+
+				sw.Write( "			" );
+				if( "void" != i.rettype )
+					sw.Write( "return " );
+				sw.WriteLine( $"{ i.name }({ i.argCall() });" );
+
 				sw.WriteLine( "		}" );
 			}
 			else
@@ -103,7 +112,12 @@ namespace IntrinsicsDocs.Cpp
 				sw.WriteLine( $"		template<{i.templatePrototype()}>" );
 				sw.WriteLine( $"		inline { i.rettype }{ callConv } { name }({ i.argPrototype( true ) })" );
 				sw.WriteLine( "		{" );
-				sw.WriteLine( $"			return { i.name }({ i.argCall() });" );
+
+				sw.Write( "			" );
+				if( "void" != i.rettype )
+					sw.Write( "return " );
+				sw.WriteLine( $"{ i.name }({ i.argCall() });" );
+
 				sw.WriteLine( "		}" );
 			}
 		}

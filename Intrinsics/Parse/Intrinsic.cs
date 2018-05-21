@@ -79,5 +79,10 @@ namespace IntrinsicsDocs
 
 		[XmlIgnore]
 		public bool fixedSetOrder = false;
+
+		public override string ToString()
+		{
+			return name;
+		}
 	}
 }
