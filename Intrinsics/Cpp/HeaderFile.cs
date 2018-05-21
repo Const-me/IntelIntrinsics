@@ -38,6 +38,7 @@ namespace IntrinsicsDocs.Cpp
 			using( var fs = File.CreateText( destPath ) )
 			{
 				fs.WriteLine( "// This file is generated automatically by a tool, please don't edit." );
+				fs.WriteLine( "#pragma once" );
 				fs.WriteLine();
 				fs.WriteLine(
 @"namespace Intrinsics

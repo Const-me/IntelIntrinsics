@@ -33,6 +33,11 @@ namespace IntrinsicsDocs.Cpp
 			return false;
 		}
 
+		static string hpp( this string destFolder, string fileName )
+		{
+			return Path.Combine( destFolder, $"{fileName}.hpp" );
+		}
+
 		public static void produce( string destFolder, DataSet dataSet )
 		{
 			if( !Directory.Exists( destFolder ) )
@@ -48,7 +53,7 @@ namespace IntrinsicsDocs.Cpp
 			foreach( var i in all )
 			{
 				HeaderFile header;
-				string key = i.CPUID.First();
+				string key = i.CPUID.First().ToLowerInvariant();
 				if( !shouldInclude( key ) )
 					continue;
 
@@ -63,8 +68,23 @@ namespace IntrinsicsDocs.Cpp
 			foreach( var kvp in dict )
 			{
 				string fileName = kvp.Key.ToLowerInvariant();
-				string path = Path.Combine( destFolder, $"{fileName}.hpp" );
-				kvp.Value.write( path );
+				kvp.Value.write( destFolder.hpp( fileName ) );
+			}
+
+			using( var fs = File.CreateText( destFolder.hpp( "intrinsics" ) ) )
+			{
+				fs.WriteLine(
+@"#pragma once
+// Includes all of them, up to AVX2
+
+#include <intrin.h>
+#include <emmintrin.h>
+#include <immintrin.h>
+" );
+				foreach( string fn in dict.Keys.OrderBy( k => k ) )
+				{
+					fs.WriteLine( @"#include ""{0}.hpp""", fn );
+				}
 			}
 		}
 	}

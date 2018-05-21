@@ -33,6 +33,8 @@ namespace IntrinsicsDocs.Cpp
 			"_mm256_pow",
 			"_mm256_svml",
 			"_mm256_trunc",
+			"_mm_broadcast",
+			"_mm256_broadcast",
 		};
 
 		static readonly HashSet<string> skipIntrinsics = new HashSet<string>
