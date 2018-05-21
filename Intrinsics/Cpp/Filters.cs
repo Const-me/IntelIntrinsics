@@ -67,6 +67,10 @@ namespace IntrinsicsDocs.Cpp
 			"_mm_cvtsi64_sd",
 			"_mm_cvtsi64_si128",
 			"_mm_cvtsi128_si64",
+			"_mm_cvtss_si64",
+			"_mm_cvttss_si64",
+			"_mm_cvtsi64_ss",
+			"_mm_crc32_u64",
 		};
 
 		static bool isAllCaps( string name )

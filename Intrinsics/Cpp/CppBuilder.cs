@@ -86,6 +86,8 @@ namespace IntrinsicsDocs.Cpp
 					fs.WriteLine( @"#include ""{0}.hpp""", fn );
 				}
 			}
+
+			ExtraCode.copyExtraFiles( destFolder );
 		}
 	}
 }

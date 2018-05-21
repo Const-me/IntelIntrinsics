@@ -58,6 +58,7 @@
     <Compile Include="..\ParseTables\InstructionsData.cs">
       <Link>Performance\InstructionsData.cs</Link>
     </Compile>
+    <EmbeddedResource Include="Cpp\avx.extra.hpp" />
     <Compile Include="Cpp\CppBuilder.cs" />
     <Compile Include="Cpp\CppWriter.cs" />
     <Compile Include="Cpp\ExtraCode.cs" />
@@ -86,6 +87,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Cpp\avx2.extra.hpp" />
+    <EmbeddedResource Include="Cpp\fp16c.extra.hpp" />
+    <EmbeddedResource Include="Cpp\operators_float.inl" />
+    <EmbeddedResource Include="Cpp\sse_operators.hpp" />
+    <Content Include="Cpp\avx_operators.hpp" />
+    <EmbeddedResource Include="Cpp\operators_float_impl.inl" />
+    <EmbeddedResource Include="Cpp\sse.extra.hpp" />
     <Content Include="Html\group.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
