@@ -73,5 +73,8 @@ namespace IntrinsicsDocs
 		{
 			return Utils.htmlFile( id );
 		}
+
+		[XmlIgnore]
+		public bool is64bitOnly = false;
 	}
 }

@@ -56,7 +56,7 @@ namespace IntrinsicsDocs.Cpp
 
 		static string cppName( this Intrinsic i )
 		{
-			if( i.name.StartsWith("_mm_"))
+			if( i.name.StartsWith( "_mm_" ) )
 				return i.name.stripPrefix( "_mm_" ).replaceSuffix( "_si128", completeSuffix );
 
 			if( i.name.StartsWith( "_mm256_" ) )
@@ -73,7 +73,7 @@ namespace IntrinsicsDocs.Cpp
 			return i.shortDescription().Replace( "\n", "" ).Replace( "\r", "" ).Replace( " \t", " " );
 		}
 
-		public static void write( this StreamWriter sw, Intrinsic i, string callConv )
+		static void write( this StreamWriter sw, Intrinsic i, string callConv )
 		{
 			sw.WriteLine( "	// " + i.singleLineDescription() );
 
@@ -95,8 +95,19 @@ namespace IntrinsicsDocs.Cpp
 				sw.WriteLine( $"		return { i.name }({ i.argCall() });" );
 				sw.WriteLine( "	}" );
 			}
+		}
 
-			sw.WriteLine();
+		public static void write( this StreamWriter sw, IEnumerable<Intrinsic> all, string callConv )
+		{
+			bool first = true;
+			foreach( var i in all )
+			{
+				if( first )
+					first = false;
+				else
+					sw.WriteLine();
+				sw.write( i, callConv );
+			}
 		}
 	}
 }
