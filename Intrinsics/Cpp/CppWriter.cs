@@ -51,7 +51,9 @@ namespace IntrinsicsDocs.Cpp
 		{
 			if( p.type.EndsWith( "int" ) && p.varname.StartsWith( "imm" ) )
 				return true;
-			if( ( p.type == "int" || p.type == "const int" ) && ( p.varname == "rounding" || p.varname == "count" || p.varname == "index" || p.varname == "scale" ) )
+			if( p.type == "const int" )
+				return true;
+			if( p.type == "int" && ( p.varname == "rounding" || p.varname == "count" || p.varname == "index" || p.varname == "scale" ) )
 				return true;
 			return false;
 		}

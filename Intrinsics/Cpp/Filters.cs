@@ -47,8 +47,16 @@ namespace IntrinsicsDocs.Cpp
 			"_mm_free",
 			"_mm_clflush",
 			"_mm_prefetch",
+			// Extra AVX code
 			"_mm_broadcast_ss",
 			"_mm256_broadcast_ss",
+
+			// Extra fp16c code
+			"_mm_cvtph_ps",
+			"_mm256_cvtph_ps",
+
+			"_mm_tzcnt_32",
+			"_mm_tzcnt_64",
 		};
 
 		static readonly HashSet<string> _64BitIntrinsics = new HashSet<string>
