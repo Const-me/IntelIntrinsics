@@ -97,6 +97,7 @@
     <EmbeddedResource Include="Cpp\operators_int.inl" />
     <EmbeddedResource Include="Cpp\sse2_operators.hpp" />
     <EmbeddedResource Include="Cpp\avx2_operators.hpp" />
+    <EmbeddedResource Include="Cpp\sse2.extra.hpp" />
     <Content Include="Html\group.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

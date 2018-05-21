@@ -47,3 +47,6 @@
 		{
 			dst = _mm256_broadcastsi128_si256( a );
 		}
+
+		using VecInteger = __m256i;
+		static constexpr int allBytesMask = 0xFFFFFFFF;
