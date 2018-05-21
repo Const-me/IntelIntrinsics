@@ -58,6 +58,9 @@
     <Compile Include="..\ParseTables\InstructionsData.cs">
       <Link>Performance\InstructionsData.cs</Link>
     </Compile>
+    <Compile Include="Cpp\CppBuilder.cs" />
+    <Compile Include="Cpp\CppWriter.cs" />
+    <Compile Include="Cpp\HeaderFile.cs" />
     <Compile Include="DataSource.cs" />
     <Compile Include="Parse\DataSet.cs" />
     <Compile Include="Parse\IntelPerfData.cs" />

@@ -1,4 +1,5 @@
-﻿using IntrinsicsDocs.Performance;
+﻿using IntrinsicsDocs.Cpp;
+using IntrinsicsDocs.Performance;
 using System;
 using System.IO;
 using System.Linq;
@@ -41,8 +42,10 @@ namespace IntrinsicsDocs
 
 			Console.WriteLine( "Loaded the XML" );
 
-			string tempFolder = Utils.inTemp( "IntrinsicsChm" );
-			HelpBuilder.produce( tempFolder, data );
+			// string tempFolder = Utils.inTemp( "IntrinsicsChm" );
+			// HelpBuilder.produce( tempFolder, data );
+
+			CppBuilder.produce( @"C:\Temp\2remove\IntrinsicsCpp", data );
 		}
 
 		static void perfTest()

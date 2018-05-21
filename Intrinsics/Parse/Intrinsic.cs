@@ -42,6 +42,8 @@ namespace IntrinsicsDocs
 		[XmlElement]
 		public string header;
 
+		static readonly Param[] s_emptyParams = new Param[ 0 ];
+
 		public void fixAfterLoading()
 		{
 			Utils.trim( ref description );
@@ -49,6 +51,7 @@ namespace IntrinsicsDocs
 			sortKey = name.TrimStart( '_' )
 				.ToLowerInvariant()
 				.stripPrefix( "mm_", "mm256_", "mm512_", "m_" );
+			if( null == parameter ) parameter = s_emptyParams;
 		}
 
 		[XmlIgnore]
