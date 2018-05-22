@@ -1,7 +1,7 @@
 ﻿		using VecFloat32 = __m256;
 		using VecFloat64 = __m256d;
-		static constexpr int valuesMask_ps = 0xFF;
-		static constexpr int valuesMask_pd = 0xF;
+		static constexpr int allValuesMask_ps = 0xFF;
+		static constexpr int allValuesMask_pd = 0xF;
 
 		// Shuffle single-precision (32-bit) floating-point elements in "a" within 128-bit lanes using the control in template arguments
 		template<uint8_t c1, uint8_t c2, uint8_t c3, uint8_t c4>

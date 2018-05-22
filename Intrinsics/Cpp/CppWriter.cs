@@ -145,12 +145,12 @@ namespace IntrinsicsDocs.Cpp
 		static void write( this StreamWriter sw, Intrinsic i, string callConv )
 		{
 			string name = i.cppName();
+			if( !String.IsNullOrWhiteSpace( callConv ) )
+				callConv = " " + callConv;
+
 			writeImpl:
 
 			sw.WriteLine( "		// " + i.singleLineDescription() );
-
-			if( !String.IsNullOrWhiteSpace( callConv ) )
-				callConv = " " + callConv;
 
 			if( i.isEmptyParams() || !i.parameter.Any( isImm ) )
 			{

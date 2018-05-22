@@ -15,19 +15,19 @@ inline VECTOR_TYPE XM_CALLCONV operator /( VECTOR_TYPE a, VECTOR_TYPE b )
 	return SIMD_OP( div )( a, b );
 }
 
-inline void operator +=( VECTOR_TYPE &a, VECTOR_TYPE b )
+inline void XM_CALLCONV operator +=( VECTOR_TYPE &a, VECTOR_TYPE b )
 {
 	a = a + b;
 }
-inline void operator -=( VECTOR_TYPE &a, VECTOR_TYPE b )
+inline void XM_CALLCONV operator -=( VECTOR_TYPE &a, VECTOR_TYPE b )
 {
 	a = a - b;
 }
-inline void operator *=( VECTOR_TYPE &a, VECTOR_TYPE b )
+inline void XM_CALLCONV operator *=( VECTOR_TYPE &a, VECTOR_TYPE b )
 {
 	a = a * b;
 }
-inline void operator /=( VECTOR_TYPE &a, VECTOR_TYPE b )
+inline void XM_CALLCONV operator /=( VECTOR_TYPE &a, VECTOR_TYPE b )
 {
 	a = a / b;
 }
