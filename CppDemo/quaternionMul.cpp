@@ -10,7 +10,7 @@ using namespace Intrinsics::Sse;
 template<uint8_t c1, uint8_t c2, uint8_t c3, uint8_t c4>
 VecFloat32 permute_ps( VecFloat32 v )
 {
-	return shuffle_ps<c1, c2, c3, c4>( v, v );
+	return shuffle_ps<c4, c3, c2, c1>( v, v );
 }
 
 VecFloat32 quaternionMultiply( VecFloat32 Q1, VecFloat32 Q2 )
@@ -59,6 +59,16 @@ VecFloat32 quaternionMultiply( VecFloat32 Q1, VecFloat32 Q2 )
 void testQuaternionMultuply()
 {
 	using namespace DirectX::SimpleMath;
-	Quaternion q1{ 0,1,0,0 };
-	// Quaternion q2 = 
+	srand( 0 );
+	Quaternion a{ randomFloat(), randomFloat() , randomFloat() , randomFloat() };
+	Quaternion b{ randomFloat(), randomFloat() , randomFloat() , randomFloat() };
+
+	a.Normalize();
+	b.Normalize();
+
+	const __m128 res_my = quaternionMultiply( a, b );
+	const __m128 res_ms = XMQuaternionMultiply( a, b );
+
+	if( res_my != res_ms )
+		__debugbreak();
 }

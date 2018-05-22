@@ -6,7 +6,8 @@ namespace Intrinsics
 {
 	namespace Avx
 	{
-#include "Implementation/operators_float.inl"
+#include "Implementation/operators_float32.inl"
+#include "Implementation/operators_float64.inl"
 
 		// Shuffle double-precision (64-bit) floating-point elements within 128-bit lanes using the control in template arguments
 		template<uint8_t c1, uint8_t c2, uint8_t c3, uint8_t c4>
