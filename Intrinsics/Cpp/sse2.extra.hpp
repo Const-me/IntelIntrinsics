@@ -1,3 +1,3 @@
 ﻿
 		using VecInteger = __m128i;
-		static constexpr int allBytesMask = 0xFFFF;
+		static constexpr int allValuesMask_epi8 = 0xFFFF;

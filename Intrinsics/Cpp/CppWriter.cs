@@ -86,7 +86,7 @@ namespace IntrinsicsDocs.Cpp
 			string res = i.shortDescription().Replace( "\n", "" ).Replace( "\r", "" ).Replace( " \t", " " );
 			if( i.fixedSetOrder )
 				res = res.stripSuffix( " in reverse order" );
-			return res;
+			return res.Trim();
 		}
 
 		static void write( this StreamWriter sw, Intrinsic i, string callConv )

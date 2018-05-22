@@ -88,16 +88,18 @@
   <ItemGroup>
     <None Include="App.config" />
     <EmbeddedResource Include="Cpp\avx2.extra.hpp" />
-    <EmbeddedResource Include="Cpp\operators_float.inl" />
+    <EmbeddedResource Include="Cpp\Implementation\operators_float.inl" />
     <EmbeddedResource Include="Cpp\sse_operators.hpp" />
     <Content Include="Cpp\avx_operators.hpp" />
-    <EmbeddedResource Include="Cpp\operators_float_impl.inl" />
+    <EmbeddedResource Include="Cpp\Implementation\operators_float_impl.inl" />
     <EmbeddedResource Include="Cpp\sse.extra.hpp" />
-    <EmbeddedResource Include="Cpp\operators_int.inl" />
+    <EmbeddedResource Include="Cpp\Implementation\operators_bitwise.inl" />
     <EmbeddedResource Include="Cpp\sse2_operators.hpp" />
     <EmbeddedResource Include="Cpp\avx2_operators.hpp" />
     <EmbeddedResource Include="Cpp\sse2.extra.hpp" />
     <EmbeddedResource Include="Cpp\fp16c.hpp" />
+    <EmbeddedResource Include="Cpp\Implementation\operators_int.inl" />
+    <EmbeddedResource Include="Cpp\Implementation\utils.hpp" />
     <Content Include="Html\group.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -117,6 +119,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -31,9 +31,19 @@ namespace IntrinsicsDocs.Cpp
 				if( name.ToLowerInvariant().EndsWith( ".extra.hpp" ) )
 					continue;
 
+				string destFolder = dest;
+
 				string nameRel = name.stripPrefix( prefix );
+				if( nameRel.StartsWith( "Implementation." ) )
+				{
+					destFolder = Path.Combine( dest, "Implementation" );
+					if( !Directory.Exists( destFolder ) )
+						Directory.CreateDirectory( destFolder );
+					nameRel = nameRel.stripPrefix( "Implementation." );
+				}
+
 				var stm = ass.GetManifestResourceStream( name );
-				string pathDest = Path.Combine( dest, nameRel );
+				string pathDest = Path.Combine( destFolder, nameRel );
 				using( var fs = File.Create( pathDest ) )
 				{
 					stm.Seek( 0, SeekOrigin.Begin );
