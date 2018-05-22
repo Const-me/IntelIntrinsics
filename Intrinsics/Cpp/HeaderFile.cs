@@ -11,7 +11,7 @@ namespace IntrinsicsDocs.Cpp
 		readonly List<Intrinsic> intrinsics = new List<Intrinsic>( 64 );
 		readonly string cpuid;
 		readonly string ns;
-		readonly string callConv = "__vectorcall";
+		readonly string callConv = "XM_CALLCONV";
 
 		readonly Func<IEnumerable<string>, bool> fnSmaller = null;
 		readonly HeaderFile smallRegInstructions = null;
@@ -78,11 +78,12 @@ namespace IntrinsicsDocs.Cpp
 		{
 			using( var fs = File.CreateText( destPath ) )
 			{
-				fs.WriteLine( "// This file is generated automatically by a tool, please don't edit." );
-				fs.WriteLine( "#pragma once" );
-				fs.WriteLine();
 				fs.WriteLine(
-@"namespace Intrinsics
+@"// This file is generated automatically by a tool, please don't edit.
+#pragma once
+#include ""Implementation/utils.hpp""
+
+namespace Intrinsics
 {" );
 				writeImpl( fs );
 

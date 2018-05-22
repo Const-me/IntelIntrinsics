@@ -78,7 +78,7 @@ namespace IntrinsicsDocs
 		public bool is64bitOnly = false;
 
 		[XmlIgnore]
-		public bool fixedSetOrder = false;
+		public bool flipArgumentsOrder = false;
 
 		public override string ToString()
 		{

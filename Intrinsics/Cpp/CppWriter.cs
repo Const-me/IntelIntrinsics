@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace IntrinsicsDocs.Cpp
 {
@@ -27,6 +26,8 @@ namespace IntrinsicsDocs.Cpp
 			if( i.isEmptyParams() )
 				return "";
 			IEnumerable<Intrinsic.Param> items = ( skipImm ) ? i.parameter.Where( ii => !isImm( ii ) ) : i.parameter;
+			if( i.flipArgumentsOrder )
+				items = items.Reverse();
 			return $" { String.Join( ", ", items.Select( argPrototype ) ) } ";
 		}
 		static string templatePrototype( Intrinsic.Param p )
@@ -66,16 +67,28 @@ namespace IntrinsicsDocs.Cpp
 			if( n.StartsWith( "_mm_" ) )
 				n = n.stripPrefix( "_mm_" ).replaceSuffix( "_si128", completeSuffix );
 			else if( n.StartsWith( "_mm256_" ) )
-				return n.stripPrefix( "_mm256_" ).replaceSuffix( "_si256", completeSuffix );
+				n = n.stripPrefix( "_mm256_" ).replaceSuffix( "_si256", completeSuffix );
 			else if( n.StartsWith( "_mm512_" ) )
-				return n.stripPrefix( "_mm512_" ).replaceSuffix( "_si512", completeSuffix );
+				n = n.stripPrefix( "_mm512_" ).replaceSuffix( "_si512", completeSuffix );
 
-			if( n.StartsWith( "setr_" ) )
+			if( n.StartsWith( "set_" ) )
 			{
 				// Intel messed up in the headers, what they call "reverse order" is normal order i.e. increasing RAM addresses.
 				// They probably meant "reverse order" compared to the native stack but that's meaningless for C++ developers, people expect left to right order to be normal.
-				n = n.Replace( "setr_", "set_" );
-				i.fixedSetOrder = true;
+				i.flipArgumentsOrder = true;
+			}
+
+			// Intel messed up in the names of "broadcast" family of intrinsics, they have type suffixes in two places in their names, e.g. _mm_broadcastsd_pd instead of _mm_broadcast_pd. Fix that.
+			string sBroadcast = "broadcast";
+			if( n.StartsWith( sBroadcast ) )
+			{
+				if( n == "broadcastsi128_si256" )
+					n = "broadcast_si128";
+				else
+				{
+					int pos = n.IndexOf( '_', sBroadcast.Length );
+					n = sBroadcast + n.Substring( pos );
+				}
 			}
 
 			return n;
@@ -84,7 +97,7 @@ namespace IntrinsicsDocs.Cpp
 		static string singleLineDescription( this Intrinsic i )
 		{
 			string res = i.shortDescription().Replace( "\n", "" ).Replace( "\r", "" ).Replace( " \t", " " );
-			if( i.fixedSetOrder )
+			if( i.flipArgumentsOrder )
 				res = res.stripSuffix( " in reverse order" );
 			return res.Trim();
 		}

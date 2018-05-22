@@ -90,7 +90,7 @@
     <EmbeddedResource Include="Cpp\avx2.extra.hpp" />
     <EmbeddedResource Include="Cpp\Implementation\operators_float.inl" />
     <EmbeddedResource Include="Cpp\sse_operators.hpp" />
-    <Content Include="Cpp\avx_operators.hpp" />
+    <EmbeddedResource Include="Cpp\avx_operators.hpp" />
     <EmbeddedResource Include="Cpp\Implementation\operators_float_impl.inl" />
     <EmbeddedResource Include="Cpp\sse.extra.hpp" />
     <EmbeddedResource Include="Cpp\Implementation\operators_bitwise.inl" />

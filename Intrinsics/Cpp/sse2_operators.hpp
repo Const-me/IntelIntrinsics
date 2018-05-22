@@ -6,7 +6,6 @@ namespace Intrinsics
 {
 	namespace Sse
 	{
-
 #include "Implementation/operators_int.inl"
 	}
 }

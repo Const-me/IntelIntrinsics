@@ -101,8 +101,8 @@ namespace IntrinsicsDocs.Cpp
 			if( isAllCaps( n ) )
 				return false;
 
-			if( n.Contains( "_set_" ) )
-				return false;   // Skip _set_, only include _setr_
+			if( n.Contains( "_setr_" ) )
+				return false;   // Skip _setr_, only include _set_
 			if( n.startsWith( skipPrefixes ) )
 				return false;
 
