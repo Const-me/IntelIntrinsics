@@ -238,12 +238,6 @@ namespace Intrinsics
 			return _mm256_cvtps_pd( a );
 		}
 
-		// Copy the lower single-precision floating-point element of "a" to "dst"
-		inline float XM_CALLCONV cvtss_f32( __m256 a )
-		{
-			return _mm256_cvtss_f32( a );
-		}
-
 		// Convert packed double-precision floating-point elements in "a" to packed 32-bit integers with truncation
 		inline __m128i XM_CALLCONV cvttpd_epi32( __m256d a )
 		{
@@ -1006,24 +1000,6 @@ namespace Intrinsics
 		inline void XM_CALLCONV zeroupper()
 		{
 			_mm256_zeroupper();
-		}
-
-		// Casts vector of type __m128d to type __m256d; the upper 128 bits of the result are zeroed
-		inline __m256d XM_CALLCONV zextpd128_pd256( __m128d a )
-		{
-			return _mm256_zextpd128_pd256( a );
-		}
-
-		// Casts vector of type __m128 to type __m256; the upper 128 bits of the result are zeroed
-		inline __m256 XM_CALLCONV zextps128_ps256( __m128 a )
-		{
-			return _mm256_zextps128_ps256( a );
-		}
-
-		// Casts vector of type __m128i to type __m256i; the upper 128 bits of the result are zeroed
-		inline __m256i XM_CALLCONV zextsi128_all( __m128i a )
-		{
-			return _mm256_zextsi128_si256( a );
 		}
 		using VecFloat32 = __m256;
 		using VecFloat64 = __m256d;

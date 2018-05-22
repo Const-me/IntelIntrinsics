@@ -63,6 +63,15 @@ namespace IntrinsicsDocs.Cpp
 			"_mm_loadu_si64",
 			"_mm_storeu_si16",
 			"_mm_storeu_si64",
+
+			"_mm_loadu_si32",
+			"_mm_storeu_si32",
+			"_mm256_cvtss_f32",
+			"_mm256_zextpd128_pd256",
+			"_mm256_zextps128_ps256",
+			"_mm256_zextsi128_si256",
+			"_mm256_cvtsd_f64",
+			"_mm256_cvtsi256_si32",
 		};
 
 		static readonly HashSet<string> _64BitIntrinsics = new HashSet<string>

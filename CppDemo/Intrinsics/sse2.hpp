@@ -574,12 +574,6 @@ namespace Intrinsics
 			return _mm_loadu_si128( mem_addr );
 		}
 
-		// Load unaligned 32-bit integer from memory into the first element of "dst"
-		inline __m128i XM_CALLCONV loadu_si32( const void *mem_addr )
-		{
-			return _mm_loadu_si32( mem_addr );
-		}
-
 		// Multiply packed signed 16-bit integers in "a" and "b", producing intermediate signed 32-bit integers
 		inline __m128i XM_CALLCONV madd_epi16( __m128i a, __m128i b )
 		{
@@ -1082,12 +1076,6 @@ namespace Intrinsics
 		inline void XM_CALLCONV storeu_all( __m128i* mem_addr, __m128i a )
 		{
 			_mm_storeu_si128( mem_addr, a );
-		}
-
-		// Store 32-bit integer from the first element of "a" into memory. "mem_addr" does not need to be aligned on any particular boundary.
-		inline void XM_CALLCONV storeu_si32( void* mem_addr, __m128i a )
-		{
-			_mm_storeu_si32( mem_addr, a );
 		}
 
 		// Store 128-bits (composed of 2 packed double-precision floating-point elements) from "a" into memory using a non-temporal memory hint

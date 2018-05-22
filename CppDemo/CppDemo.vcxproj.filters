@@ -28,11 +28,15 @@
     <ClInclude Include="Intrinsics\sse4.2.hpp" />
     <ClInclude Include="Intrinsics\ssse3.hpp" />
     <ClInclude Include="quaternionMul.h" />
+    <ClInclude Include="IDiv\DivMagic.hpp" />
+    <ClInclude Include="IDiv\IDiv.hpp" />
+    <ClInclude Include="intDivide.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="quaternionMul.cpp" />
+    <ClCompile Include="intDivide.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Intrinsics\Implementation\operators_bitwise.inl" />
@@ -40,5 +44,6 @@
     <None Include="Intrinsics\Implementation\operators_float_impl.inl" />
     <None Include="Intrinsics\Implementation\operators_int.inl" />
     <None Include="packages.config" />
+    <None Include="IDiv\DivImpl.inl" />
   </ItemGroup>
 </Project>

@@ -145,6 +145,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IDiv\DivMagic.hpp" />
+    <ClInclude Include="IDiv\IDiv.hpp" />
+    <ClInclude Include="intDivide.h" />
     <ClInclude Include="Intrinsics\aes.hpp" />
     <ClInclude Include="Intrinsics\avx.hpp" />
     <ClInclude Include="Intrinsics\avx2.hpp" />
@@ -172,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />
+    <ClCompile Include="intDivide.cpp" />
     <ClCompile Include="quaternionMul.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -181,6 +185,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="IDiv\DivImpl.inl" />
     <None Include="Intrinsics\Implementation\operators_bitwise.inl" />
     <None Include="Intrinsics\Implementation\operators_float.inl" />
     <None Include="Intrinsics\Implementation\operators_float_impl.inl" />

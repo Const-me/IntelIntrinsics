@@ -299,18 +299,6 @@ namespace Intrinsics
 			return _mm256_cvtepu8_epi64( a );
 		}
 
-		// Copy the lower double-precision floating-point element of "a" to "dst"
-		inline double XM_CALLCONV cvtsd_f64( __m256d a )
-		{
-			return _mm256_cvtsd_f64( a );
-		}
-
-		// Copy the lower 32-bit integer in "a" to "dst".
-		inline int XM_CALLCONV cvtsi256_si32( __m256i a )
-		{
-			return _mm256_cvtsi256_si32( a );
-		}
-
 		// Extract a 16-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
 		inline __int16 XM_CALLCONV extract_epi16( __m256i a )
