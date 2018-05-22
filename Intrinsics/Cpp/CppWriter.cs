@@ -9,7 +9,12 @@ namespace IntrinsicsDocs.Cpp
 	{
 		static string argPrototype( Intrinsic.Param p )
 		{
-			return $"{p.type} {p.varname}";
+			return $"{p.type.mapType()} {p.varname}".Replace( " * ", " *" );
+		}
+		static string argPrototypeUnsigned( Intrinsic.Param p )
+		{
+			string tp = "unsigned " + p.type;
+			return $"{tp.mapType()} {p.varname}".Replace( " * ", " *" );
 		}
 
 		static bool isEmptyParams( this Intrinsic i )
@@ -21,6 +26,35 @@ namespace IntrinsicsDocs.Cpp
 			return false;
 		}
 
+		// Intel messed up types in their API. We want them to be normalized, i.e. no "long long"-s, also we want standard typedefs from <stdint.h>. Fix that.
+		static readonly Dictionary<string, string> s_typeMap = new Dictionary<string, string>()
+		{
+			{ "unsigned char", "uint8_t" },
+			{ "unsigned short", "uint16_t" },
+			{ "unsigned int", "uint32_t" },
+			{ "unsigned __int64", "uint64_t" },
+			{ "__int64", "int64_t" },
+			{ "unsigned long long", "uint64_t" },
+			{ "long long", "int64_t" },
+		};
+		static string mapType( this string s )
+		{
+			bool constPointer = false;
+			if( s.EndsWith( "const*" ) || s.EndsWith( "const *" ) )
+			{
+				constPointer = true;
+				s = s.Substring( 0, s.LastIndexOf( "const" ) ).Trim();
+			}
+
+			string r;
+			if( !s_typeMap.TryGetValue( s, out r ) )
+				r = s;
+
+			if( constPointer )
+				return $"const {r} *";
+			return r;
+		}
+
 		static string argPrototype( this Intrinsic i, bool skipImm = false )
 		{
 			if( i.isEmptyParams() )
@@ -28,13 +62,18 @@ namespace IntrinsicsDocs.Cpp
 			IEnumerable<Intrinsic.Param> items = ( skipImm ) ? i.parameter.Where( ii => !isImm( ii ) ) : i.parameter;
 			if( i.flipArgumentsOrder )
 				items = items.Reverse();
-			return $" { String.Join( ", ", items.Select( argPrototype ) ) } ";
+
+			Func<Intrinsic.Param, string> fnProto = argPrototype;
+			if( i.castArgumentsUnsigned )
+				fnProto = argPrototypeUnsigned;
+
+			return $" { String.Join( ", ", items.Select( fnProto ) ) } ";
 		}
 		static string templatePrototype( Intrinsic.Param p )
 		{
 			string type = p.type;
 			type = type.stripPrefix( "const ", "const\t" );
-			return $"{type} {p.varname}";
+			return $"{type.mapType()} {p.varname}";
 		}
 		static string templatePrototype( this Intrinsic i )
 		{
@@ -45,7 +84,10 @@ namespace IntrinsicsDocs.Cpp
 		{
 			if( i.isEmptyParams() )
 				return "";
-			return $" { String.Join( ", ", i.parameter.Select( ip => ip.varname ) ) } ";
+			Func<Intrinsic.Param, string> fnProto = ip => ip.varname;
+			if( i.castArgumentsUnsigned )
+				fnProto = ip => $"({ip.type.mapType()}){ip.varname}";
+			return $" { String.Join( ", ", i.parameter.Select( fnProto ) ) } ";
 		}
 
 		static bool isImm( Intrinsic.Param p )
@@ -73,8 +115,7 @@ namespace IntrinsicsDocs.Cpp
 
 			if( n.StartsWith( "set_" ) )
 			{
-				// Intel messed up in the headers, what they call "reverse order" is normal order i.e. increasing RAM addresses.
-				// They probably meant "reverse order" compared to the native stack but that's meaningless for C++ developers, people expect left to right order to be normal.
+				// What Intel calls "reverse order" is normal order i.e. increasing RAM addresses. Fix that.
 				i.flipArgumentsOrder = true;
 			}
 
@@ -90,7 +131,6 @@ namespace IntrinsicsDocs.Cpp
 					n = sBroadcast + n.Substring( pos );
 				}
 			}
-
 			return n;
 		}
 
@@ -105,6 +145,8 @@ namespace IntrinsicsDocs.Cpp
 		static void write( this StreamWriter sw, Intrinsic i, string callConv )
 		{
 			string name = i.cppName();
+			writeImpl:
+
 			sw.WriteLine( "		// " + i.singleLineDescription() );
 
 			if( !String.IsNullOrWhiteSpace( callConv ) )
@@ -112,7 +154,7 @@ namespace IntrinsicsDocs.Cpp
 
 			if( i.isEmptyParams() || !i.parameter.Any( isImm ) )
 			{
-				sw.WriteLine( $"		inline { i.rettype }{ callConv } { name }({ i.argPrototype() })" );
+				sw.WriteLine( $"		inline { i.rettype.mapType() }{ callConv } { name }({ i.argPrototype() })" );
 				sw.WriteLine( "		{" );
 
 				sw.Write( "			" );
@@ -125,7 +167,7 @@ namespace IntrinsicsDocs.Cpp
 			else
 			{
 				sw.WriteLine( $"		template<{i.templatePrototype()}>" );
-				sw.WriteLine( $"		inline { i.rettype }{ callConv } { name }({ i.argPrototype( true ) })" );
+				sw.WriteLine( $"		inline { i.rettype.mapType() }{ callConv } { name }({ i.argPrototype( true ) })" );
 				sw.WriteLine( "		{" );
 
 				sw.Write( "			" );
@@ -134,6 +176,13 @@ namespace IntrinsicsDocs.Cpp
 				sw.WriteLine( $"{ i.name }({ i.argCall() });" );
 
 				sw.WriteLine( "		}" );
+			}
+
+			if( name.StartsWith( "set_epi" ) || name.StartsWith( "set1_epi" ) )
+			{
+				name = name.Replace( "_epi", "_epu" );
+				i.castArgumentsUnsigned = true;
+				goto writeImpl;
 			}
 		}
 

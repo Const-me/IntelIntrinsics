@@ -121,7 +121,7 @@ namespace IntrinsicsDocs
 
 		static readonly string[] stopMarkers = new string[]
 		{
-			", and store",
+			", and store the result",
 			", storing the result",
 			".",
 			" and stores the results",
@@ -131,7 +131,7 @@ namespace IntrinsicsDocs
 			", and set the corresponding bit",
 			", rotating",
 			", and return",
-			" and store",
+			// " and store",
 			", storing them",
 			" and performing "
 		};

@@ -37,8 +37,7 @@ namespace IntrinsicsDocs.Cpp
 
 		public void add( Intrinsic i )
 		{
-			if( i.name == "_mm_broadcastb_epi8" && Debugger.IsAttached )
-				Debugger.Break();
+			// if( i.name == "_mm_broadcastb_epi8" && Debugger.IsAttached ) Debugger.Break();
 
 			if( !i.shouldInclude() )
 				return;

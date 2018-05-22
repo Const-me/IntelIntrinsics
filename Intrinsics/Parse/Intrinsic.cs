@@ -80,6 +80,9 @@ namespace IntrinsicsDocs
 		[XmlIgnore]
 		public bool flipArgumentsOrder = false;
 
+		[XmlIgnore]
+		public bool castArgumentsUnsigned = false;
+
 		public override string ToString()
 		{
 			return name;
