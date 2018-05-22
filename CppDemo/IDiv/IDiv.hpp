@@ -9,15 +9,10 @@ namespace Intrinsics
 	{
 #include "DivMagic.hpp"
 	}
-
 	namespace Sse
 	{
 #include "DivImpl.inl"
 	}
-}
-
-namespace Intrinsics
-{
 	namespace Avx
 	{
 #include "DivImpl.inl"

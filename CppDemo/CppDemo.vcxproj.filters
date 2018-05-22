@@ -45,5 +45,6 @@
     <None Include="Intrinsics\Implementation\operators_int.inl" />
     <None Include="packages.config" />
     <None Include="IDiv\DivImpl.inl" />
+    <None Include="intDivide.inl" />
   </ItemGroup>
 </Project>

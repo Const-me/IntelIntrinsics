@@ -7,6 +7,10 @@ ParseTables/obj/
 PerformanceData/
 Intrinsics.VC.db
 CppDemo/Debug/
+CppDemo/Release/
 Debug/
+Release/
+CppDemo/x64/
+x64/
 *.user
 Intrinsics.VC.VC.opendb
