@@ -57,6 +57,12 @@ namespace IntrinsicsDocs.Cpp
 			"_mm_tzcnt_64",
 
 			"_mm_broadcastsi128_si256",
+
+			// VS doesn't have these
+			"_mm_loadu_si16",
+			"_mm_loadu_si64",
+			"_mm_storeu_si16",
+			"_mm_storeu_si64",
 		};
 
 		static readonly HashSet<string> _64BitIntrinsics = new HashSet<string>

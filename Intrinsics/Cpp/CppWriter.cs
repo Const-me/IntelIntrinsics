@@ -131,6 +131,11 @@ namespace IntrinsicsDocs.Cpp
 					n = sBroadcast + n.Substring( pos );
 				}
 			}
+
+			// No need for "_all" in AES intrinsics, there's a single version of them
+			if( n.StartsWith( "aes" ) && n.EndsWith( completeSuffix ) )
+				n = n.replaceSuffix( completeSuffix, "" );
+
 			return n;
 		}
 

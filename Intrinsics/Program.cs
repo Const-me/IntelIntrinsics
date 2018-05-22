@@ -45,7 +45,8 @@ namespace IntrinsicsDocs
 			// string tempFolder = Utils.inTemp( "IntrinsicsChm" );
 			// HelpBuilder.produce( tempFolder, data );
 
-			CppBuilder.produce( @"C:\Temp\2remove\IntrinsicsCpp", data );
+			string destCpp = @"C:\Z\Fun\IntelIntrinsics\CppDemo\Intrinsics";
+			CppBuilder.produce( destCpp, data );
 		}
 
 		static void perfTest()

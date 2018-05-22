@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Intrinsics\Implementation\utils.hpp" />
+    <ClInclude Include="Intrinsics\aes.hpp" />
+    <ClInclude Include="Intrinsics\avx.hpp" />
+    <ClInclude Include="Intrinsics\avx_operators.hpp" />
+    <ClInclude Include="Intrinsics\avx2.hpp" />
+    <ClInclude Include="Intrinsics\avx2_operators.hpp" />
+    <ClInclude Include="Intrinsics\bmi1.hpp" />
+    <ClInclude Include="Intrinsics\bmi2.hpp" />
+    <ClInclude Include="Intrinsics\fma.hpp" />
+    <ClInclude Include="Intrinsics\fp16c.hpp" />
+    <ClInclude Include="Intrinsics\intrinsics.hpp" />
+    <ClInclude Include="Intrinsics\pclmulqdq.hpp" />
+    <ClInclude Include="Intrinsics\sha.hpp" />
+    <ClInclude Include="Intrinsics\sse.hpp" />
+    <ClInclude Include="Intrinsics\sse_operators.hpp" />
+    <ClInclude Include="Intrinsics\sse2.hpp" />
+    <ClInclude Include="Intrinsics\sse2_operators.hpp" />
+    <ClInclude Include="Intrinsics\sse3.hpp" />
+    <ClInclude Include="Intrinsics\sse4.1.hpp" />
+    <ClInclude Include="Intrinsics\sse4.2.hpp" />
+    <ClInclude Include="Intrinsics\ssse3.hpp" />
+    <ClInclude Include="quaternionMul.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CppDemo.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="quaternionMul.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Intrinsics\Implementation\operators_bitwise.inl" />
+    <None Include="Intrinsics\Implementation\operators_float.inl" />
+    <None Include="Intrinsics\Implementation\operators_float_impl.inl" />
+    <None Include="Intrinsics\Implementation\operators_int.inl" />
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
