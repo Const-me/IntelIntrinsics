@@ -46,5 +46,7 @@
     <None Include="packages.config" />
     <None Include="IDiv\DivImpl.inl" />
     <None Include="intDivide.inl" />
+    <None Include="Intrinsics\Implementation\operators_float32.inl" />
+    <None Include="Intrinsics\Implementation\operators_float64.inl" />
   </ItemGroup>
 </Project>

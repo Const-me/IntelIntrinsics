@@ -196,6 +196,8 @@
     <None Include="intDivide.inl" />
     <None Include="Intrinsics\Implementation\operators_bitwise.inl" />
     <None Include="Intrinsics\Implementation\operators_float.inl" />
+    <None Include="Intrinsics\Implementation\operators_float32.inl" />
+    <None Include="Intrinsics\Implementation\operators_float64.inl" />
     <None Include="Intrinsics\Implementation\operators_float_impl.inl" />
     <None Include="Intrinsics\Implementation\operators_int.inl" />
     <None Include="packages.config" />
