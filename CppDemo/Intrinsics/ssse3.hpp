@@ -7,6 +7,12 @@ namespace Intrinsics
 {
 	namespace Sse
 	{
+		// Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst"
+		inline __m128i XM_CALLCONV abs_epi8( __m128i a )
+		{
+			return _mm_abs_epi8( a );
+		}
+
 		// Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst"
 		inline __m128i XM_CALLCONV abs_epi16( __m128i a )
 		{
@@ -17,12 +23,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV abs_epi32( __m128i a )
 		{
 			return _mm_abs_epi32( a );
-		}
-
-		// Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst"
-		inline __m128i XM_CALLCONV abs_epi8( __m128i a )
-		{
-			return _mm_abs_epi8( a );
 		}
 
 		// Concatenate 16-byte blocks in "a" and "b" into a 32-byte temporary result, shift the result right by "count" bytes, and store the low 16 bytes in "dst"
@@ -86,6 +86,12 @@ namespace Intrinsics
 			return _mm_shuffle_epi8( a, b );
 		}
 
+		// Negate packed 8-bit integers in "a" when the corresponding signed 8-bit integer in "b" is negative
+		inline __m128i XM_CALLCONV sign_epi8( __m128i a, __m128i b )
+		{
+			return _mm_sign_epi8( a, b );
+		}
+
 		// Negate packed 16-bit integers in "a" when the corresponding signed 16-bit integer in "b" is negative
 		inline __m128i XM_CALLCONV sign_epi16( __m128i a, __m128i b )
 		{
@@ -96,12 +102,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV sign_epi32( __m128i a, __m128i b )
 		{
 			return _mm_sign_epi32( a, b );
-		}
-
-		// Negate packed 8-bit integers in "a" when the corresponding signed 8-bit integer in "b" is negative
-		inline __m128i XM_CALLCONV sign_epi8( __m128i a, __m128i b )
-		{
-			return _mm_sign_epi8( a, b );
 		}
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics

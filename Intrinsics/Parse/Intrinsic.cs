@@ -51,6 +51,13 @@ namespace IntrinsicsDocs
 			sortKey = name.TrimStart( '_' )
 				.ToLowerInvariant()
 				.stripPrefix( "mm_", "mm256_", "mm512_", "m_" );
+
+			// For names ending with a number, zero-extend that number into 3 digits. This improves their sorting order.
+			int trailingDigits = 0;
+			for( ; char.IsDigit( sortKey[ sortKey.Length - trailingDigits - 1 ] ); trailingDigits++ ) ;
+			if( trailingDigits > 0 && trailingDigits < 3 )
+				sortKey = sortKey.Substring( 0, sortKey.Length - trailingDigits ) + new string( '0', 3 - trailingDigits ) + sortKey.Substring( sortKey.Length - trailingDigits );
+
 			if( null == parameter ) parameter = s_emptyParams;
 		}
 

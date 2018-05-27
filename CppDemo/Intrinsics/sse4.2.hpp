@@ -111,6 +111,12 @@ namespace Intrinsics
 			return _mm_cmpistrz( a, b, imm8 );
 		}
 
+		// Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 8-bit integer "v", and stores the result in "dst"
+		inline uint32_t XM_CALLCONV crc32_u8( uint32_t crc, uint8_t v )
+		{
+			return _mm_crc32_u8( crc, v );
+		}
+
 		// Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 16-bit integer "v", and stores the result in "dst"
 		inline uint32_t XM_CALLCONV crc32_u16( uint32_t crc, uint16_t v )
 		{
@@ -121,12 +127,6 @@ namespace Intrinsics
 		inline uint32_t XM_CALLCONV crc32_u32( uint32_t crc, uint32_t v )
 		{
 			return _mm_crc32_u32( crc, v );
-		}
-
-		// Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 8-bit integer "v", and stores the result in "dst"
-		inline uint32_t XM_CALLCONV crc32_u8( uint32_t crc, uint8_t v )
-		{
-			return _mm_crc32_u8( crc, v );
 		}
 
 #if _M_X64

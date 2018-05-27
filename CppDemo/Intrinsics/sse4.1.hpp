@@ -162,6 +162,13 @@ namespace Intrinsics
 			return _mm_dp_ps( a, b, imm8 );
 		}
 
+		// Extract an 8-bit integer from "a", selected with "imm8", and store the result in the lower element of "dst"
+		template<int imm8>
+		inline int XM_CALLCONV extract_epi8( __m128i a )
+		{
+			return _mm_extract_epi8( a, imm8 );
+		}
+
 		// Extract a 32-bit integer from "a", selected with "imm8", and store the result in "dst"
 		template<int imm8>
 		inline int XM_CALLCONV extract_epi32( __m128i a )
@@ -174,13 +181,6 @@ namespace Intrinsics
 		inline int64_t XM_CALLCONV extract_epi64( __m128i a )
 		{
 			return (int64_t)_mm_extract_epi64( a, imm8 );
-		}
-
-		// Extract an 8-bit integer from "a", selected with "imm8", and store the result in the lower element of "dst"
-		template<int imm8>
-		inline int XM_CALLCONV extract_epi8( __m128i a )
-		{
-			return _mm_extract_epi8( a, imm8 );
 		}
 
 		// Extract a single-precision floating-point element from "a", selected with "imm8"
@@ -214,6 +214,13 @@ namespace Intrinsics
 			return _mm_floor_ss( a, b );
 		}
 
+		// Copy "a" to "dst", and insert the lower 8-bit integer from "i" into "dst" at the location specified by "imm8"
+		template<int imm8>
+		inline __m128i XM_CALLCONV insert_epi8( __m128i a, int i )
+		{
+			return _mm_insert_epi8( a, i, imm8 );
+		}
+
 		// Copy "a" to "dst", and insert the 32-bit integer "i" into "dst" at the location specified by "imm8"
 		template<int imm8>
 		inline __m128i XM_CALLCONV insert_epi32( __m128i a, int i )
@@ -228,13 +235,6 @@ namespace Intrinsics
 			return _mm_insert_epi64( a, (real_int64_t)i, imm8 );
 		}
 
-		// Copy "a" to "dst", and insert the lower 8-bit integer from "i" into "dst" at the location specified by "imm8"
-		template<int imm8>
-		inline __m128i XM_CALLCONV insert_epi8( __m128i a, int i )
-		{
-			return _mm_insert_epi8( a, i, imm8 );
-		}
-
 		// Copy "a" to "tmp", then insert a single-precision floating-point element from "b" into "tmp" using the control in "imm8"
 		template<int imm8>
 		inline __m128 XM_CALLCONV insert_ps( __m128 a, __m128 b )
@@ -242,16 +242,16 @@ namespace Intrinsics
 			return _mm_insert_ps( a, b, imm8 );
 		}
 
-		// Compare packed 32-bit integers in "a" and "b", and store packed maximum values in "dst"
-		inline __m128i XM_CALLCONV max_epi32( __m128i a, __m128i b )
-		{
-			return _mm_max_epi32( a, b );
-		}
-
 		// Compare packed 8-bit integers in "a" and "b", and store packed maximum values in "dst"
 		inline __m128i XM_CALLCONV max_epi8( __m128i a, __m128i b )
 		{
 			return _mm_max_epi8( a, b );
+		}
+
+		// Compare packed 32-bit integers in "a" and "b", and store packed maximum values in "dst"
+		inline __m128i XM_CALLCONV max_epi32( __m128i a, __m128i b )
+		{
+			return _mm_max_epi32( a, b );
 		}
 
 		// Compare packed unsigned 16-bit integers in "a" and "b", and store packed maximum values in "dst"
@@ -266,16 +266,16 @@ namespace Intrinsics
 			return _mm_max_epu32( a, b );
 		}
 
-		// Compare packed 32-bit integers in "a" and "b", and store packed minimum values in "dst"
-		inline __m128i XM_CALLCONV min_epi32( __m128i a, __m128i b )
-		{
-			return _mm_min_epi32( a, b );
-		}
-
 		// Compare packed 8-bit integers in "a" and "b", and store packed minimum values in "dst"
 		inline __m128i XM_CALLCONV min_epi8( __m128i a, __m128i b )
 		{
 			return _mm_min_epi8( a, b );
+		}
+
+		// Compare packed 32-bit integers in "a" and "b", and store packed minimum values in "dst"
+		inline __m128i XM_CALLCONV min_epi32( __m128i a, __m128i b )
+		{
+			return _mm_min_epi32( a, b );
 		}
 
 		// Compare packed unsigned 16-bit integers in "a" and "b", and store packed minimum values in "dst"

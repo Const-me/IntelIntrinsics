@@ -7,6 +7,12 @@ namespace Intrinsics
 {
 	namespace Avx
 	{
+		// Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst"
+		inline __m256i XM_CALLCONV abs_epi8( __m256i a )
+		{
+			return _mm256_abs_epi8( a );
+		}
+
 		// Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst"
 		inline __m256i XM_CALLCONV abs_epi16( __m256i a )
 		{
@@ -19,10 +25,10 @@ namespace Intrinsics
 			return _mm256_abs_epi32( a );
 		}
 
-		// Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst"
-		inline __m256i XM_CALLCONV abs_epi8( __m256i a )
+		// Add packed 8-bit integers in "a" and "b", and store the results in "dst"
+		inline __m256i XM_CALLCONV add_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_abs_epi8( a );
+			return _mm256_add_epi8( a, b );
 		}
 
 		// Add packed 16-bit integers in "a" and "b", and store the results in "dst"
@@ -43,10 +49,10 @@ namespace Intrinsics
 			return _mm256_add_epi64( a, b );
 		}
 
-		// Add packed 8-bit integers in "a" and "b", and store the results in "dst"
-		inline __m256i XM_CALLCONV add_epi8( __m256i a, __m256i b )
+		// Add packed 8-bit integers in "a" and "b" using saturation, and store the results in "dst"
+		inline __m256i XM_CALLCONV adds_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_add_epi8( a, b );
+			return _mm256_adds_epi8( a, b );
 		}
 
 		// Add packed 16-bit integers in "a" and "b" using saturation, and store the results in "dst"
@@ -55,22 +61,16 @@ namespace Intrinsics
 			return _mm256_adds_epi16( a, b );
 		}
 
-		// Add packed 8-bit integers in "a" and "b" using saturation, and store the results in "dst"
-		inline __m256i XM_CALLCONV adds_epi8( __m256i a, __m256i b )
+		// Add packed unsigned 8-bit integers in "a" and "b" using saturation
+		inline __m256i XM_CALLCONV adds_epu8( __m256i a, __m256i b )
 		{
-			return _mm256_adds_epi8( a, b );
+			return _mm256_adds_epu8( a, b );
 		}
 
 		// Add packed unsigned 16-bit integers in "a" and "b" using saturation
 		inline __m256i XM_CALLCONV adds_epu16( __m256i a, __m256i b )
 		{
 			return _mm256_adds_epu16( a, b );
-		}
-
-		// Add packed unsigned 8-bit integers in "a" and "b" using saturation
-		inline __m256i XM_CALLCONV adds_epu8( __m256i a, __m256i b )
-		{
-			return _mm256_adds_epu8( a, b );
 		}
 
 		// Concatenate pairs of 16-byte blocks in "a" and "b" into a 32-byte temporary result, shift the result right by "count" bytes, and store the low 16 bytes in "dst"
@@ -92,16 +92,16 @@ namespace Intrinsics
 			return _mm256_andnot_si256( a, b );
 		}
 
-		// Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst"
-		inline __m256i XM_CALLCONV avg_epu16( __m256i a, __m256i b )
-		{
-			return _mm256_avg_epu16( a, b );
-		}
-
 		// Average packed unsigned 8-bit integers in "a" and "b", and store the results in "dst"
 		inline __m256i XM_CALLCONV avg_epu8( __m256i a, __m256i b )
 		{
 			return _mm256_avg_epu8( a, b );
+		}
+
+		// Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst"
+		inline __m256i XM_CALLCONV avg_epu16( __m256i a, __m256i b )
+		{
+			return _mm256_avg_epu16( a, b );
 		}
 
 		// Blend packed 16-bit integers from "a" and "b" within 128-bit lanes using control mask "imm8"
@@ -180,6 +180,12 @@ namespace Intrinsics
 			return _mm256_bsrli_epi128( a, imm8 );
 		}
 
+		// Compare packed 8-bit integers in "a" and "b" for equality, and store the results in "dst"
+		inline __m256i XM_CALLCONV cmpeq_epi8( __m256i a, __m256i b )
+		{
+			return _mm256_cmpeq_epi8( a, b );
+		}
+
 		// Compare packed 16-bit integers in "a" and "b" for equality, and store the results in "dst"
 		inline __m256i XM_CALLCONV cmpeq_epi16( __m256i a, __m256i b )
 		{
@@ -198,10 +204,10 @@ namespace Intrinsics
 			return _mm256_cmpeq_epi64( a, b );
 		}
 
-		// Compare packed 8-bit integers in "a" and "b" for equality, and store the results in "dst"
-		inline __m256i XM_CALLCONV cmpeq_epi8( __m256i a, __m256i b )
+		// Compare packed 8-bit integers in "a" and "b" for greater-than, and store the results in "dst"
+		inline __m256i XM_CALLCONV cmpgt_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_cmpeq_epi8( a, b );
+			return _mm256_cmpgt_epi8( a, b );
 		}
 
 		// Compare packed 16-bit integers in "a" and "b" for greater-than, and store the results in "dst"
@@ -220,12 +226,6 @@ namespace Intrinsics
 		inline __m256i XM_CALLCONV cmpgt_epi64( __m256i a, __m256i b )
 		{
 			return _mm256_cmpgt_epi64( a, b );
-		}
-
-		// Compare packed 8-bit integers in "a" and "b" for greater-than, and store the results in "dst"
-		inline __m256i XM_CALLCONV cmpgt_epi8( __m256i a, __m256i b )
-		{
-			return _mm256_cmpgt_epi8( a, b );
 		}
 
 		// Sign extend packed 16-bit integers in "a" to packed 32-bit integers
@@ -300,18 +300,18 @@ namespace Intrinsics
 			return _mm256_cvtepu8_epi64( a );
 		}
 
-		// Extract a 16-bit integer from "a", selected with "index", and store the result in "dst"
-		template<int index>
-		inline int16_t XM_CALLCONV extract_epi16( __m256i a )
-		{
-			return _mm256_extract_epi16( a, index );
-		}
-
 		// Extract an 8-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
 		inline int8_t XM_CALLCONV extract_epi8( __m256i a )
 		{
 			return _mm256_extract_epi8( a, index );
+		}
+
+		// Extract a 16-bit integer from "a", selected with "index", and store the result in "dst"
+		template<int index>
+		inline int16_t XM_CALLCONV extract_epi16( __m256i a )
+		{
+			return _mm256_extract_epi16( a, index );
 		}
 
 		// Extract 128 bits (composed of integer data) from "a", selected with "imm8"
@@ -512,6 +512,12 @@ namespace Intrinsics
 			_mm256_maskstore_epi64( (real_int64_t *)mem_addr, mask, a );
 		}
 
+		// Compare packed 8-bit integers in "a" and "b", and store packed maximum values in "dst"
+		inline __m256i XM_CALLCONV max_epi8( __m256i a, __m256i b )
+		{
+			return _mm256_max_epi8( a, b );
+		}
+
 		// Compare packed 16-bit integers in "a" and "b", and store packed maximum values in "dst"
 		inline __m256i XM_CALLCONV max_epi16( __m256i a, __m256i b )
 		{
@@ -524,10 +530,10 @@ namespace Intrinsics
 			return _mm256_max_epi32( a, b );
 		}
 
-		// Compare packed 8-bit integers in "a" and "b", and store packed maximum values in "dst"
-		inline __m256i XM_CALLCONV max_epi8( __m256i a, __m256i b )
+		// Compare packed unsigned 8-bit integers in "a" and "b", and store packed maximum values in "dst"
+		inline __m256i XM_CALLCONV max_epu8( __m256i a, __m256i b )
 		{
-			return _mm256_max_epi8( a, b );
+			return _mm256_max_epu8( a, b );
 		}
 
 		// Compare packed unsigned 16-bit integers in "a" and "b", and store packed maximum values in "dst"
@@ -542,10 +548,10 @@ namespace Intrinsics
 			return _mm256_max_epu32( a, b );
 		}
 
-		// Compare packed unsigned 8-bit integers in "a" and "b", and store packed maximum values in "dst"
-		inline __m256i XM_CALLCONV max_epu8( __m256i a, __m256i b )
+		// Compare packed 8-bit integers in "a" and "b", and store packed minimum values in "dst"
+		inline __m256i XM_CALLCONV min_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_max_epu8( a, b );
+			return _mm256_min_epi8( a, b );
 		}
 
 		// Compare packed 16-bit integers in "a" and "b", and store packed minimum values in "dst"
@@ -560,10 +566,10 @@ namespace Intrinsics
 			return _mm256_min_epi32( a, b );
 		}
 
-		// Compare packed 8-bit integers in "a" and "b", and store packed minimum values in "dst"
-		inline __m256i XM_CALLCONV min_epi8( __m256i a, __m256i b )
+		// Compare packed unsigned 8-bit integers in "a" and "b", and store packed minimum values in "dst"
+		inline __m256i XM_CALLCONV min_epu8( __m256i a, __m256i b )
 		{
-			return _mm256_min_epi8( a, b );
+			return _mm256_min_epu8( a, b );
 		}
 
 		// Compare packed unsigned 16-bit integers in "a" and "b", and store packed minimum values in "dst"
@@ -576,12 +582,6 @@ namespace Intrinsics
 		inline __m256i XM_CALLCONV min_epu32( __m256i a, __m256i b )
 		{
 			return _mm256_min_epu32( a, b );
-		}
-
-		// Compare packed unsigned 8-bit integers in "a" and "b", and store packed minimum values in "dst"
-		inline __m256i XM_CALLCONV min_epu8( __m256i a, __m256i b )
-		{
-			return _mm256_min_epu8( a, b );
 		}
 
 		// Create mask from the most significant bit of each 8-bit element in "a"
@@ -708,17 +708,17 @@ namespace Intrinsics
 			return _mm256_sad_epu8( a, b );
 		}
 
+		// Shuffle 8-bit integers in "a" within 128-bit lanes according to shuffle control mask in the corresponding 8-bit element of "b"
+		inline __m256i XM_CALLCONV shuffle_epi8( __m256i a, __m256i b )
+		{
+			return _mm256_shuffle_epi8( a, b );
+		}
+
 		// Shuffle 32-bit integers in "a" within 128-bit lanes using the control in "imm8"
 		template<int imm8>
 		inline __m256i XM_CALLCONV shuffle_epi32( __m256i a )
 		{
 			return _mm256_shuffle_epi32( a, imm8 );
-		}
-
-		// Shuffle 8-bit integers in "a" within 128-bit lanes according to shuffle control mask in the corresponding 8-bit element of "b"
-		inline __m256i XM_CALLCONV shuffle_epi8( __m256i a, __m256i b )
-		{
-			return _mm256_shuffle_epi8( a, b );
 		}
 
 		// Shuffle 16-bit integers in the high 64 bits of 128-bit lanes of "a" using the control in "imm8"
@@ -735,6 +735,12 @@ namespace Intrinsics
 			return _mm256_shufflelo_epi16( a, imm8 );
 		}
 
+		// Negate packed 8-bit integers in "a" when the corresponding signed 8-bit integer in "b" is negative
+		inline __m256i XM_CALLCONV sign_epi8( __m256i a, __m256i b )
+		{
+			return _mm256_sign_epi8( a, b );
+		}
+
 		// Negate packed 16-bit integers in "a" when the corresponding signed 16-bit integer in "b" is negative
 		inline __m256i XM_CALLCONV sign_epi16( __m256i a, __m256i b )
 		{
@@ -745,12 +751,6 @@ namespace Intrinsics
 		inline __m256i XM_CALLCONV sign_epi32( __m256i a, __m256i b )
 		{
 			return _mm256_sign_epi32( a, b );
-		}
-
-		// Negate packed 8-bit integers in "a" when the corresponding signed 8-bit integer in "b" is negative
-		inline __m256i XM_CALLCONV sign_epi8( __m256i a, __m256i b )
-		{
-			return _mm256_sign_epi8( a, b );
 		}
 
 		// Shift packed 16-bit integers in "a" left by "count" while shifting in zeros
@@ -907,6 +907,12 @@ namespace Intrinsics
 			return _mm256_stream_load_si256( mem_addr );
 		}
 
+		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a"
+		inline __m256i XM_CALLCONV sub_epi8( __m256i a, __m256i b )
+		{
+			return _mm256_sub_epi8( a, b );
+		}
+
 		// Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a"
 		inline __m256i XM_CALLCONV sub_epi16( __m256i a, __m256i b )
 		{
@@ -925,10 +931,10 @@ namespace Intrinsics
 			return _mm256_sub_epi64( a, b );
 		}
 
-		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a"
-		inline __m256i XM_CALLCONV sub_epi8( __m256i a, __m256i b )
+		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a" using saturation
+		inline __m256i XM_CALLCONV subs_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_sub_epi8( a, b );
+			return _mm256_subs_epi8( a, b );
 		}
 
 		// Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a" using saturation
@@ -937,10 +943,10 @@ namespace Intrinsics
 			return _mm256_subs_epi16( a, b );
 		}
 
-		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a" using saturation
-		inline __m256i XM_CALLCONV subs_epi8( __m256i a, __m256i b )
+		// Subtract packed unsigned 8-bit integers in "b" from packed unsigned 8-bit integers in "a" using saturation
+		inline __m256i XM_CALLCONV subs_epu8( __m256i a, __m256i b )
 		{
-			return _mm256_subs_epi8( a, b );
+			return _mm256_subs_epu8( a, b );
 		}
 
 		// Subtract packed unsigned 16-bit integers in "b" from packed unsigned 16-bit integers in "a" using saturation
@@ -949,10 +955,10 @@ namespace Intrinsics
 			return _mm256_subs_epu16( a, b );
 		}
 
-		// Subtract packed unsigned 8-bit integers in "b" from packed unsigned 8-bit integers in "a" using saturation
-		inline __m256i XM_CALLCONV subs_epu8( __m256i a, __m256i b )
+		// Unpack and interleave 8-bit integers from the high half of each 128-bit lane in "a" and "b"
+		inline __m256i XM_CALLCONV unpackhi_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_subs_epu8( a, b );
+			return _mm256_unpackhi_epi8( a, b );
 		}
 
 		// Unpack and interleave 16-bit integers from the high half of each 128-bit lane in "a" and "b"
@@ -973,10 +979,10 @@ namespace Intrinsics
 			return _mm256_unpackhi_epi64( a, b );
 		}
 
-		// Unpack and interleave 8-bit integers from the high half of each 128-bit lane in "a" and "b"
-		inline __m256i XM_CALLCONV unpackhi_epi8( __m256i a, __m256i b )
+		// Unpack and interleave 8-bit integers from the low half of each 128-bit lane in "a" and "b"
+		inline __m256i XM_CALLCONV unpacklo_epi8( __m256i a, __m256i b )
 		{
-			return _mm256_unpackhi_epi8( a, b );
+			return _mm256_unpacklo_epi8( a, b );
 		}
 
 		// Unpack and interleave 16-bit integers from the low half of each 128-bit lane in "a" and "b"
@@ -995,12 +1001,6 @@ namespace Intrinsics
 		inline __m256i XM_CALLCONV unpacklo_epi64( __m256i a, __m256i b )
 		{
 			return _mm256_unpacklo_epi64( a, b );
-		}
-
-		// Unpack and interleave 8-bit integers from the low half of each 128-bit lane in "a" and "b"
-		inline __m256i XM_CALLCONV unpacklo_epi8( __m256i a, __m256i b )
-		{
-			return _mm256_unpacklo_epi8( a, b );
 		}
 
 		// Compute the bitwise XOR of 256 bits (representing integer data) in "a" and "b"

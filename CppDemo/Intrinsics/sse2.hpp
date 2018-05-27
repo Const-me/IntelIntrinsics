@@ -8,6 +8,12 @@ namespace Intrinsics
 {
 	namespace Sse
 	{
+		// Add packed 8-bit integers in "a" and "b", and store the results in "dst"
+		inline __m128i XM_CALLCONV add_epi8( __m128i a, __m128i b )
+		{
+			return _mm_add_epi8( a, b );
+		}
+
 		// Add packed 16-bit integers in "a" and "b", and store the results in "dst"
 		inline __m128i XM_CALLCONV add_epi16( __m128i a, __m128i b )
 		{
@@ -26,12 +32,6 @@ namespace Intrinsics
 			return _mm_add_epi64( a, b );
 		}
 
-		// Add packed 8-bit integers in "a" and "b", and store the results in "dst"
-		inline __m128i XM_CALLCONV add_epi8( __m128i a, __m128i b )
-		{
-			return _mm_add_epi8( a, b );
-		}
-
 		// Add packed double-precision floating-point elements in "a" and "b"
 		inline __m128d XM_CALLCONV add_pd( __m128d a, __m128d b )
 		{
@@ -44,28 +44,28 @@ namespace Intrinsics
 			return _mm_add_sd( a, b );
 		}
 
-		// Add packed 16-bit integers in "a" and "b" using saturation, and store the results in "dst"
-		inline __m128i XM_CALLCONV adds_epi16( __m128i a, __m128i b )
-		{
-			return _mm_adds_epi16( a, b );
-		}
-
 		// Add packed 8-bit integers in "a" and "b" using saturation, and store the results in "dst"
 		inline __m128i XM_CALLCONV adds_epi8( __m128i a, __m128i b )
 		{
 			return _mm_adds_epi8( a, b );
 		}
 
-		// Add packed unsigned 16-bit integers in "a" and "b" using saturation
-		inline __m128i XM_CALLCONV adds_epu16( __m128i a, __m128i b )
+		// Add packed 16-bit integers in "a" and "b" using saturation, and store the results in "dst"
+		inline __m128i XM_CALLCONV adds_epi16( __m128i a, __m128i b )
 		{
-			return _mm_adds_epu16( a, b );
+			return _mm_adds_epi16( a, b );
 		}
 
 		// Add packed unsigned 8-bit integers in "a" and "b" using saturation
 		inline __m128i XM_CALLCONV adds_epu8( __m128i a, __m128i b )
 		{
 			return _mm_adds_epu8( a, b );
+		}
+
+		// Add packed unsigned 16-bit integers in "a" and "b" using saturation
+		inline __m128i XM_CALLCONV adds_epu16( __m128i a, __m128i b )
+		{
+			return _mm_adds_epu16( a, b );
 		}
 
 		// Compute the bitwise AND of packed double-precision floating-point elements in "a" and "b"
@@ -92,16 +92,16 @@ namespace Intrinsics
 			return _mm_andnot_si128( a, b );
 		}
 
-		// Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst"
-		inline __m128i XM_CALLCONV avg_epu16( __m128i a, __m128i b )
-		{
-			return _mm_avg_epu16( a, b );
-		}
-
 		// Average packed unsigned 8-bit integers in "a" and "b", and store the results in "dst"
 		inline __m128i XM_CALLCONV avg_epu8( __m128i a, __m128i b )
 		{
 			return _mm_avg_epu8( a, b );
+		}
+
+		// Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst"
+		inline __m128i XM_CALLCONV avg_epu16( __m128i a, __m128i b )
+		{
+			return _mm_avg_epu16( a, b );
 		}
 
 		// Shift "a" left by "imm8" bytes while shifting in zeros, and store the results in "dst"
@@ -154,6 +154,12 @@ namespace Intrinsics
 			return _mm_castsi128_ps( a );
 		}
 
+		// Compare packed 8-bit integers in "a" and "b" for equality, and store the results in "dst"
+		inline __m128i XM_CALLCONV cmpeq_epi8( __m128i a, __m128i b )
+		{
+			return _mm_cmpeq_epi8( a, b );
+		}
+
 		// Compare packed 16-bit integers in "a" and "b" for equality, and store the results in "dst"
 		inline __m128i XM_CALLCONV cmpeq_epi16( __m128i a, __m128i b )
 		{
@@ -164,12 +170,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV cmpeq_epi32( __m128i a, __m128i b )
 		{
 			return _mm_cmpeq_epi32( a, b );
-		}
-
-		// Compare packed 8-bit integers in "a" and "b" for equality, and store the results in "dst"
-		inline __m128i XM_CALLCONV cmpeq_epi8( __m128i a, __m128i b )
-		{
-			return _mm_cmpeq_epi8( a, b );
 		}
 
 		// Compare packed double-precision floating-point elements in "a" and "b" for equality
@@ -196,6 +196,12 @@ namespace Intrinsics
 			return _mm_cmpge_sd( a, b );
 		}
 
+		// Compare packed 8-bit integers in "a" and "b" for greater-than, and store the results in "dst"
+		inline __m128i XM_CALLCONV cmpgt_epi8( __m128i a, __m128i b )
+		{
+			return _mm_cmpgt_epi8( a, b );
+		}
+
 		// Compare packed 16-bit integers in "a" and "b" for greater-than, and store the results in "dst"
 		inline __m128i XM_CALLCONV cmpgt_epi16( __m128i a, __m128i b )
 		{
@@ -206,12 +212,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV cmpgt_epi32( __m128i a, __m128i b )
 		{
 			return _mm_cmpgt_epi32( a, b );
-		}
-
-		// Compare packed 8-bit integers in "a" and "b" for greater-than, and store the results in "dst"
-		inline __m128i XM_CALLCONV cmpgt_epi8( __m128i a, __m128i b )
-		{
-			return _mm_cmpgt_epi8( a, b );
 		}
 
 		// Compare packed double-precision floating-point elements in "a" and "b" for greater-than
@@ -238,6 +238,12 @@ namespace Intrinsics
 			return _mm_cmple_sd( a, b );
 		}
 
+		// Compare packed 8-bit integers in "a" and "b" for less-than, and store the results in "dst"
+		inline __m128i XM_CALLCONV cmplt_epi8( __m128i a, __m128i b )
+		{
+			return _mm_cmplt_epi8( a, b );
+		}
+
 		// Compare packed 16-bit integers in "a" and "b" for less-than, and store the results in "dst"
 		inline __m128i XM_CALLCONV cmplt_epi16( __m128i a, __m128i b )
 		{
@@ -248,12 +254,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV cmplt_epi32( __m128i a, __m128i b )
 		{
 			return _mm_cmplt_epi32( a, b );
-		}
-
-		// Compare packed 8-bit integers in "a" and "b" for less-than, and store the results in "dst"
-		inline __m128i XM_CALLCONV cmplt_epi8( __m128i a, __m128i b )
-		{
-			return _mm_cmplt_epi8( a, b );
 		}
 
 		// Compare packed double-precision floating-point elements in "a" and "b" for less-than
@@ -744,6 +744,17 @@ namespace Intrinsics
 			return _mm_sad_epu8( a, b );
 		}
 
+		// Set packed 8-bit integers in "dst" with the supplied values
+		inline __m128i XM_CALLCONV set_epi8( char e0, char e1, char e2, char e3, char e4, char e5, char e6, char e7, char e8, char e9, char e10, char e11, char e12, char e13, char e14, char e15 )
+		{
+			return _mm_set_epi8( e15, e14, e13, e12, e11, e10, e9, e8, e7, e6, e5, e4, e3, e2, e1, e0 );
+		}
+		// Set packed 8-bit integers in "dst" with the supplied values
+		inline __m128i XM_CALLCONV set_epu8( uint8_t e0, uint8_t e1, uint8_t e2, uint8_t e3, uint8_t e4, uint8_t e5, uint8_t e6, uint8_t e7, uint8_t e8, uint8_t e9, uint8_t e10, uint8_t e11, uint8_t e12, uint8_t e13, uint8_t e14, uint8_t e15 )
+		{
+			return _mm_set_epi8( (char)e15, (char)e14, (char)e13, (char)e12, (char)e11, (char)e10, (char)e9, (char)e8, (char)e7, (char)e6, (char)e5, (char)e4, (char)e3, (char)e2, (char)e1, (char)e0 );
+		}
+
 		// Set packed 16-bit integers in "dst" with the supplied values.
 		inline __m128i XM_CALLCONV set_epi16( short e0, short e1, short e2, short e3, short e4, short e5, short e6, short e7 )
 		{
@@ -777,17 +788,6 @@ namespace Intrinsics
 			return _mm_set_epi64x( (real_int64_t)e1, (real_int64_t)e0 );
 		}
 
-		// Set packed 8-bit integers in "dst" with the supplied values
-		inline __m128i XM_CALLCONV set_epi8( char e0, char e1, char e2, char e3, char e4, char e5, char e6, char e7, char e8, char e9, char e10, char e11, char e12, char e13, char e14, char e15 )
-		{
-			return _mm_set_epi8( e15, e14, e13, e12, e11, e10, e9, e8, e7, e6, e5, e4, e3, e2, e1, e0 );
-		}
-		// Set packed 8-bit integers in "dst" with the supplied values
-		inline __m128i XM_CALLCONV set_epu8( uint8_t e0, uint8_t e1, uint8_t e2, uint8_t e3, uint8_t e4, uint8_t e5, uint8_t e6, uint8_t e7, uint8_t e8, uint8_t e9, uint8_t e10, uint8_t e11, uint8_t e12, uint8_t e13, uint8_t e14, uint8_t e15 )
-		{
-			return _mm_set_epi8( (char)e15, (char)e14, (char)e13, (char)e12, (char)e11, (char)e10, (char)e9, (char)e8, (char)e7, (char)e6, (char)e5, (char)e4, (char)e3, (char)e2, (char)e1, (char)e0 );
-		}
-
 		// Set packed double-precision floating-point elements in "dst" with the supplied values
 		inline __m128d XM_CALLCONV set_pd( double e0, double e1 )
 		{
@@ -798,6 +798,17 @@ namespace Intrinsics
 		inline __m128d XM_CALLCONV set_sd( double a )
 		{
 			return _mm_set_sd( a );
+		}
+
+		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastb".
+		inline __m128i XM_CALLCONV set1_epi8( char a )
+		{
+			return _mm_set1_epi8( a );
+		}
+		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastb".
+		inline __m128i XM_CALLCONV set1_epu8( uint8_t a )
+		{
+			return _mm_set1_epi8( (char)a );
 		}
 
 		// Broadcast 16-bit integer "a" to all all elements of "dst". This intrinsic may generate "vpbroadcastw".
@@ -831,17 +842,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV set1_epu64x( uint64_t a )
 		{
 			return _mm_set1_epi64x( (real_int64_t)a );
-		}
-
-		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastb".
-		inline __m128i XM_CALLCONV set1_epi8( char a )
-		{
-			return _mm_set1_epi8( a );
-		}
-		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastb".
-		inline __m128i XM_CALLCONV set1_epu8( uint8_t a )
-		{
-			return _mm_set1_epi8( (char)a );
 		}
 
 		// Broadcast double-precision floating-point value "a" to all elements of "dst"
@@ -1086,16 +1086,22 @@ namespace Intrinsics
 			_mm_stream_pd( mem_addr, a );
 		}
 
+		// Store 32-bit integer "a" into memory using a non-temporal hint to minimize cache pollution
+		inline void XM_CALLCONV stream_si32( int *mem_addr, int a )
+		{
+			_mm_stream_si32( mem_addr, a );
+		}
+
 		// Store 128-bits of integer data from "a" into memory using a non-temporal memory hint
 		inline void XM_CALLCONV stream_all( __m128i *mem_addr, __m128i a )
 		{
 			_mm_stream_si128( mem_addr, a );
 		}
 
-		// Store 32-bit integer "a" into memory using a non-temporal hint to minimize cache pollution
-		inline void XM_CALLCONV stream_si32( int *mem_addr, int a )
+		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a"
+		inline __m128i XM_CALLCONV sub_epi8( __m128i a, __m128i b )
 		{
-			_mm_stream_si32( mem_addr, a );
+			return _mm_sub_epi8( a, b );
 		}
 
 		// Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a"
@@ -1116,12 +1122,6 @@ namespace Intrinsics
 			return _mm_sub_epi64( a, b );
 		}
 
-		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a"
-		inline __m128i XM_CALLCONV sub_epi8( __m128i a, __m128i b )
-		{
-			return _mm_sub_epi8( a, b );
-		}
-
 		// Subtract packed double-precision floating-point elements in "b" from packed double-precision floating-point elements in "a"
 		inline __m128d XM_CALLCONV sub_pd( __m128d a, __m128d b )
 		{
@@ -1134,28 +1134,28 @@ namespace Intrinsics
 			return _mm_sub_sd( a, b );
 		}
 
-		// Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a" using saturation
-		inline __m128i XM_CALLCONV subs_epi16( __m128i a, __m128i b )
-		{
-			return _mm_subs_epi16( a, b );
-		}
-
 		// Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a" using saturation
 		inline __m128i XM_CALLCONV subs_epi8( __m128i a, __m128i b )
 		{
 			return _mm_subs_epi8( a, b );
 		}
 
-		// Subtract packed unsigned 16-bit integers in "b" from packed unsigned 16-bit integers in "a" using saturation
-		inline __m128i XM_CALLCONV subs_epu16( __m128i a, __m128i b )
+		// Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a" using saturation
+		inline __m128i XM_CALLCONV subs_epi16( __m128i a, __m128i b )
 		{
-			return _mm_subs_epu16( a, b );
+			return _mm_subs_epi16( a, b );
 		}
 
 		// Subtract packed unsigned 8-bit integers in "b" from packed unsigned 8-bit integers in "a" using saturation
 		inline __m128i XM_CALLCONV subs_epu8( __m128i a, __m128i b )
 		{
 			return _mm_subs_epu8( a, b );
+		}
+
+		// Subtract packed unsigned 16-bit integers in "b" from packed unsigned 16-bit integers in "a" using saturation
+		inline __m128i XM_CALLCONV subs_epu16( __m128i a, __m128i b )
+		{
+			return _mm_subs_epu16( a, b );
 		}
 
 		// Compare the lower double-precision floating-point element in "a" and "b" for equality
@@ -1206,6 +1206,12 @@ namespace Intrinsics
 			return _mm_undefined_si128();
 		}
 
+		// Unpack and interleave 8-bit integers from the high half of "a" and "b"
+		inline __m128i XM_CALLCONV unpackhi_epi8( __m128i a, __m128i b )
+		{
+			return _mm_unpackhi_epi8( a, b );
+		}
+
 		// Unpack and interleave 16-bit integers from the high half of "a" and "b"
 		inline __m128i XM_CALLCONV unpackhi_epi16( __m128i a, __m128i b )
 		{
@@ -1224,16 +1230,16 @@ namespace Intrinsics
 			return _mm_unpackhi_epi64( a, b );
 		}
 
-		// Unpack and interleave 8-bit integers from the high half of "a" and "b"
-		inline __m128i XM_CALLCONV unpackhi_epi8( __m128i a, __m128i b )
-		{
-			return _mm_unpackhi_epi8( a, b );
-		}
-
 		// Unpack and interleave double-precision floating-point elements from the high half of "a" and "b"
 		inline __m128d XM_CALLCONV unpackhi_pd( __m128d a, __m128d b )
 		{
 			return _mm_unpackhi_pd( a, b );
+		}
+
+		// Unpack and interleave 8-bit integers from the low half of "a" and "b"
+		inline __m128i XM_CALLCONV unpacklo_epi8( __m128i a, __m128i b )
+		{
+			return _mm_unpacklo_epi8( a, b );
 		}
 
 		// Unpack and interleave 16-bit integers from the low half of "a" and "b"
@@ -1252,12 +1258,6 @@ namespace Intrinsics
 		inline __m128i XM_CALLCONV unpacklo_epi64( __m128i a, __m128i b )
 		{
 			return _mm_unpacklo_epi64( a, b );
-		}
-
-		// Unpack and interleave 8-bit integers from the low half of "a" and "b"
-		inline __m128i XM_CALLCONV unpacklo_epi8( __m128i a, __m128i b )
-		{
-			return _mm_unpacklo_epi8( a, b );
 		}
 
 		// Unpack and interleave double-precision floating-point elements from the low half of "a" and "b"

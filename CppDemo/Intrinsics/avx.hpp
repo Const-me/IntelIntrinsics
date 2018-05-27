@@ -341,6 +341,13 @@ namespace Intrinsics
 			return _mm256_hsub_ps( a, b );
 		}
 
+		// Copy "a" to "dst", and insert the 8-bit integer "i" into "dst" at the location specified by "index"
+		template<int index>
+		inline __m256i XM_CALLCONV insert_epi8( __m256i a, int8_t i )
+		{
+			return _mm256_insert_epi8( a, i, index );
+		}
+
 		// Copy "a" to "dst", and insert the 16-bit integer "i" into "dst" at the location specified by "index"
 		template<int index>
 		inline __m256i XM_CALLCONV insert_epi16( __m256i a, int16_t i )
@@ -360,13 +367,6 @@ namespace Intrinsics
 		inline __m256i XM_CALLCONV insert_epi64( __m256i a, int64_t i )
 		{
 			return _mm256_insert_epi64( a, (real_int64_t)i, index );
-		}
-
-		// Copy "a" to "dst", and insert the 8-bit integer "i" into "dst" at the location specified by "index"
-		template<int index>
-		inline __m256i XM_CALLCONV insert_epi8( __m256i a, int8_t i )
-		{
-			return _mm256_insert_epi8( a, i, index );
 		}
 
 		// Copy "a" to "dst", then insert 128 bits (composed of 2 packed double-precision floating-point elements) from "b" into "dst" at the location specified by "imm8"
@@ -607,6 +607,17 @@ namespace Intrinsics
 			return _mm256_rsqrt_ps( a );
 		}
 
+		// Set packed 8-bit integers in "dst" with the supplied values
+		inline __m256i XM_CALLCONV set_epi8( char e0, char e1, char e2, char e3, char e4, char e5, char e6, char e7, char e8, char e9, char e10, char e11, char e12, char e13, char e14, char e15, char e16, char e17, char e18, char e19, char e20, char e21, char e22, char e23, char e24, char e25, char e26, char e27, char e28, char e29, char e30, char e31 )
+		{
+			return _mm256_set_epi8( e31, e30, e29, e28, e27, e26, e25, e24, e23, e22, e21, e20, e19, e18, e17, e16, e15, e14, e13, e12, e11, e10, e9, e8, e7, e6, e5, e4, e3, e2, e1, e0 );
+		}
+		// Set packed 8-bit integers in "dst" with the supplied values
+		inline __m256i XM_CALLCONV set_epu8( uint8_t e0, uint8_t e1, uint8_t e2, uint8_t e3, uint8_t e4, uint8_t e5, uint8_t e6, uint8_t e7, uint8_t e8, uint8_t e9, uint8_t e10, uint8_t e11, uint8_t e12, uint8_t e13, uint8_t e14, uint8_t e15, uint8_t e16, uint8_t e17, uint8_t e18, uint8_t e19, uint8_t e20, uint8_t e21, uint8_t e22, uint8_t e23, uint8_t e24, uint8_t e25, uint8_t e26, uint8_t e27, uint8_t e28, uint8_t e29, uint8_t e30, uint8_t e31 )
+		{
+			return _mm256_set_epi8( (char)e31, (char)e30, (char)e29, (char)e28, (char)e27, (char)e26, (char)e25, (char)e24, (char)e23, (char)e22, (char)e21, (char)e20, (char)e19, (char)e18, (char)e17, (char)e16, (char)e15, (char)e14, (char)e13, (char)e12, (char)e11, (char)e10, (char)e9, (char)e8, (char)e7, (char)e6, (char)e5, (char)e4, (char)e3, (char)e2, (char)e1, (char)e0 );
+		}
+
 		// Set packed 16-bit integers in "dst" with the supplied values.
 		inline __m256i XM_CALLCONV set_epi16( short e0, short e1, short e2, short e3, short e4, short e5, short e6, short e7, short e8, short e9, short e10, short e11, short e12, short e13, short e14, short e15 )
 		{
@@ -640,17 +651,6 @@ namespace Intrinsics
 			return _mm256_set_epi64x( (real_int64_t)e3, (real_int64_t)e2, (real_int64_t)e1, (real_int64_t)e0 );
 		}
 
-		// Set packed 8-bit integers in "dst" with the supplied values
-		inline __m256i XM_CALLCONV set_epi8( char e0, char e1, char e2, char e3, char e4, char e5, char e6, char e7, char e8, char e9, char e10, char e11, char e12, char e13, char e14, char e15, char e16, char e17, char e18, char e19, char e20, char e21, char e22, char e23, char e24, char e25, char e26, char e27, char e28, char e29, char e30, char e31 )
-		{
-			return _mm256_set_epi8( e31, e30, e29, e28, e27, e26, e25, e24, e23, e22, e21, e20, e19, e18, e17, e16, e15, e14, e13, e12, e11, e10, e9, e8, e7, e6, e5, e4, e3, e2, e1, e0 );
-		}
-		// Set packed 8-bit integers in "dst" with the supplied values
-		inline __m256i XM_CALLCONV set_epu8( uint8_t e0, uint8_t e1, uint8_t e2, uint8_t e3, uint8_t e4, uint8_t e5, uint8_t e6, uint8_t e7, uint8_t e8, uint8_t e9, uint8_t e10, uint8_t e11, uint8_t e12, uint8_t e13, uint8_t e14, uint8_t e15, uint8_t e16, uint8_t e17, uint8_t e18, uint8_t e19, uint8_t e20, uint8_t e21, uint8_t e22, uint8_t e23, uint8_t e24, uint8_t e25, uint8_t e26, uint8_t e27, uint8_t e28, uint8_t e29, uint8_t e30, uint8_t e31 )
-		{
-			return _mm256_set_epi8( (char)e31, (char)e30, (char)e29, (char)e28, (char)e27, (char)e26, (char)e25, (char)e24, (char)e23, (char)e22, (char)e21, (char)e20, (char)e19, (char)e18, (char)e17, (char)e16, (char)e15, (char)e14, (char)e13, (char)e12, (char)e11, (char)e10, (char)e9, (char)e8, (char)e7, (char)e6, (char)e5, (char)e4, (char)e3, (char)e2, (char)e1, (char)e0 );
-		}
-
 		// Set packed double-precision floating-point elements in "dst" with the supplied values
 		inline __m256d XM_CALLCONV set_pd( double e0, double e1, double e2, double e3 )
 		{
@@ -661,6 +661,17 @@ namespace Intrinsics
 		inline __m256 XM_CALLCONV set_ps( float e0, float e1, float e2, float e3, float e4, float e5, float e6, float e7 )
 		{
 			return _mm256_set_ps( e7, e6, e5, e4, e3, e2, e1, e0 );
+		}
+
+		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastb".
+		inline __m256i XM_CALLCONV set1_epi8( char a )
+		{
+			return _mm256_set1_epi8( a );
+		}
+		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastb".
+		inline __m256i XM_CALLCONV set1_epu8( uint8_t a )
+		{
+			return _mm256_set1_epi8( (char)a );
 		}
 
 		// Broadcast 16-bit integer "a" to all all elements of "dst". This intrinsic may generate the "vpbroadcastw".
@@ -694,17 +705,6 @@ namespace Intrinsics
 		inline __m256i XM_CALLCONV set1_epu64x( uint64_t a )
 		{
 			return _mm256_set1_epi64x( (real_int64_t)a );
-		}
-
-		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastb".
-		inline __m256i XM_CALLCONV set1_epi8( char a )
-		{
-			return _mm256_set1_epi8( a );
-		}
-		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastb".
-		inline __m256i XM_CALLCONV set1_epu8( uint8_t a )
-		{
-			return _mm256_set1_epi8( (char)a );
 		}
 
 		// Broadcast double-precision floating-point value "a" to all elements of "dst"
