@@ -14,3 +14,6 @@ CppDemo/x64/
 x64/
 *.user
 Intrinsics.VC.VC.opendb
+CppDemo/CMakeCache.txt
+CppDemo/CMakeFiles/
+CppDemo/Makefile

@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="Intrinsics\Implementation\utils.hpp" />
     <ClInclude Include="Intrinsics\aes.hpp" />
     <ClInclude Include="Intrinsics\avx.hpp" />
@@ -16,7 +12,6 @@
     <ClInclude Include="Intrinsics\bmi2.hpp" />
     <ClInclude Include="Intrinsics\fma.hpp" />
     <ClInclude Include="Intrinsics\fp16c.hpp" />
-    <ClInclude Include="Intrinsics\intrinsics.hpp" />
     <ClInclude Include="Intrinsics\pclmulqdq.hpp" />
     <ClInclude Include="Intrinsics\sha.hpp" />
     <ClInclude Include="Intrinsics\sse.hpp" />
@@ -48,5 +43,8 @@
     <None Include="intDivide.inl" />
     <None Include="Intrinsics\Implementation\operators_float32.inl" />
     <None Include="Intrinsics\Implementation\operators_float64.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

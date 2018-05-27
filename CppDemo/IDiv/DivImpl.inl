@@ -76,14 +76,14 @@ namespace SimdDivImpl
 template<uint32_t div>
 inline VecInteger XM_CALLCONV div_epu32( VecInteger x )
 {
-	using tMagic = typename DivMagic<div>;
+	using tMagic = DivMagic<div>;
 	return SimdDivImpl::div_epu32_impl<tMagic::mul32, tMagic::shift32>( x );
 }
 
 template<uint16_t div>
 inline VecInteger XM_CALLCONV div_epu16( VecInteger x )
 {
-	using tMagic = typename DivMagic<div>;
+	using tMagic = DivMagic<div>;
 	return SimdDivImpl::div_epu16_impl<tMagic::mul16, tMagic::shift16>( x );
 }
 

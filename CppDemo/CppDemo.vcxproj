@@ -144,9 +144,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="IDiv\DivMagic.hpp" />
     <ClInclude Include="IDiv\IDiv.hpp" />
     <ClInclude Include="intDivide.h" />
@@ -160,7 +157,6 @@
     <ClInclude Include="Intrinsics\fma.hpp" />
     <ClInclude Include="Intrinsics\fp16c.hpp" />
     <ClInclude Include="Intrinsics\Implementation\utils.hpp" />
-    <ClInclude Include="Intrinsics\intrinsics.hpp" />
     <ClInclude Include="Intrinsics\pclmulqdq.hpp" />
     <ClInclude Include="Intrinsics\sha.hpp" />
     <ClInclude Include="Intrinsics\sse.hpp" />
@@ -173,7 +169,6 @@
     <ClInclude Include="Intrinsics\ssse3.hpp" />
     <ClInclude Include="quaternionMul.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />
@@ -201,6 +196,9 @@
     <None Include="Intrinsics\Implementation\operators_float_impl.inl" />
     <None Include="Intrinsics\Implementation\operators_int.inl" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
