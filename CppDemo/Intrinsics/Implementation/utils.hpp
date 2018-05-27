@@ -7,8 +7,8 @@
 // Both VC++ and clang support __vectorcall keyword. Not that it's too important, should be inlined anyway, but compilers are free to ignore `inline` keyword as they see fit.
 #define XM_CALLCONV __vectorcall
 #else
-// Other compilers don't support __vectorcall, use __fastcall instead
-#define XM_CALLCONV __fastcall
+// Other compilers don't support __vectorcall.
+#define XM_CALLCONV
 #endif
 #endif
 
