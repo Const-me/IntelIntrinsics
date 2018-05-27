@@ -767,12 +767,12 @@ namespace Intrinsics
 		// Set packed 64-bit integers in "dst" with the supplied values.
 		inline __m128i XM_CALLCONV set_epi64x( int64_t e0, int64_t e1 )
 		{
-			return _mm_set_epi64x( e1, e0 );
+			return _mm_set_epi64x( (real_int64_t)e1, (real_int64_t)e0 );
 		}
 		// Set packed 64-bit integers in "dst" with the supplied values.
 		inline __m128i XM_CALLCONV set_epu64x( uint64_t e0, uint64_t e1 )
 		{
-			return _mm_set_epi64x( (int64_t)e1, (int64_t)e0 );
+			return _mm_set_epi64x( (real_int64_t)e1, (real_int64_t)e0 );
 		}
 
 		// Set packed 8-bit integers in "dst" with the supplied values
@@ -823,12 +823,12 @@ namespace Intrinsics
 		// Broadcast 64-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastq".
 		inline __m128i XM_CALLCONV set1_epi64x( int64_t a )
 		{
-			return _mm_set1_epi64x( a );
+			return _mm_set1_epi64x( (real_int64_t)a );
 		}
 		// Broadcast 64-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastq".
 		inline __m128i XM_CALLCONV set1_epu64x( uint64_t a )
 		{
-			return _mm_set1_epi64x( (int64_t)a );
+			return _mm_set1_epi64x( (real_int64_t)a );
 		}
 
 		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastb".
@@ -1280,67 +1280,67 @@ namespace Intrinsics
 		// Convert the lower double-precision floating-point element in "a" to a 64-bit integer
 		inline int64_t XM_CALLCONV cvtsd_si64( __m128d a )
 		{
-			return _mm_cvtsd_si64( a );
+			return (int64_t)_mm_cvtsd_si64( a );
 		}
 
 		// Convert the lower double-precision floating-point element in "a" to a 64-bit integer
 		inline int64_t XM_CALLCONV cvtsd_si64x( __m128d a )
 		{
-			return _mm_cvtsd_si64x( a );
+			return (int64_t)_mm_cvtsd_si64x( a );
 		}
 
 		// Copy the lower 64-bit integer in "a" to "dst".
 		inline int64_t XM_CALLCONV cvtsi128_si64( __m128i a )
 		{
-			return _mm_cvtsi128_si64( a );
+			return (int64_t)_mm_cvtsi128_si64( a );
 		}
 
 		// Copy the lower 64-bit integer in "a" to "dst".
 		inline int64_t XM_CALLCONV cvtsi128_si64x( __m128i a )
 		{
-			return _mm_cvtsi128_si64x( a );
+			return (int64_t)_mm_cvtsi128_si64x( a );
 		}
 
 		// Convert the 64-bit integer "b" to a double-precision floating-point element
 		inline __m128d XM_CALLCONV cvtsi64_sd( __m128d a, int64_t b )
 		{
-			return _mm_cvtsi64_sd( a, b );
+			return _mm_cvtsi64_sd( a, (real_int64_t)b );
 		}
 
 		// Copy 64-bit integer "a" to the lower element of "dst", and zero the upper element
 		inline __m128i XM_CALLCONV cvtsi64_all( int64_t a )
 		{
-			return _mm_cvtsi64_si128( a );
+			return _mm_cvtsi64_si128( (real_int64_t)a );
 		}
 
 		// Convert the 64-bit integer "b" to a double-precision floating-point element
 		inline __m128d XM_CALLCONV cvtsi64x_sd( __m128d a, int64_t b )
 		{
-			return _mm_cvtsi64x_sd( a, b );
+			return _mm_cvtsi64x_sd( a, (real_int64_t)b );
 		}
 
 		// Copy 64-bit integer "a" to the lower element of "dst", and zero the upper element
 		inline __m128i XM_CALLCONV cvtsi64x_all( int64_t a )
 		{
-			return _mm_cvtsi64x_si128( a );
+			return _mm_cvtsi64x_si128( (real_int64_t)a );
 		}
 
 		// Convert the lower double-precision floating-point element in "a" to a 64-bit integer with truncation
 		inline int64_t XM_CALLCONV cvttsd_si64( __m128d a )
 		{
-			return _mm_cvttsd_si64( a );
+			return (int64_t)_mm_cvttsd_si64( a );
 		}
 
 		// Convert the lower double-precision floating-point element in "a" to a 64-bit integer with truncation
 		inline int64_t XM_CALLCONV cvttsd_si64x( __m128d a )
 		{
-			return _mm_cvttsd_si64x( a );
+			return (int64_t)_mm_cvttsd_si64x( a );
 		}
 
 		// Store 64-bit integer "a" into memory using a non-temporal hint to minimize cache pollution
 		inline void XM_CALLCONV stream_si64( int64_t *mem_addr, int64_t a )
 		{
-			_mm_stream_si64( mem_addr, a );
+			_mm_stream_si64( (real_int64_t *)mem_addr, (real_int64_t)a );
 		}
 #endif // _M_X64
 

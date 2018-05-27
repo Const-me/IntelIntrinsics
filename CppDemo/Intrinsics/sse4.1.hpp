@@ -172,7 +172,7 @@ namespace Intrinsics
 		template<int imm8>
 		inline int64_t XM_CALLCONV extract_epi64( __m128i a )
 		{
-			return _mm_extract_epi64( a, imm8 );
+			return (int64_t)_mm_extract_epi64( a, imm8 );
 		}
 
 		// Extract an 8-bit integer from "a", selected with "imm8", and store the result in the lower element of "dst"
@@ -224,7 +224,7 @@ namespace Intrinsics
 		template<int imm8>
 		inline __m128i XM_CALLCONV insert_epi64( __m128i a, int64_t i )
 		{
-			return _mm_insert_epi64( a, i, imm8 );
+			return _mm_insert_epi64( a, (real_int64_t)i, imm8 );
 		}
 
 		// Copy "a" to "dst", and insert the lower 8-bit integer from "i" into "dst" at the location specified by "imm8"

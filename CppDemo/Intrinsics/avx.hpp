@@ -280,7 +280,7 @@ namespace Intrinsics
 		template<int index>
 		inline int64_t XM_CALLCONV extract_epi64( __m256i a )
 		{
-			return _mm256_extract_epi64( a, index );
+			return (int64_t)_mm256_extract_epi64( a, index );
 		}
 
 		// Extract 128 bits (composed of 2 packed double-precision floating-point elements) from "a", selected with "imm8"
@@ -358,7 +358,7 @@ namespace Intrinsics
 		template<int index>
 		inline __m256i XM_CALLCONV insert_epi64( __m256i a, int64_t i )
 		{
-			return _mm256_insert_epi64( a, i, index );
+			return _mm256_insert_epi64( a, (real_int64_t)i, index );
 		}
 
 		// Copy "a" to "dst", and insert the 8-bit integer "i" into "dst" at the location specified by "index"
@@ -649,12 +649,12 @@ namespace Intrinsics
 		// Set packed 64-bit integers in "dst" with the supplied values.
 		inline __m256i XM_CALLCONV set_epi64x( int64_t e0, int64_t e1, int64_t e2, int64_t e3 )
 		{
-			return _mm256_set_epi64x( e3, e2, e1, e0 );
+			return _mm256_set_epi64x( (real_int64_t)e3, (real_int64_t)e2, (real_int64_t)e1, (real_int64_t)e0 );
 		}
 		// Set packed 64-bit integers in "dst" with the supplied values.
 		inline __m256i XM_CALLCONV set_epu64x( uint64_t e0, uint64_t e1, uint64_t e2, uint64_t e3 )
 		{
-			return _mm256_set_epi64x( (int64_t)e3, (int64_t)e2, (int64_t)e1, (int64_t)e0 );
+			return _mm256_set_epi64x( (real_int64_t)e3, (real_int64_t)e2, (real_int64_t)e1, (real_int64_t)e0 );
 		}
 
 		// Set packed 8-bit integers in "dst" with the supplied values
@@ -723,12 +723,12 @@ namespace Intrinsics
 		// Broadcast 64-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastq".
 		inline __m256i XM_CALLCONV set1_epi64x( int64_t a )
 		{
-			return _mm256_set1_epi64x( a );
+			return _mm256_set1_epi64x( (real_int64_t)a );
 		}
 		// Broadcast 64-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastq".
 		inline __m256i XM_CALLCONV set1_epu64x( uint64_t a )
 		{
-			return _mm256_set1_epi64x( (int64_t)a );
+			return _mm256_set1_epi64x( (real_int64_t)a );
 		}
 
 		// Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastb".

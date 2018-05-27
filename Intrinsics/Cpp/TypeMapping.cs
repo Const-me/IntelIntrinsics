@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IntrinsicsDocs.Cpp
 {
@@ -45,6 +46,30 @@ namespace IntrinsicsDocs.Cpp
 			else if( pointer )
 				return $"{r} *";
 			return r;
+		}
+
+		static readonly Tuple<string, string>[] i64Types = new Tuple<string, string>[]
+		{
+			Tuple.Create( "uint64_t", "real_uint64_t" ),
+			Tuple.Create( "int64_t", "real_int64_t" ),
+		};
+
+		public static string returnValueCast( string s )
+		{
+			s = s.mapType();
+			foreach( var ii in i64Types )
+				if( s.Contains( ii.Item1 ) )
+					return $"({s})";
+			return "";
+		}
+
+		public static string castArgNative( this string s, bool alwaysCast )
+		{
+			s = s.mapType();
+			foreach( var ii in i64Types )
+				if( s.Contains( ii.Item1 ) )
+					return $"({s.Replace( ii.Item1, ii.Item2 )})";
+			return alwaysCast ? $"({ s })" : String.Empty;
 		}
 	}
 }

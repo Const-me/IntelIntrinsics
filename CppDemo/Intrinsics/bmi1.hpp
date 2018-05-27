@@ -15,7 +15,7 @@ namespace Intrinsics
 		// Compute the bitwise NOT of 64-bit integer "a" and then AND with b
 		inline uint64_t _andn_u64( uint64_t a, uint64_t b )
 		{
-			return _andn_u64( a, b );
+			return (uint64_t)_andn_u64( (real_uint64_t)a, (real_uint64_t)b );
 		}
 
 		// Extract contiguous bits from unsigned 32-bit integer "a", and store the result in "dst"
@@ -27,7 +27,7 @@ namespace Intrinsics
 		// Extract contiguous bits from unsigned 64-bit integer "a", and store the result in "dst"
 		inline uint64_t _bextr_u64( uint64_t a, uint32_t start, uint32_t len )
 		{
-			return _bextr_u64( a, start, len );
+			return (uint64_t)_bextr_u64( (real_uint64_t)a, start, len );
 		}
 
 		// Extract contiguous bits from unsigned 32-bit integer "a", and store the result in "dst"
@@ -39,7 +39,7 @@ namespace Intrinsics
 		// Extract contiguous bits from unsigned 64-bit integer "a", and store the result in "dst"
 		inline uint64_t _bextr2_u64( uint64_t a, uint64_t control )
 		{
-			return _bextr2_u64( a, control );
+			return (uint64_t)_bextr2_u64( (real_uint64_t)a, (real_uint64_t)control );
 		}
 
 		// Extract the lowest set bit from unsigned 32-bit integer "a" and set the corresponding bit in "dst"
@@ -51,7 +51,7 @@ namespace Intrinsics
 		// Extract the lowest set bit from unsigned 64-bit integer "a" and set the corresponding bit in "dst"
 		inline uint64_t _blsi_u64( uint64_t a )
 		{
-			return _blsi_u64( a );
+			return (uint64_t)_blsi_u64( (real_uint64_t)a );
 		}
 
 		// Set all the lower bits of "dst" up to and including the lowest set bit in unsigned 32-bit integer "a"
@@ -63,7 +63,7 @@ namespace Intrinsics
 		// Set all the lower bits of "dst" up to and including the lowest set bit in unsigned 64-bit integer "a"
 		inline uint64_t _blsmsk_u64( uint64_t a )
 		{
-			return _blsmsk_u64( a );
+			return (uint64_t)_blsmsk_u64( (real_uint64_t)a );
 		}
 
 		// Copy all bits from unsigned 32-bit integer "a" to "dst", and reset (set to 0) the bit in "dst" that corresponds to the lowest set bit in "a"
@@ -75,7 +75,7 @@ namespace Intrinsics
 		// Copy all bits from unsigned 64-bit integer "a" to "dst", and reset (set to 0) the bit in "dst" that corresponds to the lowest set bit in "a"
 		inline uint64_t _blsr_u64( uint64_t a )
 		{
-			return _blsr_u64( a );
+			return (uint64_t)_blsr_u64( (real_uint64_t)a );
 		}
 
 		// Count the number of trailing zero bits in unsigned 32-bit integer "a"
@@ -87,7 +87,7 @@ namespace Intrinsics
 		// Count the number of trailing zero bits in unsigned 64-bit integer "a"
 		inline uint64_t _tzcnt_u64( uint64_t a )
 		{
-			return _tzcnt_u64( a );
+			return (uint64_t)_tzcnt_u64( (real_uint64_t)a );
 		}
 	}	// namespace Intrinsics::Misc
 }	// namespace Intrinsics

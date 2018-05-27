@@ -593,19 +593,19 @@ namespace Intrinsics
 		// Convert the 64-bit integer "b" to a single-precision floating-point element
 		inline __m128 XM_CALLCONV cvtsi64_ss( __m128 a, int64_t b )
 		{
-			return _mm_cvtsi64_ss( a, b );
+			return _mm_cvtsi64_ss( a, (real_int64_t)b );
 		}
 
 		// Convert the lower single-precision floating-point element in "a" to a 64-bit integer
 		inline int64_t XM_CALLCONV cvtss_si64( __m128 a )
 		{
-			return _mm_cvtss_si64( a );
+			return (int64_t)_mm_cvtss_si64( a );
 		}
 
 		// Convert the lower single-precision floating-point element in "a" to a 64-bit integer with truncation
 		inline int64_t XM_CALLCONV cvttss_si64( __m128 a )
 		{
-			return _mm_cvttss_si64( a );
+			return (int64_t)_mm_cvttss_si64( a );
 		}
 #endif // _M_X64
 

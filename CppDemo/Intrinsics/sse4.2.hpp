@@ -132,7 +132,7 @@ namespace Intrinsics
 		// Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 64-bit integer "v", and stores the result in "dst"
 		inline uint64_t XM_CALLCONV crc32_u64( uint64_t crc, uint64_t v )
 		{
-			return _mm_crc32_u64( crc, v );
+			return (uint64_t)_mm_crc32_u64( (real_uint64_t)crc, (real_uint64_t)v );
 		}
 #endif // _M_X64
 	}	// namespace Intrinsics::Sse

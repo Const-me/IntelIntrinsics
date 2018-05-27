@@ -367,7 +367,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m256i XM_CALLCONV i32gather_epi64( const int64_t *base_addr, __m128i vindex )
 		{
-			return _mm256_i32gather_epi64( base_addr, vindex, scale );
+			return _mm256_i32gather_epi64( (const real_int64_t *)base_addr, vindex, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 32-bit indices
@@ -395,7 +395,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m256i XM_CALLCONV i64gather_epi64( const int64_t *base_addr, __m256i vindex )
 		{
-			return _mm256_i64gather_epi64( base_addr, vindex, scale );
+			return _mm256_i64gather_epi64( (const real_int64_t *)base_addr, vindex, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 64-bit indices
@@ -442,7 +442,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m256i XM_CALLCONV mask_i32gather_epi64( __m256i src, const int64_t *base_addr, __m128i vindex, __m256i mask )
 		{
-			return _mm256_mask_i32gather_epi64( src, base_addr, vindex, mask, scale );
+			return _mm256_mask_i32gather_epi64( src, (const real_int64_t *)base_addr, vindex, mask, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 32-bit indices
@@ -470,7 +470,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m256i XM_CALLCONV mask_i64gather_epi64( __m256i src, const int64_t *base_addr, __m256i vindex, __m256i mask )
 		{
-			return _mm256_mask_i64gather_epi64( src, base_addr, vindex, mask, scale );
+			return _mm256_mask_i64gather_epi64( src, (const real_int64_t *)base_addr, vindex, mask, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 64-bit indices
@@ -496,7 +496,7 @@ namespace Intrinsics
 		// Load packed 64-bit integers from memory into "dst" using "mask" (elements are zeroed out when the highest bit is not set in the corresponding element)
 		inline __m256i XM_CALLCONV maskload_epi64( const int64_t *mem_addr, __m256i mask )
 		{
-			return _mm256_maskload_epi64( mem_addr, mask );
+			return _mm256_maskload_epi64( (const real_int64_t *)mem_addr, mask );
 		}
 
 		// Store packed 32-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
@@ -508,7 +508,7 @@ namespace Intrinsics
 		// Store packed 64-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
 		inline void XM_CALLCONV maskstore_epi64( int64_t *mem_addr, __m256i mask, __m256i a )
 		{
-			_mm256_maskstore_epi64( mem_addr, mask, a );
+			_mm256_maskstore_epi64( (real_int64_t *)mem_addr, mask, a );
 		}
 
 		// Compare packed 16-bit integers in "a" and "b", and store packed maximum values in "dst"
@@ -1068,7 +1068,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m128i XM_CALLCONV i32gather_epi64( const int64_t *base_addr, __m128i vindex )
 		{
-			return _mm_i32gather_epi64( base_addr, vindex, scale );
+			return _mm_i32gather_epi64( (const real_int64_t *)base_addr, vindex, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 32-bit indices
@@ -1096,7 +1096,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m128i XM_CALLCONV i64gather_epi64( const int64_t *base_addr, __m128i vindex )
 		{
-			return _mm_i64gather_epi64( base_addr, vindex, scale );
+			return _mm_i64gather_epi64( (const real_int64_t *)base_addr, vindex, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 64-bit indices
@@ -1124,7 +1124,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m128i XM_CALLCONV mask_i32gather_epi64( __m128i src, const int64_t *base_addr, __m128i vindex, __m128i mask )
 		{
-			return _mm_mask_i32gather_epi64( src, base_addr, vindex, mask, scale );
+			return _mm_mask_i32gather_epi64( src, (const real_int64_t *)base_addr, vindex, mask, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 32-bit indices
@@ -1152,7 +1152,7 @@ namespace Intrinsics
 		template<int scale>
 		inline __m128i XM_CALLCONV mask_i64gather_epi64( __m128i src, const int64_t *base_addr, __m128i vindex, __m128i mask )
 		{
-			return _mm_mask_i64gather_epi64( src, base_addr, vindex, mask, scale );
+			return _mm_mask_i64gather_epi64( src, (const real_int64_t *)base_addr, vindex, mask, scale );
 		}
 
 		// Gather double-precision floating-point elements from memory using 64-bit indices
@@ -1178,7 +1178,7 @@ namespace Intrinsics
 		// Load packed 64-bit integers from memory into "dst" using "mask" (elements are zeroed out when the highest bit is not set in the corresponding element)
 		inline __m128i XM_CALLCONV maskload_epi64( const int64_t *mem_addr, __m128i mask )
 		{
-			return _mm_maskload_epi64( mem_addr, mask );
+			return _mm_maskload_epi64( (const real_int64_t *)mem_addr, mask );
 		}
 
 		// Store packed 32-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
@@ -1190,7 +1190,7 @@ namespace Intrinsics
 		// Store packed 64-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
 		inline void XM_CALLCONV maskstore_epi64( int64_t *mem_addr, __m128i mask, __m128i a )
 		{
-			_mm_maskstore_epi64( mem_addr, mask, a );
+			_mm_maskstore_epi64( (real_int64_t *)mem_addr, mask, a );
 		}
 
 		// Shift packed 32-bit integers in "a" left by the amount specified by the corresponding element in "count" while shifting in zeros

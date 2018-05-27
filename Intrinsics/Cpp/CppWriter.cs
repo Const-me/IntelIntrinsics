@@ -26,8 +26,6 @@ namespace IntrinsicsDocs.Cpp
 			return false;
 		}
 
-
-
 		static string argPrototype( this Intrinsic i, bool skipImm = false )
 		{
 			if( i.isEmptyParams() )
@@ -57,9 +55,7 @@ namespace IntrinsicsDocs.Cpp
 		{
 			if( i.isEmptyParams() )
 				return "";
-			Func<Intrinsic.Param, string> fnProto = ip => ip.varname;
-			if( i.castArgumentsUnsigned )
-				fnProto = ip => $"({ip.type.mapType()}){ip.varname}";
+			Func<Intrinsic.Param, string> fnProto = ip => $"{ ip.type.castArgNative( i.castArgumentsUnsigned ) }{ ip.varname }";
 			return $" { String.Join( ", ", i.parameter.Select( fnProto ) ) } ";
 		}
 
@@ -130,31 +126,24 @@ namespace IntrinsicsDocs.Cpp
 
 			sw.WriteLine( "		// " + i.singleLineDescription() );
 
+			bool isTemplate = true;
 			if( i.isEmptyParams() || !i.parameter.Any( isImm ) )
-			{
-				sw.WriteLine( $"		inline { i.rettype.mapType() }{ callConv } { name }({ i.argPrototype() })" );
-				sw.WriteLine( "		{" );
-
-				sw.Write( "			" );
-				if( "void" != i.rettype )
-					sw.Write( "return " );
-				sw.WriteLine( $"{ i.name }({ i.argCall() });" );
-
-				sw.WriteLine( "		}" );
-			}
-			else
-			{
+				isTemplate = false;
+			if( isTemplate )
 				sw.WriteLine( $"		template<{i.templatePrototype()}>" );
-				sw.WriteLine( $"		inline { i.rettype.mapType() }{ callConv } { name }({ i.argPrototype( true ) })" );
-				sw.WriteLine( "		{" );
 
-				sw.Write( "			" );
-				if( "void" != i.rettype )
-					sw.Write( "return " );
-				sw.WriteLine( $"{ i.name }({ i.argCall() });" );
+			sw.WriteLine( $"		inline { i.rettype.mapType() }{ callConv } { name }({ i.argPrototype( isTemplate ) })" );
+			sw.WriteLine( "		{" );
 
-				sw.WriteLine( "		}" );
+			sw.Write( "			" );
+			if( "void" != i.rettype )
+			{
+				sw.Write( "return " );
+				sw.Write( TypeMapping.returnValueCast( i.rettype ) );
 			}
+			sw.WriteLine( $"{ i.name }({ i.argCall() });" );
+
+			sw.WriteLine( "		}" );
 
 			if( name.StartsWith( "set_epi" ) || name.StartsWith( "set1_epi" ) )
 			{

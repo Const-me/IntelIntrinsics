@@ -15,14 +15,21 @@
 
 namespace Intrinsics
 {
-#ifndef _MSC_VER
 	// Workaround for a bug in clang: https://stackoverflow.com/q/50552347/126995
-	using int64_t = long long;
-	using uint64_t = unsigned long long;
+
+#ifdef _MSC_VER
+	// On Windows, everything just work out of the box. But because the code is cross-platform, we still need the typedefs.
+	using real_int64_t = int64_t;
+	using real_uint64_t = uint64_t;
+#else
+	// On Linux, int64_t type is incompatible with `long long`, and <emmintrin.h> / <immintrin.h> headers use `long long` instead of the standard int64_t / uint64_t types.
+	// So we need to cast every single time. Fortunately everything is auto-generated, so it wasn't that hard.
+	using real_int64_t = long long;
+	using real_uint64_t = unsigned long long;
 #endif
 }
 
-// Workaround for clang's "overloaded operator must have at least one parameter of class or enumeration type" error
+// Workaround for clang's "overloaded operator must have at least one parameter of class or enumeration type" error: disabling the overloaded operators
 #ifdef _MSC_VER
 #define INTRINSICS_SUPPORT_OPERATORS 1
 #else
