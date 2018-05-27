@@ -55,7 +55,7 @@ namespace IntrinsicsDocs.Cpp
 		{
 			if( i.isEmptyParams() )
 				return "";
-			Func<Intrinsic.Param, string> fnProto = ip => $"{ ip.type.castArgNative( i.castArgumentsUnsigned ) }{ ip.varname }";
+			Func<Intrinsic.Param, string> fnProto = ip => ip.type.castArgNative( i.castArgumentsUnsigned ) + ip.varname;
 			return $" { String.Join( ", ", i.parameter.Select( fnProto ) ) } ";
 		}
 
