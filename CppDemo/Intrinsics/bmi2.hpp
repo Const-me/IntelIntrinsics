@@ -19,13 +19,13 @@ namespace Intrinsics
 		}
 
 		// Multiply unsigned 32-bit integers "a" and "b", store the low 32-bits of the result in "dst", and store the high 32-bits in "hi"
-		inline uint32_t _mulx_u32( uint32_t a, uint32_t b, unsigned int* hi )
+		inline uint32_t _mulx_u32( uint32_t a, uint32_t b, uint32_t *hi )
 		{
 			return _mulx_u32( a, b, hi );
 		}
 
 		// Multiply unsigned 64-bit integers "a" and "b", store the low 64-bits of the result in "dst", and store the high 64-bits in "hi"
-		inline uint64_t _mulx_u64( uint64_t a, uint64_t b, unsigned __int64* hi )
+		inline uint64_t _mulx_u64( uint64_t a, uint64_t b, uint64_t *hi )
 		{
 			return _mulx_u64( a, b, hi );
 		}

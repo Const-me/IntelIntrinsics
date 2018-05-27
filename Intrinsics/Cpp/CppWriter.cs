@@ -26,34 +26,7 @@ namespace IntrinsicsDocs.Cpp
 			return false;
 		}
 
-		// Intel messed up types in their API. We want them to be normalized, i.e. no "long long"-s, also we want standard typedefs from <stdint.h>. Fix that.
-		static readonly Dictionary<string, string> s_typeMap = new Dictionary<string, string>()
-		{
-			{ "unsigned char", "uint8_t" },
-			{ "unsigned short", "uint16_t" },
-			{ "unsigned int", "uint32_t" },
-			{ "unsigned __int64", "uint64_t" },
-			{ "__int64", "int64_t" },
-			{ "unsigned long long", "uint64_t" },
-			{ "long long", "int64_t" },
-		};
-		static string mapType( this string s )
-		{
-			bool constPointer = false;
-			if( s.EndsWith( "const*" ) || s.EndsWith( "const *" ) )
-			{
-				constPointer = true;
-				s = s.Substring( 0, s.LastIndexOf( "const" ) ).Trim();
-			}
 
-			string r;
-			if( !s_typeMap.TryGetValue( s, out r ) )
-				r = s;
-
-			if( constPointer )
-				return $"const {r} *";
-			return r;
-		}
 
 		static string argPrototype( this Intrinsic i, bool skipImm = false )
 		{

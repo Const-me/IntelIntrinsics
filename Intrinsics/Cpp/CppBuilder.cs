@@ -7,6 +7,8 @@ namespace IntrinsicsDocs.Cpp
 {
 	static class CppBuilder
 	{
+		const bool makeIntrinsicsHpp = false;
+
 		static bool shouldInclude( string cpuId )
 		{
 			if( cpuId.Contains( "512" ) )
@@ -71,22 +73,25 @@ namespace IntrinsicsDocs.Cpp
 				kvp.Value.write( destFolder.hpp( fileName ) );
 			}
 
-			using( var fs = File.CreateText( destFolder.hpp( "intrinsics" ) ) )
+			if( makeIntrinsicsHpp )
 			{
-				fs.WriteLine(
+				using( var fs = File.CreateText( destFolder.hpp( "intrinsics" ) ) )
+				{
+					fs.WriteLine(
 @"#pragma once
 // Includes all of them, up to AVX2
 
-#include <intrin.h>
-#include <emmintrin.h>
-#include <immintrin.h>
+# include <intrin.h>
+# include <emmintrin.h>
+# include <immintrin.h>
 " );
-				List<string> keys = dict.Keys.ToList();
-				keys.Add( "fp16c" );
-				keys.Sort();
-				foreach( string fn in keys )
-				{
-					fs.WriteLine( @"#include ""{0}.hpp""", fn );
+					List<string> keys = dict.Keys.ToList();
+					keys.Add( "fp16c" );
+					keys.Sort();
+					foreach( string fn in keys )
+					{
+						fs.WriteLine( @"#include ""{0}.hpp""", fn );
+					}
 				}
 			}
 

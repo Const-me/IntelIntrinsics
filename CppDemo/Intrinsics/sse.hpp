@@ -464,55 +464,55 @@ namespace Intrinsics
 		}
 
 		// Store 128-bits (composed of 4 packed single-precision floating-point elements) from "a" into memory
-		inline void XM_CALLCONV store_ps( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV store_ps( float *mem_addr, __m128 a )
 		{
 			_mm_store_ps( mem_addr, a );
 		}
 
 		// Store the lower single-precision floating-point element from "a" into 4 contiguous elements in memory
-		inline void XM_CALLCONV store_ps1( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV store_ps1( float *mem_addr, __m128 a )
 		{
 			_mm_store_ps1( mem_addr, a );
 		}
 
 		// Store the lower single-precision floating-point element from "a" into memory
-		inline void XM_CALLCONV store_ss( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV store_ss( float *mem_addr, __m128 a )
 		{
 			_mm_store_ss( mem_addr, a );
 		}
 
 		// Store the lower single-precision floating-point element from "a" into 4 contiguous elements in memory
-		inline void XM_CALLCONV store1_ps( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV store1_ps( float *mem_addr, __m128 a )
 		{
 			_mm_store1_ps( mem_addr, a );
 		}
 
 		// Store the upper 2 single-precision floating-point elements from "a" into memory
-		inline void XM_CALLCONV storeh_pi( __m64* mem_addr, __m128 a )
+		inline void XM_CALLCONV storeh_pi( __m64 *mem_addr, __m128 a )
 		{
 			_mm_storeh_pi( mem_addr, a );
 		}
 
 		// Store the lower 2 single-precision floating-point elements from "a" into memory
-		inline void XM_CALLCONV storel_pi( __m64* mem_addr, __m128 a )
+		inline void XM_CALLCONV storel_pi( __m64 *mem_addr, __m128 a )
 		{
 			_mm_storel_pi( mem_addr, a );
 		}
 
 		// Store 4 single-precision floating-point elements from "a" into memory in reverse order
-		inline void XM_CALLCONV storer_ps( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV storer_ps( float *mem_addr, __m128 a )
 		{
 			_mm_storer_ps( mem_addr, a );
 		}
 
 		// Store 128-bits (composed of 4 packed single-precision floating-point elements) from "a" into memory
-		inline void XM_CALLCONV storeu_ps( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV storeu_ps( float *mem_addr, __m128 a )
 		{
 			_mm_storeu_ps( mem_addr, a );
 		}
 
 		// Store 128-bits (composed of 4 packed single-precision floating-point elements) from "a" into memory using a non-temporal memory hint
-		inline void XM_CALLCONV stream_ps( float* mem_addr, __m128 a )
+		inline void XM_CALLCONV stream_ps( float *mem_addr, __m128 a )
 		{
 			_mm_stream_ps( mem_addr, a );
 		}

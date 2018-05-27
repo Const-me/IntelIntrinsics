@@ -22,7 +22,7 @@ namespace IntrinsicsDocs.Cpp
 
 		public static void copyExtraFiles( string dest )
 		{
-			// "IntrinsicsDocs.Cpp.fp16c.extra.hpp"
+			// "*.extra.hpp"
 			var ass = Assembly.GetExecutingAssembly();
 			foreach( string name in ass.GetManifestResourceNames() )
 			{

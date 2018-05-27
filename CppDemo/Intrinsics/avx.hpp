@@ -271,7 +271,7 @@ namespace Intrinsics
 
 		// Extract a 32-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
-		inline __int32 XM_CALLCONV extract_epi32( __m256i a )
+		inline int32_t XM_CALLCONV extract_epi32( __m256i a )
 		{
 			return _mm256_extract_epi32( a, index );
 		}
@@ -342,14 +342,14 @@ namespace Intrinsics
 
 		// Copy "a" to "dst", and insert the 16-bit integer "i" into "dst" at the location specified by "index"
 		template<int index>
-		inline __m256i XM_CALLCONV insert_epi16( __m256i a, __int16 i )
+		inline __m256i XM_CALLCONV insert_epi16( __m256i a, int16_t i )
 		{
 			return _mm256_insert_epi16( a, i, index );
 		}
 
 		// Copy "a" to "dst", and insert the 32-bit integer "i" into "dst" at the location specified by "index"
 		template<int index>
-		inline __m256i XM_CALLCONV insert_epi32( __m256i a, __int32 i )
+		inline __m256i XM_CALLCONV insert_epi32( __m256i a, int32_t i )
 		{
 			return _mm256_insert_epi32( a, i, index );
 		}
@@ -363,7 +363,7 @@ namespace Intrinsics
 
 		// Copy "a" to "dst", and insert the 8-bit integer "i" into "dst" at the location specified by "index"
 		template<int index>
-		inline __m256i XM_CALLCONV insert_epi8( __m256i a, __int8 i )
+		inline __m256i XM_CALLCONV insert_epi8( __m256i a, int8_t i )
 		{
 			return _mm256_insert_epi8( a, i, index );
 		}
@@ -835,19 +835,19 @@ namespace Intrinsics
 		}
 
 		// Store the high and low 128-bit halves (each composed of 4 packed single-precision floating-point elements) from "a" into memory two different 128-bit locations
-		inline void XM_CALLCONV storeu2_m128( float* hiaddr, float* loaddr, __m256 a )
+		inline void XM_CALLCONV storeu2_m128( float *hiaddr, float *loaddr, __m256 a )
 		{
 			_mm256_storeu2_m128( hiaddr, loaddr, a );
 		}
 
 		// Store the high and low 128-bit halves (each composed of 2 packed double-precision floating-point elements) from "a" into memory two different 128-bit locations
-		inline void XM_CALLCONV storeu2_m128d( double* hiaddr, double* loaddr, __m256d a )
+		inline void XM_CALLCONV storeu2_m128d( double *hiaddr, double *loaddr, __m256d a )
 		{
 			_mm256_storeu2_m128d( hiaddr, loaddr, a );
 		}
 
 		// Store the high and low 128-bit halves (each composed of integer data) from "a" into memory two different 128-bit locations
-		inline void XM_CALLCONV storeu2_m128i( __m128i* hiaddr, __m128i* loaddr, __m256i a )
+		inline void XM_CALLCONV storeu2_m128i( __m128i *hiaddr, __m128i *loaddr, __m256i a )
 		{
 			_mm256_storeu2_m128i( hiaddr, loaddr, a );
 		}

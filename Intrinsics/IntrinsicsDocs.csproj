@@ -64,6 +64,7 @@
     <Compile Include="Cpp\ExtraCode.cs" />
     <Compile Include="Cpp\Filters.cs" />
     <Compile Include="Cpp\HeaderFile.cs" />
+    <Compile Include="Cpp\TypeMapping.cs" />
     <Compile Include="DataSource.cs" />
     <Compile Include="Parse\DataSet.cs" />
     <Compile Include="Parse\IntelPerfData.cs" />

@@ -581,7 +581,7 @@ namespace Intrinsics
 		}
 
 		// Conditionally store 8-bit integer elements from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element) and a non-temporal memory hint
-		inline void XM_CALLCONV maskmoveu_all( __m128i a, __m128i mask, char* mem_addr )
+		inline void XM_CALLCONV maskmoveu_all( __m128i a, __m128i mask, char *mem_addr )
 		{
 			_mm_maskmoveu_si128( a, mask, mem_addr );
 		}
@@ -1019,79 +1019,79 @@ namespace Intrinsics
 		}
 
 		// Store 128-bits (composed of 2 packed double-precision floating-point elements) from "a" into memory
-		inline void XM_CALLCONV store_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV store_pd( double *mem_addr, __m128d a )
 		{
 			_mm_store_pd( mem_addr, a );
 		}
 
 		// Store the lower double-precision floating-point element from "a" into memory
-		inline void XM_CALLCONV store_sd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV store_sd( double *mem_addr, __m128d a )
 		{
 			_mm_store_sd( mem_addr, a );
 		}
 
 		// Store 128-bits of integer data from "a" into memory. "mem_addr" must be aligned on a 16-byte boundary or a general-protection exception may be generated.
-		inline void XM_CALLCONV store_all( __m128i* mem_addr, __m128i a )
+		inline void XM_CALLCONV store_all( __m128i *mem_addr, __m128i a )
 		{
 			_mm_store_si128( mem_addr, a );
 		}
 
 		// Store the lower double-precision floating-point element from "a" into 2 contiguous elements in memory
-		inline void XM_CALLCONV store1_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV store1_pd( double *mem_addr, __m128d a )
 		{
 			_mm_store1_pd( mem_addr, a );
 		}
 
 		// Store the upper double-precision floating-point element from "a" into memory
-		inline void XM_CALLCONV storeh_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV storeh_pd( double *mem_addr, __m128d a )
 		{
 			_mm_storeh_pd( mem_addr, a );
 		}
 
 		// Store 64-bit integer from the first element of "a" into memory.
-		inline void XM_CALLCONV storel_epi64( __m128i* mem_addr, __m128i a )
+		inline void XM_CALLCONV storel_epi64( __m128i *mem_addr, __m128i a )
 		{
 			_mm_storel_epi64( mem_addr, a );
 		}
 
 		// Store the lower double-precision floating-point element from "a" into memory
-		inline void XM_CALLCONV storel_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV storel_pd( double *mem_addr, __m128d a )
 		{
 			_mm_storel_pd( mem_addr, a );
 		}
 
 		// Store 2 double-precision floating-point elements from "a" into memory in reverse order
-		inline void XM_CALLCONV storer_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV storer_pd( double *mem_addr, __m128d a )
 		{
 			_mm_storer_pd( mem_addr, a );
 		}
 
 		// Store 128-bits (composed of 2 packed double-precision floating-point elements) from "a" into memory
-		inline void XM_CALLCONV storeu_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV storeu_pd( double *mem_addr, __m128d a )
 		{
 			_mm_storeu_pd( mem_addr, a );
 		}
 
 		// Store 128-bits of integer data from "a" into memory.	"mem_addr" does not need to be aligned on any particular boundary.
-		inline void XM_CALLCONV storeu_all( __m128i* mem_addr, __m128i a )
+		inline void XM_CALLCONV storeu_all( __m128i *mem_addr, __m128i a )
 		{
 			_mm_storeu_si128( mem_addr, a );
 		}
 
 		// Store 128-bits (composed of 2 packed double-precision floating-point elements) from "a" into memory using a non-temporal memory hint
-		inline void XM_CALLCONV stream_pd( double* mem_addr, __m128d a )
+		inline void XM_CALLCONV stream_pd( double *mem_addr, __m128d a )
 		{
 			_mm_stream_pd( mem_addr, a );
 		}
 
 		// Store 128-bits of integer data from "a" into memory using a non-temporal memory hint
-		inline void XM_CALLCONV stream_all( __m128i* mem_addr, __m128i a )
+		inline void XM_CALLCONV stream_all( __m128i *mem_addr, __m128i a )
 		{
 			_mm_stream_si128( mem_addr, a );
 		}
 
 		// Store 32-bit integer "a" into memory using a non-temporal hint to minimize cache pollution
-		inline void XM_CALLCONV stream_si32( int* mem_addr, int a )
+		inline void XM_CALLCONV stream_si32( int *mem_addr, int a )
 		{
 			_mm_stream_si32( mem_addr, a );
 		}
@@ -1338,7 +1338,7 @@ namespace Intrinsics
 		}
 
 		// Store 64-bit integer "a" into memory using a non-temporal hint to minimize cache pollution
-		inline void XM_CALLCONV stream_si64( __int64* mem_addr, int64_t a )
+		inline void XM_CALLCONV stream_si64( int64_t *mem_addr, int64_t a )
 		{
 			_mm_stream_si64( mem_addr, a );
 		}

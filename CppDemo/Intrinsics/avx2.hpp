@@ -301,14 +301,14 @@ namespace Intrinsics
 
 		// Extract a 16-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
-		inline __int16 XM_CALLCONV extract_epi16( __m256i a )
+		inline int16_t XM_CALLCONV extract_epi16( __m256i a )
 		{
 			return _mm256_extract_epi16( a, index );
 		}
 
 		// Extract an 8-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
-		inline __int8 XM_CALLCONV extract_epi8( __m256i a )
+		inline int8_t XM_CALLCONV extract_epi8( __m256i a )
 		{
 			return _mm256_extract_epi8( a, index );
 		}
@@ -500,13 +500,13 @@ namespace Intrinsics
 		}
 
 		// Store packed 32-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
-		inline void XM_CALLCONV maskstore_epi32( int* mem_addr, __m256i mask, __m256i a )
+		inline void XM_CALLCONV maskstore_epi32( int *mem_addr, __m256i mask, __m256i a )
 		{
 			_mm256_maskstore_epi32( mem_addr, mask, a );
 		}
 
 		// Store packed 64-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
-		inline void XM_CALLCONV maskstore_epi64( __int64* mem_addr, __m256i mask, __m256i a )
+		inline void XM_CALLCONV maskstore_epi64( int64_t *mem_addr, __m256i mask, __m256i a )
 		{
 			_mm256_maskstore_epi64( mem_addr, mask, a );
 		}
@@ -1182,13 +1182,13 @@ namespace Intrinsics
 		}
 
 		// Store packed 32-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
-		inline void XM_CALLCONV maskstore_epi32( int* mem_addr, __m128i mask, __m128i a )
+		inline void XM_CALLCONV maskstore_epi32( int *mem_addr, __m128i mask, __m128i a )
 		{
 			_mm_maskstore_epi32( mem_addr, mask, a );
 		}
 
 		// Store packed 64-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element)
-		inline void XM_CALLCONV maskstore_epi64( __int64* mem_addr, __m128i mask, __m128i a )
+		inline void XM_CALLCONV maskstore_epi64( int64_t *mem_addr, __m128i mask, __m128i a )
 		{
 			_mm_maskstore_epi64( mem_addr, mask, a );
 		}
