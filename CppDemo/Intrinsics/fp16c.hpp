@@ -1,4 +1,6 @@
 #pragma once
+#include <emmintrin.h>
+#include <immintrin.h>
 #include "Implementation/utils.hpp"
 
 namespace Intrinsics

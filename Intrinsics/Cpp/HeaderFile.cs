@@ -12,6 +12,7 @@ namespace IntrinsicsDocs.Cpp
 		readonly string cpuid;
 		readonly string ns;
 		readonly string callConv = "XM_CALLCONV";
+		readonly HashSet<string> headers = new HashSet<string>( StringComparer.OrdinalIgnoreCase );
 
 		readonly Func<IEnumerable<string>, bool> fnSmaller = null;
 		readonly HeaderFile smallRegInstructions = null;
@@ -41,6 +42,9 @@ namespace IntrinsicsDocs.Cpp
 
 			if( !i.shouldInclude() )
 				return;
+
+			if( i.header.notEmpty() )
+				headers.Add( i.header );
 
 			if( null != smallRegInstructions && i.isSmall( fnSmaller ) )
 				smallRegInstructions.add( i );
@@ -79,14 +83,19 @@ namespace IntrinsicsDocs.Cpp
 			{
 				fs.WriteLine(
 @"// This file is generated automatically by a tool, please don't edit.
-#pragma once
-#include ""Implementation/utils.hpp""
+#pragma once" );
+
+				foreach( var h in headers )
+					fs.WriteLine( "#include <{0}>", h );
+
+				fs.WriteLine(
+@"#include ""Implementation/utils.hpp""
 
 namespace Intrinsics
 {" );
 				writeImpl( fs );
 
-				if( null != smallRegInstructions && smallRegInstructions.intrinsics.Count>0 )
+				if( null != smallRegInstructions && smallRegInstructions.intrinsics.Count > 0 )
 				{
 					fs.WriteLine();
 					smallRegInstructions.writeImpl( fs );

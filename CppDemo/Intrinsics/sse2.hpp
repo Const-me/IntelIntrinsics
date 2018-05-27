@@ -1,5 +1,7 @@
 // This file is generated automatically by a tool, please don't edit.
 #pragma once
+#include <emmintrin.h>
+#include <immintrin.h>
 #include "Implementation/utils.hpp"
 
 namespace Intrinsics
