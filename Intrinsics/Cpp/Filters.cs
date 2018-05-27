@@ -163,5 +163,24 @@ namespace IntrinsicsDocs.Cpp
 		{
 			return fn( i.api() );
 		}
+
+		static readonly HashSet<string> s_gcc_missing = new HashSet<string>()
+		{
+			"_mm256_loadu2_m128",
+			"_mm256_loadu2_m128d",
+			"_mm256_loadu2_m128i",
+			"_mm256_set_m128",
+			"_mm256_set_m128d",
+			"_mm256_set_m128i",
+			"_mm256_storeu2_m128",
+			"_mm256_storeu2_m128d",
+			"_mm256_storeu2_m128i",
+			"_mm_broadcastsd_pd",
+		};
+
+		public static bool isUnsupportedInGcc( this Intrinsic i )
+		{
+			return s_gcc_missing.Contains( i.name );
+		}
 	}
 }

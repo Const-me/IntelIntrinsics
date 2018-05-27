@@ -432,24 +432,6 @@ namespace Intrinsics
 			return _mm256_loadu_si256( mem_addr );
 		}
 
-		// Load two 128-bit values (composed of 4 packed single-precision floating-point elements) from memory, and combine them into a 256-bit value in "dst"
-		inline __m256 XM_CALLCONV loadu2_m128( const float *hiaddr, const float *loaddr )
-		{
-			return _mm256_loadu2_m128( hiaddr, loaddr );
-		}
-
-		// Load two 128-bit values (composed of 2 packed double-precision floating-point elements) from memory, and combine them into a 256-bit value in "dst"
-		inline __m256d XM_CALLCONV loadu2_m128d( const double *hiaddr, const double *loaddr )
-		{
-			return _mm256_loadu2_m128d( hiaddr, loaddr );
-		}
-
-		// Load two 128-bit values (composed of integer data) from memory, and combine them into a 256-bit value in "dst"
-		inline __m256i XM_CALLCONV loadu2_m128i( const __m128i *hiaddr, const __m128i *loaddr )
-		{
-			return _mm256_loadu2_m128i( hiaddr, loaddr );
-		}
-
 		// Load packed double-precision floating-point elements from memory into "dst" using "mask" (elements are zeroed out when the high bit of the corresponding element is not set)
 		inline __m256d XM_CALLCONV maskload_pd( const double *mem_addr, __m256i mask )
 		{
@@ -669,24 +651,6 @@ namespace Intrinsics
 			return _mm256_set_epi8( (char)e31, (char)e30, (char)e29, (char)e28, (char)e27, (char)e26, (char)e25, (char)e24, (char)e23, (char)e22, (char)e21, (char)e20, (char)e19, (char)e18, (char)e17, (char)e16, (char)e15, (char)e14, (char)e13, (char)e12, (char)e11, (char)e10, (char)e9, (char)e8, (char)e7, (char)e6, (char)e5, (char)e4, (char)e3, (char)e2, (char)e1, (char)e0 );
 		}
 
-		// Set packed __m256 vector "dst" with the supplied values.
-		inline __m256 XM_CALLCONV set_m128( __m128 lo, __m128 hi )
-		{
-			return _mm256_set_m128( hi, lo );
-		}
-
-		// Set packed __m256d vector "dst" with the supplied values.
-		inline __m256d XM_CALLCONV set_m128d( __m128d lo, __m128d hi )
-		{
-			return _mm256_set_m128d( hi, lo );
-		}
-
-		// Set packed __m256i vector "dst" with the supplied values.
-		inline __m256i XM_CALLCONV set_m128i( __m128i lo, __m128i hi )
-		{
-			return _mm256_set_m128i( hi, lo );
-		}
-
 		// Set packed double-precision floating-point elements in "dst" with the supplied values
 		inline __m256d XM_CALLCONV set_pd( double e0, double e1, double e2, double e3 )
 		{
@@ -833,24 +797,6 @@ namespace Intrinsics
 		inline void XM_CALLCONV storeu_all( __m256i *mem_addr, __m256i a )
 		{
 			_mm256_storeu_si256( mem_addr, a );
-		}
-
-		// Store the high and low 128-bit halves (each composed of 4 packed single-precision floating-point elements) from "a" into memory two different 128-bit locations
-		inline void XM_CALLCONV storeu2_m128( float *hiaddr, float *loaddr, __m256 a )
-		{
-			_mm256_storeu2_m128( hiaddr, loaddr, a );
-		}
-
-		// Store the high and low 128-bit halves (each composed of 2 packed double-precision floating-point elements) from "a" into memory two different 128-bit locations
-		inline void XM_CALLCONV storeu2_m128d( double *hiaddr, double *loaddr, __m256d a )
-		{
-			_mm256_storeu2_m128d( hiaddr, loaddr, a );
-		}
-
-		// Store the high and low 128-bit halves (each composed of integer data) from "a" into memory two different 128-bit locations
-		inline void XM_CALLCONV storeu2_m128i( __m128i *hiaddr, __m128i *loaddr, __m256i a )
-		{
-			_mm256_storeu2_m128i( hiaddr, loaddr, a );
 		}
 
 		// Store 256-bits (composed of 4 packed double-precision floating-point elements) from "a" into memory using a non-temporal memory hint
@@ -1002,6 +948,62 @@ namespace Intrinsics
 		{
 			_mm256_zeroupper();
 		}
+
+#ifndef __GNUC__
+		// Load two 128-bit values (composed of 4 packed single-precision floating-point elements) from memory, and combine them into a 256-bit value in "dst"
+		inline __m256 XM_CALLCONV loadu2_m128( const float *hiaddr, const float *loaddr )
+		{
+			return _mm256_loadu2_m128( hiaddr, loaddr );
+		}
+
+		// Load two 128-bit values (composed of 2 packed double-precision floating-point elements) from memory, and combine them into a 256-bit value in "dst"
+		inline __m256d XM_CALLCONV loadu2_m128d( const double *hiaddr, const double *loaddr )
+		{
+			return _mm256_loadu2_m128d( hiaddr, loaddr );
+		}
+
+		// Load two 128-bit values (composed of integer data) from memory, and combine them into a 256-bit value in "dst"
+		inline __m256i XM_CALLCONV loadu2_m128i( const __m128i *hiaddr, const __m128i *loaddr )
+		{
+			return _mm256_loadu2_m128i( hiaddr, loaddr );
+		}
+
+		// Set packed __m256 vector "dst" with the supplied values.
+		inline __m256 XM_CALLCONV set_m128( __m128 lo, __m128 hi )
+		{
+			return _mm256_set_m128( hi, lo );
+		}
+
+		// Set packed __m256d vector "dst" with the supplied values.
+		inline __m256d XM_CALLCONV set_m128d( __m128d lo, __m128d hi )
+		{
+			return _mm256_set_m128d( hi, lo );
+		}
+
+		// Set packed __m256i vector "dst" with the supplied values.
+		inline __m256i XM_CALLCONV set_m128i( __m128i lo, __m128i hi )
+		{
+			return _mm256_set_m128i( hi, lo );
+		}
+
+		// Store the high and low 128-bit halves (each composed of 4 packed single-precision floating-point elements) from "a" into memory two different 128-bit locations
+		inline void XM_CALLCONV storeu2_m128( float *hiaddr, float *loaddr, __m256 a )
+		{
+			_mm256_storeu2_m128( hiaddr, loaddr, a );
+		}
+
+		// Store the high and low 128-bit halves (each composed of 2 packed double-precision floating-point elements) from "a" into memory two different 128-bit locations
+		inline void XM_CALLCONV storeu2_m128d( double *hiaddr, double *loaddr, __m256d a )
+		{
+			_mm256_storeu2_m128d( hiaddr, loaddr, a );
+		}
+
+		// Store the high and low 128-bit halves (each composed of integer data) from "a" into memory two different 128-bit locations
+		inline void XM_CALLCONV storeu2_m128i( __m128i *hiaddr, __m128i *loaddr, __m256i a )
+		{
+			_mm256_storeu2_m128i( hiaddr, loaddr, a );
+		}
+#endif // !__GNUC__
 		using VecFloat32 = __m256;
 		using VecFloat64 = __m256d;
 		static constexpr int allValuesMask_ps = 0xFF;

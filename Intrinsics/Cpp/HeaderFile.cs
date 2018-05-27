@@ -57,16 +57,25 @@ namespace IntrinsicsDocs.Cpp
 			fs.WriteLine(
 @"	namespace {0}
 	{{", ns );
-			var all = intrinsics.Where( i => !i.is64bitOnly ).OrderBy( i => i.sortKey ).ToArray();
+			var all = intrinsics.Where( i => !i.is64bitOnly && !i.isUnsupportedInGcc() ).OrderBy( i => i.sortKey ).ToArray();
 			fs.write( all, callConv );
 
 			var a64 = intrinsics.Where( i => i.is64bitOnly ).OrderBy( i => i.sortKey ).ToArray();
-			if( a64.Length > 0 )
+			if( a64.notEmpty() )
 			{
 				fs.WriteLine();
 				fs.WriteLine( "#if _M_X64" );
 				fs.write( a64, callConv );
 				fs.WriteLine( "#endif // _M_X64" );
+			}
+
+			var gccMissing = intrinsics.Where( i => i.isUnsupportedInGcc() ).OrderBy( i => i.sortKey ).ToArray();
+			if( gccMissing.notEmpty() )
+			{
+				fs.WriteLine();
+				fs.WriteLine( "#ifndef __GNUC__" );
+				fs.write( gccMissing, callConv );
+				fs.WriteLine( "#endif // !__GNUC__" );
 			}
 
 			string xt = ExtraCode.extra( cpuid );

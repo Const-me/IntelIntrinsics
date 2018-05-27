@@ -1040,12 +1040,6 @@ namespace Intrinsics
 			return _mm_broadcastq_epi64( a );
 		}
 
-		// Broadcast the low double-precision floating-point element from "a" to all elements of "dst"
-		inline __m128d XM_CALLCONV broadcast_pd( __m128d a )
-		{
-			return _mm_broadcastsd_pd( a );
-		}
-
 		// Broadcast the low single-precision floating-point element from "a" to all elements of "dst"
 		inline __m128 XM_CALLCONV broadcast_ps( __m128 a )
 		{
@@ -1223,5 +1217,13 @@ namespace Intrinsics
 		{
 			return _mm_srlv_epi64( a, count );
 		}
+
+#ifndef __GNUC__
+		// Broadcast the low double-precision floating-point element from "a" to all elements of "dst"
+		inline __m128d XM_CALLCONV broadcast_pd( __m128d a )
+		{
+			return _mm_broadcastsd_pd( a );
+		}
+#endif // !__GNUC__
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics
