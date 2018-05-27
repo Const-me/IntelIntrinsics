@@ -16,6 +16,11 @@ namespace ParseTables
 
 			var data = TablesParser.parse( src );
 			var ser = new XmlSerializerEx(typeof(InstructionsData));
+
+			var destDir = Path.GetDirectoryName( dest );
+			if( !Directory.Exists( destDir ) )
+				Directory.CreateDirectory( destDir );
+
 			using( var fs = File.Create( dest ) )
 				ser.Serialize( fs, data );
 		}
