@@ -2,8 +2,12 @@
 #include "quaternionMul.h"
 #include "Intrinsics/sse_operators.hpp"
 
+#ifdef _MSC_VER
 #include <d3d11.h>
 #include <SimpleMath.h>
+#else
+#include "QuaternionPort.hpp"
+#endif
 
 using namespace Intrinsics::Sse;
 
@@ -56,8 +60,9 @@ VecFloat32 quaternionMultiply( VecFloat32 Q1, VecFloat32 Q2 )
 	return vResult;
 }
 
-void testQuaternionMultuply()
+bool testQuaternionMultuply()
 {
+	using namespace DirectX;
 	using namespace DirectX::SimpleMath;
 	srand( 0 );
 	Quaternion a{ randomFloat(), randomFloat() , randomFloat() , randomFloat() };
@@ -69,6 +74,11 @@ void testQuaternionMultuply()
 	const __m128 res_my = quaternionMultiply( a, b );
 	const __m128 res_ms = XMQuaternionMultiply( a, b );
 
-	if( res_my != res_ms )
-		__debugbreak();
+	if( notEquals( res_my, res_ms ) )
+	{
+		printf( "testQuaternionMultuply FAILED\n" );
+		return false;
+	}
+	printf( "testQuaternionMultuply passed\n" );
+	return true;
 }

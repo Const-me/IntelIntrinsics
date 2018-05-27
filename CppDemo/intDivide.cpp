@@ -33,7 +33,7 @@ static inline bool testAll( FuncScalar fnScalar, FuncVector fnSimd )
 		}
 
 		const TVector resultSimd = fnSimd( src );
-		if( resultSimd != resultScalar )
+		if( notEquals( resultSimd, resultScalar ) )
 			res = false;
 	}
 	return res;
@@ -53,9 +53,11 @@ namespace Intrinsics
 
 void testIntDivide()
 {
-	printf( "Testing SSE version..\n" );
-	printf( "%s\n", Intrinsics::Sse::testEverything() ? "passed" : "failed" );
+	printf( "Testing SSE division.. " );
+	fflush( stdout );
+	printf( "%s\n", Intrinsics::Sse::testEverything() ? "passed" : "FAILED" );
 
-	printf( "Testing AVX version..\n" );
-	printf( "%s\n", Intrinsics::Avx::testEverything() ? "passed" : "failed" );
+	printf( "Testing AVX division.. " );
+	fflush( stdout );
+	printf( "%s\n", Intrinsics::Avx::testEverything() ? "passed" : "FAILED" );
 }

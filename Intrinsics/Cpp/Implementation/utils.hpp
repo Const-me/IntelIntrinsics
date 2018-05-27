@@ -21,3 +21,10 @@ namespace Intrinsics
 	using uint64_t = unsigned long long;
 #endif
 }
+
+// Workaround for clang's "overloaded operator must have at least one parameter of class or enumeration type" error: disabling the overloaded operators
+#ifdef _MSC_VER
+#define INTRINSICS_SUPPORT_OPERATORS 1
+#else
+#define INTRINSICS_SUPPORT_OPERATORS 0
+#endif

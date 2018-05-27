@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="QuaternionPort.hpp" />
     <ClInclude Include="IDiv\DivMagic.hpp" />
     <ClInclude Include="IDiv\IDiv.hpp" />
     <ClInclude Include="intDivide.h" />

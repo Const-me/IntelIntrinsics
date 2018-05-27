@@ -1,4 +1,6 @@
 #pragma once
+#include <stdint.h>
+
 // Calling convention for SIMD functions
 #ifndef XM_CALLCONV
 #define XM_CALLCONV __vectorcall
@@ -11,16 +13,18 @@
 // Append type suffix to the name, e.g. when TYPE_SUFFIX is defined to 'ps', SIMD_OP( mul ) will expand into mul_ps name. This is used internally to implement same operators for 32 and 64 bit floats.
 #define SIMD_OP( OP ) SIMD_OP_IMPL( OP, TYPE_SUFFIX )
 
-#include <stdint.h>
-
 namespace Intrinsics
 {
-#if _MSC_VER
-	using int64_t = ::int64_t;
-	using uint64_t = ::uint64_t;
-#else
+#ifndef _MSC_VER
 	// Workaround for a bug in clang: https://stackoverflow.com/q/50552347/126995
 	using int64_t = long long;
 	using uint64_t = unsigned long long;
 #endif
 }
+
+// Workaround for clang's "overloaded operator must have at least one parameter of class or enumeration type" error
+#ifdef _MSC_VER
+#define INTRINSICS_SUPPORT_OPERATORS 1
+#else
+#define INTRINSICS_SUPPORT_OPERATORS 0
+#endif

@@ -26,6 +26,7 @@
     <ClInclude Include="IDiv\DivMagic.hpp" />
     <ClInclude Include="IDiv\IDiv.hpp" />
     <ClInclude Include="intDivide.h" />
+    <ClInclude Include="QuaternionPort.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />
