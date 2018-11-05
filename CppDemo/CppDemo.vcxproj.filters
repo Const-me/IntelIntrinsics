@@ -28,6 +28,7 @@
     <ClInclude Include="Intrinsics\Extra\common.hpp" />
     <ClInclude Include="Intrinsics\Extra\sse2-extra.hpp" />
     <ClInclude Include="Intrinsics\Extra\sse-extra.hpp" />
+    <ClInclude Include="Intrinsics\Extra\sse4.2-extra.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />

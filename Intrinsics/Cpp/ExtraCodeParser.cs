@@ -11,6 +11,7 @@ namespace IntrinsicsDocs.Cpp
 	{
 		sse1,
 		sse2,
+		sse42,
 		bitwise,
 		float_avx_cmp,
 		float_cmp_ops,

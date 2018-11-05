@@ -149,6 +149,7 @@
     <ClInclude Include="Intrinsics\Extra\common.hpp" />
     <ClInclude Include="Intrinsics\Extra\sse-extra.hpp" />
     <ClInclude Include="Intrinsics\Extra\sse2-extra.hpp" />
+    <ClInclude Include="Intrinsics\Extra\sse4.2-extra.hpp" />
     <ClInclude Include="QuaternionPort.hpp" />
     <ClInclude Include="IDiv\DivMagic.hpp" />
     <ClInclude Include="IDiv\IDiv.hpp" />

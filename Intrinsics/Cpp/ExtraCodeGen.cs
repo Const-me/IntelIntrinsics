@@ -17,7 +17,7 @@ namespace IntrinsicsDocs.Cpp
 			public ExtraWriter( string destFolder, string name, string ns, params string[] extraIncludes )
 			{
 				string path = Path.Combine( destFolder, name );
-				path = Path.ChangeExtension( path, ".hpp" );
+				path += ".hpp";
 				writer = new StreamWriter( path, false, s_enc );
 				this.ns = ns;
 
@@ -69,6 +69,7 @@ namespace IntrinsicsDocs.Cpp
 			{
 				case "sse": return true;
 				case "sse2": return true;
+				case "sse4.2": return true;
 				case "avx": return true;
 				case "avx2": return true;
 			}
@@ -134,6 +135,17 @@ namespace IntrinsicsDocs.Cpp
 				w.extraFloat( d, "pd", false );
 				w.line();
 				w.extraInteger( i, false );
+			}
+
+			// SSE 4.2
+			using( var w = new ExtraWriter( extra, "sse4.2-extra", "Sse", @"""../sse2.hpp""", @"""../sse4.1.hpp""" ) )  // cmpeq_epi64 is SSE 4.1, while cmpgt_epi64 is SSE 4.2. Looks like Intel forgot about that, and fixed later :-)
+			{
+				w.writeExtra( eExtra.sse42, null, null );
+				w.writeExtra( eExtra.int_math, i, "epi64" );
+				w.line();
+				w.line( "#if INTRINSICS_SUPPORT_OPERATORS" );
+				w.writeExtra( eExtra.int_math_ops, i, "epi64", "Int64" );
+				w.line( "#endif // INTRINSICS_SUPPORT_OPERATORS" );
 			}
 
 			// AVX1

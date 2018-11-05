@@ -101,6 +101,7 @@
     <EmbeddedResource Include="Cpp\Extra\int_common.inl" />
     <EmbeddedResource Include="Cpp\Extra\common.hpp" />
     <EmbeddedResource Include="Cpp\Extra\avx1.inl" />
+    <EmbeddedResource Include="Cpp\Extra\sse42.inl" />
     <Content Include="Html\group.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

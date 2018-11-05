@@ -138,3 +138,4 @@ namespace Intrinsics
 #endif // _M_X64
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics
+#include "Extra/sse4.2-extra.hpp"
