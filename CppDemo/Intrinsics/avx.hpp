@@ -1,7 +1,7 @@
 // This file is generated automatically by a tool, please don't edit.
 #pragma once
 #include <immintrin.h>
-#include "Implementation/utils.hpp"
+#include "Extra/common.hpp"
 
 namespace Intrinsics
 {
@@ -160,19 +160,19 @@ namespace Intrinsics
 		}
 
 		// Casts vector of type __m256i to type __m256d. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
-		inline __m256d XM_CALLCONV castsi256_pd( __m256i a )
+		inline __m256d XM_CALLCONV castall_pd( __m256i a )
 		{
 			return _mm256_castsi256_pd( a );
 		}
 
 		// Casts vector of type __m256i to type __m256. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
-		inline __m256 XM_CALLCONV castsi256_ps( __m256i a )
+		inline __m256 XM_CALLCONV castall_ps( __m256i a )
 		{
 			return _mm256_castsi256_ps( a );
 		}
 
 		// Casts vector of type __m256i to type __m128i. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
-		inline __m128i XM_CALLCONV castsi256_si128( __m256i a )
+		inline __m128i XM_CALLCONV castall_si128( __m256i a )
 		{
 			return _mm256_castsi256_si128( a );
 		}
@@ -1004,10 +1004,6 @@ namespace Intrinsics
 			_mm256_storeu2_m128i( hiaddr, loaddr, a );
 		}
 #endif // !__GNUC__
-		using VecFloat32 = __m256;
-		using VecFloat64 = __m256d;
-		static constexpr int allValuesMask_ps = 0xFF;
-		static constexpr int allValuesMask_pd = 0xF;
 	}	// namespace Intrinsics::Avx
 
 	namespace Sse
@@ -1133,3 +1129,4 @@ namespace Intrinsics
 		}
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics
+#include "Extra/avx-extra.hpp"

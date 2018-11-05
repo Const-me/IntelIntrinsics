@@ -3,8 +3,8 @@
 #include "IDiv/IDiv.hpp"
 #include <array>
 #include <limits>
-#include "Intrinsics/sse2_operators.hpp"
-#include "Intrinsics/avx2_operators.hpp"
+#include "Intrinsics/sse2.hpp"
+#include "Intrinsics/avx2.hpp"
 
 template<class TScalar, class TVector, class FuncScalar, class FuncVector>
 static inline bool testAll( FuncScalar fnScalar, FuncVector fnSimd )

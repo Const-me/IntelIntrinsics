@@ -76,9 +76,17 @@ namespace IntrinsicsDocs.Cpp
 		{
 			string n = i.name;
 			if( n.StartsWith( "_mm_" ) )
+			{
 				n = n.stripPrefix( "_mm_" ).replaceSuffix( "_si128", completeSuffix );
+				if( n.StartsWith( "castsi128_" ) )
+					n = n.Replace( "castsi128_", "castall_" );
+			}
 			else if( n.StartsWith( "_mm256_" ) )
+			{
 				n = n.stripPrefix( "_mm256_" ).replaceSuffix( "_si256", completeSuffix );
+				if( n.StartsWith( "castsi256_" ) )
+					n = n.Replace( "castsi256_", "castall_" );
+			}
 			else if( n.StartsWith( "_mm512_" ) )
 				n = n.stripPrefix( "_mm512_" ).replaceSuffix( "_si512", completeSuffix );
 

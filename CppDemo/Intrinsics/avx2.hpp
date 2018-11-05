@@ -1,7 +1,7 @@
 // This file is generated automatically by a tool, please don't edit.
 #pragma once
 #include <immintrin.h>
-#include "Implementation/utils.hpp"
+#include "Extra/common.hpp"
 
 namespace Intrinsics
 {
@@ -302,14 +302,14 @@ namespace Intrinsics
 
 		// Extract an 8-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
-		inline int8_t XM_CALLCONV extract_epi8( __m256i a )
+		inline int XM_CALLCONV extract_epi8( __m256i a )
 		{
 			return _mm256_extract_epi8( a, index );
 		}
 
 		// Extract a 16-bit integer from "a", selected with "index", and store the result in "dst"
 		template<int index>
-		inline int16_t XM_CALLCONV extract_epi16( __m256i a )
+		inline int XM_CALLCONV extract_epi16( __m256i a )
 		{
 			return _mm256_extract_epi16( a, index );
 		}
@@ -1008,9 +1008,6 @@ namespace Intrinsics
 		{
 			return _mm256_xor_si256( a, b );
 		}
-
-		using VecInteger = __m256i;
-		static constexpr int allValuesMask_epi8 = 0xFFFFFFFF;
 	}	// namespace Intrinsics::Avx
 
 	namespace Sse
@@ -1227,3 +1224,4 @@ namespace Intrinsics
 #endif // !__GNUC__
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics
+#include "Extra/avx2-extra.hpp"

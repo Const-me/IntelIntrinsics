@@ -1,7 +1,7 @@
 #pragma once
 #include <emmintrin.h>
 #include <immintrin.h>
-#include "Implementation/utils.hpp"
+#include "Extra/common.hpp"
 
 namespace Intrinsics
 {

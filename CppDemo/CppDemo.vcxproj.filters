@@ -5,9 +5,7 @@
     <ClInclude Include="Intrinsics\Implementation\utils.hpp" />
     <ClInclude Include="Intrinsics\aes.hpp" />
     <ClInclude Include="Intrinsics\avx.hpp" />
-    <ClInclude Include="Intrinsics\avx_operators.hpp" />
     <ClInclude Include="Intrinsics\avx2.hpp" />
-    <ClInclude Include="Intrinsics\avx2_operators.hpp" />
     <ClInclude Include="Intrinsics\bmi1.hpp" />
     <ClInclude Include="Intrinsics\bmi2.hpp" />
     <ClInclude Include="Intrinsics\fma.hpp" />
@@ -15,9 +13,7 @@
     <ClInclude Include="Intrinsics\pclmulqdq.hpp" />
     <ClInclude Include="Intrinsics\sha.hpp" />
     <ClInclude Include="Intrinsics\sse.hpp" />
-    <ClInclude Include="Intrinsics\sse_operators.hpp" />
     <ClInclude Include="Intrinsics\sse2.hpp" />
-    <ClInclude Include="Intrinsics\sse2_operators.hpp" />
     <ClInclude Include="Intrinsics\sse3.hpp" />
     <ClInclude Include="Intrinsics\sse4.1.hpp" />
     <ClInclude Include="Intrinsics\sse4.2.hpp" />
@@ -27,6 +23,11 @@
     <ClInclude Include="IDiv\IDiv.hpp" />
     <ClInclude Include="intDivide.h" />
     <ClInclude Include="QuaternionPort.hpp" />
+    <ClInclude Include="Intrinsics\Extra\avx2-extra.hpp" />
+    <ClInclude Include="Intrinsics\Extra\avx-extra.hpp" />
+    <ClInclude Include="Intrinsics\Extra\common.hpp" />
+    <ClInclude Include="Intrinsics\Extra\sse2-extra.hpp" />
+    <ClInclude Include="Intrinsics\Extra\sse-extra.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />

@@ -2,7 +2,7 @@
 #pragma once
 #include <xmmintrin.h>
 #include <immintrin.h>
-#include "Implementation/utils.hpp"
+#include "Extra/common.hpp"
 
 namespace Intrinsics
 {
@@ -610,8 +610,6 @@ namespace Intrinsics
 			return (int64_t)_mm_cvttss_si64( a );
 		}
 #endif // _M_X64
-
-		using VecFloat32 = __m128;
-		static constexpr int allValuesMask_ps = 0xF;
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics
+#include "Extra/sse-extra.hpp"

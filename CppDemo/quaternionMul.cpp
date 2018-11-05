@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "quaternionMul.h"
-#include "Intrinsics/sse_operators.hpp"
+#include "Intrinsics/sse.hpp"
 
 #ifdef _MSC_VER
 #include <d3d11.h>

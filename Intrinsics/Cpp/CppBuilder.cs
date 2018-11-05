@@ -7,8 +7,6 @@ namespace IntrinsicsDocs.Cpp
 {
 	static class CppBuilder
 	{
-		const bool makeIntrinsicsHpp = false;
-
 		static bool shouldInclude( string cpuId )
 		{
 			if( cpuId.Contains( "512" ) )
@@ -73,7 +71,7 @@ namespace IntrinsicsDocs.Cpp
 				kvp.Value.write( destFolder.hpp( fileName ) );
 			}
 
-			if( makeIntrinsicsHpp )
+			/* if( makeIntrinsicsHpp )
 			{
 				using( var fs = File.CreateText( destFolder.hpp( "intrinsics" ) ) )
 				{
@@ -93,9 +91,10 @@ namespace IntrinsicsDocs.Cpp
 						fs.WriteLine( @"#include ""{0}.hpp""", fn );
 					}
 				}
-			}
+			} */
 
-			ExtraCode.copyExtraFiles( destFolder );
+			// ExtraCode.copyExtraFiles( destFolder );
+			ExtraCodeGen.generateExtras( destFolder );
 		}
 	}
 }

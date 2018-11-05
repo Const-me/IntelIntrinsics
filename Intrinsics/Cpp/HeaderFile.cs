@@ -78,10 +78,6 @@ namespace IntrinsicsDocs.Cpp
 				fs.WriteLine( "#endif // !__GNUC__" );
 			}
 
-			string xt = ExtraCode.extra( cpuid );
-			if( null != xt )
-				fs.Write( xt );
-
 			fs.WriteLine( @"	}}	// namespace Intrinsics::{0}", ns );
 
 		}
@@ -98,7 +94,7 @@ namespace IntrinsicsDocs.Cpp
 					fs.WriteLine( "#include <{0}>", h );
 
 				fs.WriteLine(
-@"#include ""Implementation/utils.hpp""
+@"#include ""Extra/common.hpp""
 
 namespace Intrinsics
 {" );
@@ -109,7 +105,13 @@ namespace Intrinsics
 					fs.WriteLine();
 					smallRegInstructions.writeImpl( fs );
 				}
-				fs.WriteLine( "}	// namespace Intrinsics" );
+				fs.Write( "}	// namespace Intrinsics" );
+
+				if( ExtraCodeGen.hasExtraHeader( cpuid ) )
+				{
+					fs.WriteLine();
+					fs.Write( @"#include ""Extra/{0}-extra.hpp""", cpuid );
+				}
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 // This file is generated automatically by a tool, please don't edit.
 #pragma once
 #include <nmmintrin.h>
-#include "Implementation/utils.hpp"
+#include "Extra/common.hpp"
 
 namespace Intrinsics
 {

@@ -2,7 +2,7 @@
 #pragma once
 #include <emmintrin.h>
 #include <immintrin.h>
-#include "Implementation/utils.hpp"
+#include "Extra/common.hpp"
 
 namespace Intrinsics
 {
@@ -143,13 +143,13 @@ namespace Intrinsics
 		}
 
 		// Cast vector of type __m128i to type __m128d. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
-		inline __m128d XM_CALLCONV castsi128_pd( __m128i a )
+		inline __m128d XM_CALLCONV castall_pd( __m128i a )
 		{
 			return _mm_castsi128_pd( a );
 		}
 
 		// Cast vector of type __m128i to type __m128. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
-		inline __m128 XM_CALLCONV castsi128_ps( __m128i a )
+		inline __m128 XM_CALLCONV castall_ps( __m128i a )
 		{
 			return _mm_castsi128_ps( a );
 		}
@@ -1345,10 +1345,6 @@ namespace Intrinsics
 			_mm_stream_si64( (real_int64_t *)mem_addr, (real_int64_t)a );
 		}
 #endif // _M_X64
-
-		using VecInteger = __m128i;
-		static constexpr int allValuesMask_epi8 = 0xFFFF;
-		using VecFloat64 = __m128d;
-		static constexpr int allValuesMask_pd = 0x3;
 	}	// namespace Intrinsics::Sse
 }	// namespace Intrinsics
+#include "Extra/sse2-extra.hpp"
