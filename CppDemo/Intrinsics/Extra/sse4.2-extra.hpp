@@ -1,3 +1,4 @@
+// This file is generated automatically by a tool. If you want to change it, fork & modify the tool instead: https://github.com/Const-me/IntelIntrinsics
 #pragma once
 #include "../sse2.hpp"
 #include "../sse4.1.hpp"

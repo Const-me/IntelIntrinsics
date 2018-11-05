@@ -20,7 +20,7 @@ namespace IntrinsicsDocs.Cpp
 				path += ".hpp";
 				writer = new StreamWriter( path, false, s_enc );
 				this.ns = ns;
-
+				writer.WriteLine( HeaderFile.headerComment );
 				writer.WriteLine( "#pragma once" );
 				foreach( string inc in extraIncludes )
 					writer.WriteLine( "#include {0}", inc );

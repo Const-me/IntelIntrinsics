@@ -1,4 +1,4 @@
-// This file is generated automatically by a tool, please don't edit.
+// This file is generated automatically by a tool. If you want to change it, fork & modify the tool instead: https://github.com/Const-me/IntelIntrinsics
 #pragma once
 #include <emmintrin.h>
 #include <immintrin.h>

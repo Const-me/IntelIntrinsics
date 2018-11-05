@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -8,6 +7,8 @@ namespace IntrinsicsDocs.Cpp
 {
 	class HeaderFile
 	{
+		public const string headerComment = @"// This file is generated automatically by a tool. If you want to change it, fork & modify the tool instead: https://github.com/Const-me/IntelIntrinsics";
+
 		readonly List<Intrinsic> intrinsics = new List<Intrinsic>( 64 );
 		readonly string cpuid;
 		readonly string ns;
@@ -86,9 +87,8 @@ namespace IntrinsicsDocs.Cpp
 		{
 			using( var fs = File.CreateText( destPath ) )
 			{
-				fs.WriteLine(
-@"// This file is generated automatically by a tool, please don't edit.
-#pragma once" );
+				fs.WriteLine( headerComment );
+				fs.WriteLine( "#pragma once" );
 
 				foreach( var h in headers )
 					fs.WriteLine( "#include <{0}>", h );
