@@ -22,6 +22,9 @@ namespace IntrinsicsDocs.Cpp
 		avx2,
 	}
 
+	/// <summary>Parses the *.inl files from the embedded resources, expands VECTOR_TYPE and SIMD_OP macros.</summary>
+	/// <remarks>After I've used the generated code for a while in my projects, I've realized that macro-heavy stuff is relatively hard to read, therefore hard to work with.
+	/// That's why this version copies what was previously #included, expanding a few macros in the process.</remarks>
 	static class ExtraCodeParser
 	{
 		const string prefix = "IntrinsicsDocs.Cpp.Extra.";

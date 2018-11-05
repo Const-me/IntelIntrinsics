@@ -1,5 +1,5 @@
 ﻿// Return vector filled with all one-s.
-inline VECTOR_TYPE XM_CALLCONV SIMD_OP( allones )( )
+inline VECTOR_TYPE XM_CALLCONV SIMD_OP( allones )()
 {
 	return cmpeq_epi8( SIMD_OP( setzero )(), SIMD_OP( setzero )() );
 }

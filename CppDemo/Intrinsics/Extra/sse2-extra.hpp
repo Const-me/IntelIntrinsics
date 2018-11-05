@@ -169,7 +169,7 @@ namespace Intrinsics
 #endif // INTRINSICS_SUPPORT_OPERATORS
 
 		// Return vector filled with all one-s.
-		inline __m128i XM_CALLCONV allones_all( )
+		inline __m128i XM_CALLCONV allones_all()
 		{
 			return cmpeq_epi8( setzero_all(), setzero_all() );
 		}
@@ -234,6 +234,7 @@ namespace Intrinsics
 #endif // INTRINSICS_SUPPORT_OPERATORS
 
 		// ==== Couple missing integer comparison intrinsics ====
+
 		// a >= b
 		inline __m128i XM_CALLCONV cmpge_epi8( __m128i a, __m128i b )
 		{
@@ -254,6 +255,7 @@ namespace Intrinsics
 			const __m128i ee = cmpeq_epi8( a, b );
 			return xor_all( ee, allones_all() );
 		}
+
 		// a >= b
 		inline __m128i XM_CALLCONV cmpge_epi16( __m128i a, __m128i b )
 		{
@@ -274,6 +276,7 @@ namespace Intrinsics
 			const __m128i ee = cmpeq_epi16( a, b );
 			return xor_all( ee, allones_all() );
 		}
+
 		// a >= b
 		inline __m128i XM_CALLCONV cmpge_epi32( __m128i a, __m128i b )
 		{

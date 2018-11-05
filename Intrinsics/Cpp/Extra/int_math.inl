@@ -1,4 +1,5 @@
-﻿// a >= b
+﻿
+// a >= b
 inline VECTOR_TYPE XM_CALLCONV SIMD_OP( cmpge )( VECTOR_TYPE a, VECTOR_TYPE b )
 {
 	const VECTOR_TYPE lt = SIMD_OP( cmplt )( a, b );
