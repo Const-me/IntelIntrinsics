@@ -28,7 +28,7 @@ namespace Intrinsics
 			constexpr int imm = _MM_SHUFFLE( (int)c4, (int)c3, (int)c2, (int)c1 );
 			return shuffle_pd<imm>( a, b );
 		}
-		// AVS doesn't have cmpeq / cmpgt / etc. for floating point lanes, the only way to compare stuff is _mm256_cmp_ps / _mm256_cmp_pd.
+		// AVX doesn't have cmpeq / cmpgt / etc. for floating point lanes, the only way to compare stuff is _mm256_cmp_ps / _mm256_cmp_pd.
 		// This is inconvenient, implement missing intrinsics here.
 		// https://stackoverflow.com/q/16988199/126995
 
@@ -213,7 +213,7 @@ namespace Intrinsics
 			return xor_ps( a, allones_ps() );
 		}
 #endif // INTRINSICS_SUPPORT_OPERATORS
-		// AVS doesn't have cmpeq / cmpgt / etc. for floating point lanes, the only way to compare stuff is _mm256_cmp_ps / _mm256_cmp_pd.
+		// AVX doesn't have cmpeq / cmpgt / etc. for floating point lanes, the only way to compare stuff is _mm256_cmp_ps / _mm256_cmp_pd.
 		// This is inconvenient, implement missing intrinsics here.
 		// https://stackoverflow.com/q/16988199/126995
 

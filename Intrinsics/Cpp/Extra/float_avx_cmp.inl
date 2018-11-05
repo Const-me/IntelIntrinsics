@@ -1,4 +1,4 @@
-// AVS doesn't have cmpeq / cmpgt / etc. for floating point lanes, the only way to compare stuff is _mm256_cmp_ps / _mm256_cmp_pd.
+// AVX doesn't have cmpeq / cmpgt / etc. for floating point lanes, the only way to compare stuff is _mm256_cmp_ps / _mm256_cmp_pd.
 // This is inconvenient, implement missing intrinsics here.
 // https://stackoverflow.com/q/16988199/126995
 
