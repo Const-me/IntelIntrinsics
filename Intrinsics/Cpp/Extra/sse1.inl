@@ -1,4 +1,5 @@
 using VecFloat32 = __m128;
+// movemask_ps will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_ps = 0xF;
 
 // Shuffle single-precision (32-bit) floating-point elements in "a" using the control in template arguments

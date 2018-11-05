@@ -6,6 +6,7 @@ namespace Intrinsics
 	namespace Sse
 	{
 		using VecFloat32 = __m128;
+		// movemask_ps will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_ps = 0xF;
 
 		// Shuffle single-precision (32-bit) floating-point elements in "a" using the control in template arguments
@@ -25,7 +26,7 @@ namespace Intrinsics
 			return set1_ps( -0.0 );
 		}
 
-		// Return vector filled with all one-s. This is NaN, you should only use this for bitwise operations.
+		// Produce vector filled with all ones. The value is NaN, you should only use this for bitwise operations.
 		inline __m128 XM_CALLCONV allones_ps()
 		{
 			return cmpeq_ps( setzero_ps(), setzero_ps() );

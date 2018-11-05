@@ -6,9 +6,11 @@ namespace Intrinsics
 	namespace Avx
 	{
 		using VecFloat32 = __m256;
+		// movemask_ps will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_ps = 0xFF;
 
 		using VecFloat64 = __m256d;
+		// movemask_pd will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_pd = 0xF;
 
 		// Shuffle single-precision (32-bit) floating-point elements in "a" within 128-bit lanes using the control in template arguments
@@ -32,37 +34,37 @@ namespace Intrinsics
 		// This is inconvenient, implement missing intrinsics here.
 		// https://stackoverflow.com/q/16988199/126995
 
-		// ==
+		// operator ==
 		inline __m256 XM_CALLCONV cmpeq_ps( __m256 a, __m256 b )
 		{
 			return cmp_ps<_CMP_EQ_OQ>( a, b );
 		}
 
-		// !=
+		// operator !=
 		inline __m256 XM_CALLCONV cmpneq_ps( __m256 a, __m256 b )
 		{
 			return cmp_ps<_CMP_NEQ_OQ>( a, b );
 		}
 
-		// >
+		// operator >
 		inline __m256 XM_CALLCONV cmpgt_ps( __m256 a, __m256 b )
 		{
 			return cmp_ps<_CMP_GT_OQ>( a, b );
 		}
 
-		// <
+		// operator <
 		inline __m256 XM_CALLCONV cmplt_ps( __m256 a, __m256 b )
 		{
 			return cmp_ps<_CMP_LT_OQ>( a, b );
 		}
 
-		// >=
+		// operator >=
 		inline __m256 XM_CALLCONV cmpge_ps( __m256 a, __m256 b )
 		{
 			return cmp_ps<_CMP_GE_OQ>( a, b );
 		}
 
-		// <
+		// operator <
 		inline __m256 XM_CALLCONV cmple_ps( __m256 a, __m256 b )
 		{
 			return cmp_ps<_CMP_LE_OQ>( a, b );
@@ -76,7 +78,7 @@ namespace Intrinsics
 			return set1_ps( -0.0 );
 		}
 
-		// Return vector filled with all one-s. This is NaN, you should only use this for bitwise operations.
+		// Produce vector filled with all ones. The value is NaN, you should only use this for bitwise operations.
 		inline __m256 XM_CALLCONV allones_ps()
 		{
 			return cmpeq_ps( setzero_ps(), setzero_ps() );
@@ -217,37 +219,37 @@ namespace Intrinsics
 		// This is inconvenient, implement missing intrinsics here.
 		// https://stackoverflow.com/q/16988199/126995
 
-		// ==
+		// operator ==
 		inline __m256d XM_CALLCONV cmpeq_pd( __m256d a, __m256d b )
 		{
 			return cmp_pd<_CMP_EQ_OQ>( a, b );
 		}
 
-		// !=
+		// operator !=
 		inline __m256d XM_CALLCONV cmpneq_pd( __m256d a, __m256d b )
 		{
 			return cmp_pd<_CMP_NEQ_OQ>( a, b );
 		}
 
-		// >
+		// operator >
 		inline __m256d XM_CALLCONV cmpgt_pd( __m256d a, __m256d b )
 		{
 			return cmp_pd<_CMP_GT_OQ>( a, b );
 		}
 
-		// <
+		// operator <
 		inline __m256d XM_CALLCONV cmplt_pd( __m256d a, __m256d b )
 		{
 			return cmp_pd<_CMP_LT_OQ>( a, b );
 		}
 
-		// >=
+		// operator >=
 		inline __m256d XM_CALLCONV cmpge_pd( __m256d a, __m256d b )
 		{
 			return cmp_pd<_CMP_GE_OQ>( a, b );
 		}
 
-		// <
+		// operator <
 		inline __m256d XM_CALLCONV cmple_pd( __m256d a, __m256d b )
 		{
 			return cmp_pd<_CMP_LE_OQ>( a, b );
@@ -261,7 +263,7 @@ namespace Intrinsics
 			return set1_pd( -0.0 );
 		}
 
-		// Return vector filled with all one-s. This is NaN, you should only use this for bitwise operations.
+		// Produce vector filled with all ones. The value is NaN, you should only use this for bitwise operations.
 		inline __m256d XM_CALLCONV allones_pd()
 		{
 			return cmpeq_pd( setzero_pd(), setzero_pd() );

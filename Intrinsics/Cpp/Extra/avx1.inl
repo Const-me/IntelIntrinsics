@@ -1,7 +1,9 @@
 using VecFloat32 = __m256;
+// movemask_ps will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_ps = 0xFF;
 
 using VecFloat64 = __m256d;
+// movemask_pd will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_pd = 0xF;
 
 // Shuffle single-precision (32-bit) floating-point elements in "a" within 128-bit lanes using the control in template arguments

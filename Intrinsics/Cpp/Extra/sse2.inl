@@ -1,9 +1,13 @@
 using VecFloat64 = __m128d;
+// movemask_pd will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_pd = 0x3;
 
 using VecInteger = __m128i;
+// movemask_epi8 will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_epi8 = 0xFFFF;
+// movemask_epi32 will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_epi32 = allValuesMask_ps;
+// movemask_epi64 will return this value when every lane has the most significant bit set.
 static constexpr int allValuesMask_epi64 = allValuesMask_pd;
 
 // Shuffle double-precision (64-bit) floating-point elements using the control in "imm8", and store the results in "dst". 

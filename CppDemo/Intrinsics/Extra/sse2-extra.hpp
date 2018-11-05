@@ -7,11 +7,15 @@ namespace Intrinsics
 	namespace Sse
 	{
 		using VecFloat64 = __m128d;
+		// movemask_pd will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_pd = 0x3;
 
 		using VecInteger = __m128i;
+		// movemask_epi8 will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_epi8 = 0xFFFF;
+		// movemask_epi32 will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_epi32 = allValuesMask_ps;
+		// movemask_epi64 will return this value when every lane has the most significant bit set.
 		static constexpr int allValuesMask_epi64 = allValuesMask_pd;
 
 		// Shuffle double-precision (64-bit) floating-point elements using the control in "imm8", and store the results in "dst". 
@@ -31,7 +35,7 @@ namespace Intrinsics
 			return set1_pd( -0.0 );
 		}
 
-		// Return vector filled with all one-s. This is NaN, you should only use this for bitwise operations.
+		// Produce vector filled with all ones. The value is NaN, you should only use this for bitwise operations.
 		inline __m128d XM_CALLCONV allones_pd()
 		{
 			return cmpeq_pd( setzero_pd(), setzero_pd() );
@@ -245,63 +249,63 @@ namespace Intrinsics
 
 		// ==== Couple missing integer comparison intrinsics ====
 
-		// a >= b
+		// operator >=
 		inline __m128i XM_CALLCONV cmpge_epi8( __m128i a, __m128i b )
 		{
 			const __m128i lt = cmplt_epi8( a, b );
 			return xor_all( lt, allones_all() );
 		}
 
-		// a <= b
+		// operator <=
 		inline __m128i XM_CALLCONV cmple_epi8( __m128i a, __m128i b )
 		{
 			const __m128i gt = cmpgt_epi8( a, b );
 			return xor_all( gt, allones_all() );
 		}
 
-		// a != b
+		// operator !=
 		inline __m128i XM_CALLCONV cmpneq_epi8( __m128i a, __m128i b )
 		{
 			const __m128i ee = cmpeq_epi8( a, b );
 			return xor_all( ee, allones_all() );
 		}
 
-		// a >= b
+		// operator >=
 		inline __m128i XM_CALLCONV cmpge_epi16( __m128i a, __m128i b )
 		{
 			const __m128i lt = cmplt_epi16( a, b );
 			return xor_all( lt, allones_all() );
 		}
 
-		// a <= b
+		// operator <=
 		inline __m128i XM_CALLCONV cmple_epi16( __m128i a, __m128i b )
 		{
 			const __m128i gt = cmpgt_epi16( a, b );
 			return xor_all( gt, allones_all() );
 		}
 
-		// a != b
+		// operator !=
 		inline __m128i XM_CALLCONV cmpneq_epi16( __m128i a, __m128i b )
 		{
 			const __m128i ee = cmpeq_epi16( a, b );
 			return xor_all( ee, allones_all() );
 		}
 
-		// a >= b
+		// operator >=
 		inline __m128i XM_CALLCONV cmpge_epi32( __m128i a, __m128i b )
 		{
 			const __m128i lt = cmplt_epi32( a, b );
 			return xor_all( lt, allones_all() );
 		}
 
-		// a <= b
+		// operator <=
 		inline __m128i XM_CALLCONV cmple_epi32( __m128i a, __m128i b )
 		{
 			const __m128i gt = cmpgt_epi32( a, b );
 			return xor_all( gt, allones_all() );
 		}
 
-		// a != b
+		// operator !=
 		inline __m128i XM_CALLCONV cmpneq_epi32( __m128i a, __m128i b )
 		{
 			const __m128i ee = cmpeq_epi32( a, b );

@@ -7,7 +7,7 @@ inline VECTOR_TYPE XM_CALLCONV SIMD_OP( signBitsMask )()
 	return SIMD_OP( set1 )( -0.0 );
 }
 
-// Return vector filled with all one-s. This is NaN, you should only use this for bitwise operations.
+// Produce vector filled with all ones. The value is NaN, you should only use this for bitwise operations.
 inline VECTOR_TYPE XM_CALLCONV SIMD_OP( allones )()
 {
 	return SIMD_OP( cmpeq )( SIMD_OP( setzero )(), SIMD_OP( setzero )() );

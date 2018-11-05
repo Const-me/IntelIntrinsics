@@ -7,27 +7,27 @@ namespace Intrinsics
 {
 	namespace Sse
 	{
-		// a < b
+		// operator <
 		inline __m128i XM_CALLCONV cmplt_epi64( __m128i a, __m128i b )
 		{
 			return cmpgt_epi64( b, a );
 		}
 
-		// a >= b
+		// operator >=
 		inline __m128i XM_CALLCONV cmpge_epi64( __m128i a, __m128i b )
 		{
 			const __m128i lt = cmplt_epi64( a, b );
 			return xor_all( lt, allones_all() );
 		}
 
-		// a <= b
+		// operator <=
 		inline __m128i XM_CALLCONV cmple_epi64( __m128i a, __m128i b )
 		{
 			const __m128i gt = cmpgt_epi64( a, b );
 			return xor_all( gt, allones_all() );
 		}
 
-		// a != b
+		// operator !=
 		inline __m128i XM_CALLCONV cmpneq_epi64( __m128i a, __m128i b )
 		{
 			const __m128i ee = cmpeq_epi64( a, b );
