@@ -35,7 +35,7 @@ namespace Intrinsics
 #endif
 }
 
-// Workaround for clang's "overloaded operator must have at least one parameter of class or enumeration type" error: disabling the overloaded operators
+// Workaround for "overloaded operator must have at least one parameter of class or enumeration type" in clang / "must have an argument of class or enumerated type" in gcc: disabling overloaded operators.
 #ifdef _MSC_VER
 #define INTRINSICS_SUPPORT_OPERATORS 1
 #else
