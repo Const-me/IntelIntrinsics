@@ -1,5 +1,5 @@
 using VecFloat64 = __m128d;
-static constexpr int allValuesMask_pd = 0x7;
+static constexpr int allValuesMask_pd = 0x3;
 
 using VecInteger = __m128i;
 static constexpr int allValuesMask_epi8 = 0xFFFF;
