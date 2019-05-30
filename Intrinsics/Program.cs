@@ -16,7 +16,7 @@ namespace IntrinsicsDocs
 		const bool makeCppWrappers = true;
 
 		/// <summary>Data file with the documentation, @ intel.com</summary>
-		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.4.2.xml";
+		const string remoteUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-3.4.4.xml";
 
 		/// <summary>Starting from version 3.4.1, Intel decided to split the data into 2 pieces, one XML another one JSON. Obviously, in now in 2018 the XML no longer works, and user just love waiting for seconds for client-side JS rendering to complete. The more web requests, the better.</summary>
 		const string perfUri = @"https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/perf.json";
