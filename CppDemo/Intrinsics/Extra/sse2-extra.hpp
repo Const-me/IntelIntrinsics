@@ -176,7 +176,8 @@ namespace Intrinsics
 		// Return vector filled with all one-s.
 		inline __m128i XM_CALLCONV allones_all()
 		{
-			return cmpeq_epi8( setzero_all(), setzero_all() );
+			const __m128i zero = setzero_all();
+			return cmpeq_epi8( zero, zero );
 		}
 
 		// Set each bit of mask "dst" based on the most significant bit of the corresponding packed 32-bit element in "a".
@@ -192,15 +193,38 @@ namespace Intrinsics
 		}
 
 		// Test for equality, return true if all lanes are equal
-		inline bool XM_CALLCONV equals( __m128i a, __m128i b )
+		inline bool XM_CALLCONV cmpeq_all( __m128i a, __m128i b )
 		{
 			return allValuesMask_epi8 == movemask_epi8( cmpeq_epi8( a, b ) );
 		}
 
 		// Test for inequality, return true if at least one lane is not equal
-		inline bool XM_CALLCONV notEquals( __m128i a, __m128i b )
+		inline bool XM_CALLCONV cmpneq_all( __m128i a, __m128i b )
 		{
 			return allValuesMask_epi8 != movemask_epi8( cmpeq_epi8( a, b ) );
+		}
+
+		// true if a < b, for unsigned integers occupying the whole registers
+		inline bool XM_CALLCONV cmplt_all( __m128i a, __m128i b )
+		{
+			// Flip the sign bits in both arguments. Transforms 0 into -128 = minimum for signed bytes, 0xFF into +127 = maximum for signed bytes.
+			const __m128i signBits = set1_epu8( 0x80 );
+			a = xor_all( a, signBits );
+			b = xor_all( b, signBits );
+
+			// Use signed comparisons on the bytes. Casting the results to uint32_t because AVX will return 32 bits in these scalars, int may be negative.
+			const uint32_t less = (uint32_t)movemask_epi8( cmpgt_epi8( b, a ) );
+			const uint32_t greater = (uint32_t)movemask_epi8( cmpgt_epi8( a, b ) );
+
+			// It's counter-intuitive, but this scalar comparison does the right thing.
+			// Essentially, integer comparison searches for the most significant bit that differs.
+			return less > greater;
+		}
+
+		// true if a > b, for unsigned integers occupying the whole registers
+		inline bool XM_CALLCONV cmpgt_all( __m128i a, __m128i b )
+		{
+			return cmplt_all( b, a );
 		}
 
 		// Shuffle 32-bit integers in "a" within 128-bit lanes

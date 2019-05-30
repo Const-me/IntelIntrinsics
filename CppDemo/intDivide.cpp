@@ -33,7 +33,7 @@ static inline bool testAll( FuncScalar fnScalar, FuncVector fnSimd )
 		}
 
 		const TVector resultSimd = fnSimd( src );
-		if( notEquals( resultSimd, resultScalar ) )
+		if( cmpneq_all( resultSimd, resultScalar ) )
 			res = false;
 	}
 	return res;

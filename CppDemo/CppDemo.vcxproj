@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="compare.h" />
     <ClInclude Include="Intrinsics\Extra\avx-extra.hpp" />
     <ClInclude Include="Intrinsics\Extra\avx2-extra.hpp" />
     <ClInclude Include="Intrinsics\Extra\common.hpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="compare.cpp" />
     <ClCompile Include="CppDemo.cpp" />
     <ClCompile Include="intDivide.cpp">
       <OpenMPSupport Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</OpenMPSupport>
@@ -190,6 +192,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="compare.inl" />
     <None Include="IDiv\DivImpl.inl" />
     <None Include="intDivide.inl" />
     <None Include="Intrinsics\Implementation\operators_bitwise.inl" />
