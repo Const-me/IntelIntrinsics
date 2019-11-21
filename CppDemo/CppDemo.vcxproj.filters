@@ -30,6 +30,7 @@
     <ClInclude Include="Intrinsics\Extra\sse-extra.hpp" />
     <ClInclude Include="Intrinsics\Extra\sse4.2-extra.hpp" />
     <ClInclude Include="compare.h" />
+    <ClInclude Include="brightness.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppDemo.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="quaternionMul.cpp" />
     <ClCompile Include="intDivide.cpp" />
     <ClCompile Include="compare.cpp" />
+    <ClCompile Include="brightness.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Intrinsics\Implementation\operators_bitwise.inl" />
@@ -49,6 +51,7 @@
     <None Include="Intrinsics\Implementation\operators_float32.inl" />
     <None Include="Intrinsics\Implementation\operators_float64.inl" />
     <None Include="compare.inl" />
+    <None Include="brightness.inl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

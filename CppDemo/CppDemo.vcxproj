@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="brightness.h" />
     <ClInclude Include="compare.h" />
     <ClInclude Include="Intrinsics\Extra\avx-extra.hpp" />
     <ClInclude Include="Intrinsics\Extra\avx2-extra.hpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="brightness.cpp" />
     <ClCompile Include="compare.cpp" />
     <ClCompile Include="CppDemo.cpp" />
     <ClCompile Include="intDivide.cpp">
@@ -192,6 +194,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="brightness.inl" />
     <None Include="compare.inl" />
     <None Include="IDiv\DivImpl.inl" />
     <None Include="intDivide.inl" />
