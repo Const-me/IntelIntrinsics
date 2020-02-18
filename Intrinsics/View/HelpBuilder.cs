@@ -44,10 +44,32 @@ html\*.css
 			return path;
 		}
 
+		static bool isAvx512( Intrinsic i )
+		{
+			if( i.name.StartsWith( "_mm512_" ) )
+				return true;
+			string[] cpu = i.CPUID;
+			if( null == cpu )
+				return false;
+			if( cpu.Any( s => s.StartsWith( "AVX512", StringComparison.InvariantCultureIgnoreCase ) ) )
+				return true;
+			if( cpu.Contains( "KNCNI" ) )
+				return true;
+			return false;
+		}
+
+		static bool notAvx512( Intrinsic i )
+		{
+			return !isAvx512( i );
+		}
+
 		public static void produce( string destFolder, DataSet dataSet )
 		{
 			if( !Directory.Exists( destFolder ) )
 				Directory.CreateDirectory( destFolder );
+
+			// Drop AVX512 intrinsics
+			dataSet.intrinsic = dataSet.intrinsic.Where( notAvx512 ).ToArray();
 
 			// The main content
 			string html = Path.Combine( destFolder, "html" );
@@ -62,7 +84,7 @@ html\*.css
 				w.writeIntrinsics( dataSet.intrinsic.OrderBy( p => p.id ) );
 
 			// ToC
-			string hhc= Path.Combine( destFolder, "contents.hhc" );
+			string hhc = Path.Combine( destFolder, "contents.hhc" );
 			using( IndexWriter w = new IndexWriter( hhc, true ) )
 			{
 				w.open();
