@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace IntrinsicsDocs.Performance
 {
@@ -9,7 +8,7 @@ namespace IntrinsicsDocs.Performance
 		{
 			foreach( char c in s )
 			{
-				if( !Char.IsLetter( c ) )
+				if( !char.IsLetter( c ) )
 					return false;
 			}
 			return true;

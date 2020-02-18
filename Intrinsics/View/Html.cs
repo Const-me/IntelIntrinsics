@@ -91,7 +91,7 @@ namespace IntrinsicsDocs
 
 			if( perfData.hasPerformanceData( i ) )
 			{
-				var data = perfData.table( i );
+				IEnumerable<PerfData.Instruction> data = perfData.table( i );
 				foreach( var p in data )
 				{
 					sb.AppendFormat( "			<tr><td>{0}</td><td>{1}</td>", p.cpu, p.latency ?? string.Empty );
