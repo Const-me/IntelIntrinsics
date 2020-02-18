@@ -18,6 +18,9 @@ namespace IntrinsicsDocs.Performance
 
 		public static bool hasPerformanceData( this PerfData pd, Intrinsic i )
 		{
+			if( Debugger.IsAttached && i.name == "_mm256_extractf128_si256" )
+				Debugger.Break();
+
 			if( null == i.instruction )
 				return false;
 			var data = pd.lookup( i.instruction.name );
@@ -26,7 +29,8 @@ namespace IntrinsicsDocs.Performance
 			eRegSize regSize = i.regSize();
 			if( regSize == eRegSize.None )
 				return false;
-			return data.Any( ii => ii.match( regSize ) );
+			return true;
+			// return data.Any( ii => ii.match( regSize ) );
 		}
 
 		static IEnumerable<PerfData.Instruction> pickBestPerArch( IEnumerable<PerfData.Instruction> data, eRegSize regSize )

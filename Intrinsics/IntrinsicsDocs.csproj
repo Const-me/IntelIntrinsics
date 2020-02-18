@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IntrinsicsDocs</RootNamespace>
     <AssemblyName>IntrinsicsDocs</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -70,6 +72,7 @@
     <Compile Include="Parse\IntelPerfData.cs" />
     <Compile Include="Parse\Intrinsic.cs" />
     <Compile Include="Performance\ArgTypes.cs" />
+    <Compile Include="Performance\FilterRamEntries.cs" />
     <Compile Include="Performance\PerfData.cs" />
     <Compile Include="Performance\RegSizes.cs" />
     <Compile Include="Performance\TableBuilder.cs" />

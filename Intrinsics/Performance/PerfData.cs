@@ -67,6 +67,7 @@ namespace IntrinsicsDocs.Performance
 				debugWriter = new StreamWriter( debugOutput, false );
 			}
 
+			FilterRamEntries.process( data );
 			try
 			{
 				foreach( var s in data.sheets )
@@ -96,7 +97,7 @@ namespace IntrinsicsDocs.Performance
 				yield return i;
 				if( !appendVPrefix )
 					continue;
-				if( String.IsNullOrEmpty( i ) )
+				if( string.IsNullOrEmpty( i ) )
 					continue;
 				if( i[ 0 ] == 'v' || i[ 0 ] == 'V' )
 					continue;
